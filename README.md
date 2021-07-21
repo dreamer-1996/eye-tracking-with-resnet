@@ -1,6 +1,7 @@
 # Gaze tracking using off-the-shelf webcam employing Deep Learning techniques
 
 [Here](https://github.com/hysts/pytorch_mpiigaze_demo) is a demo program.
+Following repo is modified from this [work](https://github.com/hysts/pytorch_mpiigaze).
 
 
 ## Requirements
@@ -15,6 +16,8 @@ pip install -r requirements.txt
 ## Instructions for training and evaluating the model.
 
 Download the `dataset.zip` file from here :
+
+This is different compared to the original MPIIGaze dataset because here we have added the 2-D points on the screen to the normalized data.Our target is to find the 2D gaze points on the screen from images and head poses.
 
 Extract the `Data` folder and place it inside `datasets/MPIIGaze`
 
