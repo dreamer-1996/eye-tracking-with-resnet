@@ -1,6 +1,6 @@
-# A PyTorch implementation of MPIIGaze and MPIIFaceGaze
+# Tracking with resnet
 
-[Here](https://github.com/hysts/pytorch_mpiigaze_demo) is a demo program.
+
 
 
 ## Requirements
@@ -8,37 +8,17 @@
 * Linux (Tested on Ubuntu only)
 * Python >= 3.7
 
+###Step 1 : Install the requirements
 ```bash
 pip install -r requirements.txt
 ```
+###Step 2 : Place the 
 
 
-## Download the dataset and preprocess it
-
-### MPIIGaze
-
-```bash
-bash scripts/download_mpiigaze_dataset.sh
-python tools/preprocess_mpiigaze.py --dataset datasets/MPIIGaze -o datasets/
-```
-
-### MPIIFaceGaze
-
-```bash
-bash scripts/download_mpiifacegaze_dataset.sh
-python tools/preprocess_mpiifacegaze.py --dataset datasets/MPIIFaceGaze_normalized -o datasets/
-```
 
 
-## Usage
 
-This repository uses [YACS](https://github.com/rbgirshick/yacs) for
-configuration management.
-Default parameters are specified in
-[`gaze_estimation/config/defaults.py`](gaze_estimation/config/defaults.py)
-(which is not supposed to be modified directly).
-You can overwrite those default parameters using a YAML file like
-[`configs/mpiigaze/lenet_train.yaml`](configs/mpiigaze/lenet_train.yaml).
+
 
 
 ### Training and Evaluation
