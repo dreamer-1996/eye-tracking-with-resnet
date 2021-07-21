@@ -14,7 +14,7 @@ pip install -r requirements.txt
 
 ## Instructions for training and evaluating the model.
 
-Download the dataset.zip file from here :
+Download the `dataset.zip` file from here :
 
 Extract the `Data` folder and place it inside `datasets/MPIIGaze`
 
