@@ -12,29 +12,24 @@
 pip install -r requirements.txt
 ```
 
+## Instructions for training and evaluating the model.
 
-## Download the dataset and preprocess it
+Download the dataset.zip file from here :
 
-### MPIIGaze
-
-Download the dataset zip file from here :
 Extract the `Data` folder and place it inside `datasets/MPIIGaze`
+
 Then preprocess it :
 
 ```bash
 python3 tools/preprocess_mpiigaze.py --dataset datasets/MPIIGaze -o datasets/
 ```
+Then run the script :
 
-
-```
-
-
-## Usage
-
-Using [`scripts/run_all_mpiigaze_resnet_preact.sh`](scripts/run_all_mpiigaze_resnet_preact.sh),you can run all training and evaluation of ResNet-8 with default parameters.
+```bash
+scripts/run_all_mpiigaze_resnet_preact.sh
 
 ```
-
+The results,checkpoints and the logs will be generated automatically inside the `experiments` folder
 
 
 ## References
