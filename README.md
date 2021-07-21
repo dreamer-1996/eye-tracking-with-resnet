@@ -1,6 +1,7 @@
 # Gaze tracking using off-the-shelf webcam employing Deep Learning techniques
 
 [Here](https://github.com/hysts/pytorch_mpiigaze_demo) is a demo program.
+Following repo is modified from this [work](https://github.com/hysts/pytorch_mpiigaze).
 
 
 ## Requirements
@@ -12,29 +13,26 @@
 pip install -r requirements.txt
 ```
 
+## Instructions for training and evaluating the model.
 
-## Download the dataset and preprocess it
+Download the `dataset.zip` file from [here](https://drive.google.com/file/d/1jJMUZ8wvEEs8q3lqGGa3gxwGA8syy2OO/view?usp=sharing).
 
-### MPIIGaze
+This is different compared to the original MPIIGaze dataset because here we have added the 2-D points on the screen to the normalized data.Our target is to find the 2D gaze points on the screen from images and head poses.
 
-Download the dataset zip file from here :
 Extract the `Data` folder and place it inside `datasets/MPIIGaze`
+
 Then preprocess it :
 
 ```bash
 python3 tools/preprocess_mpiigaze.py --dataset datasets/MPIIGaze -o datasets/
 ```
+Then run the script :
 
+```bash
+scripts/run_all_mpiigaze_resnet_preact.sh
 
 ```
-
-
-## Usage
-
-Using [`scripts/run_all_mpiigaze_resnet_preact.sh`](scripts/run_all_mpiigaze_resnet_preact.sh),you can run all training and evaluation of ResNet-8 with default parameters.
-
-
-
+The results,checkpoints and the logs will be generated automatically inside the `experiments` folder
 
 
 ## References
