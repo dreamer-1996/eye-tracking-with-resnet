@@ -39,7 +39,7 @@ def train(epoch, model, optimizer, scheduler, loss_function, train_loader,
     angle_error_meter = AverageMeter() ###### Need to change this
 
     start = time.time()
-    for step, (images, gazes, targets) in enumerate(train_loader):
+    for step, (images, poses, targets) in enumerate(train_loader):
         if config.tensorboard.train_images and step == 0:
             image = torchvision.utils.make_grid(images,
                                                 normalize=True,
@@ -47,13 +47,13 @@ def train(epoch, model, optimizer, scheduler, loss_function, train_loader,
             tensorboard_writer.add_image('Train/Image', image, epoch)
 
         images = images.to(device)
-        #poses = poses.to(device)
-        gazes = gazes.to(device)
+        poses = poses.to(device)
+        #gazes = gazes.to(device)
         targets = targets.to(device)
         optimizer.zero_grad()
 
         if config.mode == GazeEstimationMethod.MPIIGaze.name:
-            outputs = model(images,gazes)#model(images, poses)
+            outputs = model(images,poses)#model(images, poses)
         elif config.mode == GazeEstimationMethod.MPIIFaceGaze.name:
             outputs = model(images)
         else:
