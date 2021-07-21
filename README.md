@@ -1,4 +1,4 @@
-# A PyTorch implementation of MPIIGaze and MPIIFaceGaze
+# Gaze tracking using off-the-shelf webcam employing Deep Learning techniques
 
 [Here](https://github.com/hysts/pytorch_mpiigaze_demo) is a demo program.
 
@@ -17,101 +17,24 @@ pip install -r requirements.txt
 
 ### MPIIGaze
 
+Download the dataset zip file from here :
+Extract the `Data` folder and place it inside `datasets/MPIIGaze`
+Then preprocess it :
+
 ```bash
-bash scripts/download_mpiigaze_dataset.sh
-python tools/preprocess_mpiigaze.py --dataset datasets/MPIIGaze -o datasets/
+python3 tools/preprocess_mpiigaze.py --dataset datasets/MPIIGaze -o datasets/
 ```
 
-### MPIIFaceGaze
 
-```bash
-bash scripts/download_mpiifacegaze_dataset.sh
-python tools/preprocess_mpiifacegaze.py --dataset datasets/MPIIFaceGaze_normalized -o datasets/
 ```
 
 
 ## Usage
 
-This repository uses [YACS](https://github.com/rbgirshick/yacs) for
-configuration management.
-Default parameters are specified in
-[`gaze_estimation/config/defaults.py`](gaze_estimation/config/defaults.py)
-(which is not supposed to be modified directly).
-You can overwrite those default parameters using a YAML file like
-[`configs/mpiigaze/lenet_train.yaml`](configs/mpiigaze/lenet_train.yaml).
-
-
-### Training and Evaluation
-
-By running the following code, you can train a model using all the
-data except the person with ID 0, and run test on that person.
-
-```bash
-python train.py --config configs/mpiigaze/lenet_train.yaml
-python evaluate.py --config configs/mpiigaze/lenet_eval.yaml
-```
-
-Using [`scripts/run_all_mpiigaze_lenet.sh`](scripts/run_all_mpiigaze_lenet.sh) and
-[`scripts/run_all_mpiigaze_resnet_preact.sh`](scripts/run_all_mpiigaze_resnet_preact.sh),
-you can run all training and evaluation for LeNet and ResNet-8 with
-default parameters.
-
-
-## Results
-
-### MPIIGaze
-
-| Model           | Mean Test Angle Error [degree] | Training Time |
-|:----------------|:------------------------------:|--------------:|
-| LeNet           |              6.52              |  3.5 s/epoch  |
-| ResNet-preact-8 |              5.73              |   7 s/epoch   |
-
-The training time is the value when using GTX 1080Ti.
-
-![](figures/mpiigaze/lenet.png)
-
-![](figures/mpiigaze/resnet_preact_8.png)
-
-### MPIIFaceGaze
-
-| Model     | Mean Test Angle Error [degree] | Training Time |
-|:----------|:------------------------------:|--------------:|
-| AlexNet   |              5.06              |  135 s/epoch  |
-| ResNet-14 |              4.83              |   62 s/epoch  |
-
-The training time is the value when using GTX 1080Ti.
-
-![](figures/mpiifacegaze/alexnet.png)
-
-![](figures/mpiifacegaze/resnet_simple.png)
+Using [`scripts/run_all_mpiigaze_resnet_preact.sh`](scripts/run_all_mpiigaze_resnet_preact.sh),you can run all training and evaluation of ResNet-8 with default parameters.
 
 
 
-
-### Demo
-
-This demo program runs gaze estimation on the video from a webcam.
-
-1. Download the dlib pretrained model for landmark detection.
-
-    ```bash
-    bash scripts/download_dlib_model.sh
-    ```
-
-2. Calibrate the camera.
-
-    Save the calibration result in the same format as the sample
-    file [`data/calib/sample_params.yaml`](data/calib/sample_params.yaml).
-
-4. Run demo.
-
-    Specify the model path and the path of the camera calibration results
-    in the configuration file as in
-    [`configs/demo_mpiigaze_resnet.yaml`](configs/demo_mpiigaze_resnet.yaml).
-
-    ```bash
-    python demo.py --config configs/demo_mpiigaze_resnet.yaml
-    ```
 
 
 ## References
