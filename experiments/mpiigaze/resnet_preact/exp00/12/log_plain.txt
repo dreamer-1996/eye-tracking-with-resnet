@@ -1,0 +1,773 @@
+[2021-07-22 02:28:31] __main__ INFO: mode: MPIIGaze
+dataset:
+  dataset_dir: datasets/MPIIGaze.h5
+transform:
+  mpiifacegaze_face_size: 224
+  mpiifacegaze_gray: False
+device: cuda
+model:
+  name: resnet_preact
+  backbone:
+    name: resnet_simple
+    pretrained: resnet18
+    resnet_block: basic
+    resnet_layers: [2, 2, 2]
+train:
+  batch_size: 32
+  optimizer: sgd
+  base_lr: 0.1
+  momentum: 0.9
+  nesterov: True
+  weight_decay: 0.0001
+  no_weight_decay_on_bn: False
+  loss: L2
+  seed: 0
+  val_first: True
+  val_period: 1
+  test_id: 12
+  val_ratio: 0.1
+  output_dir: experiments/mpiigaze/resnet_preact/exp00/
+  log_period: 100
+  checkpoint_period: 10
+  use_tensorboard: True
+  train_dataloader:
+    num_workers: 4
+    drop_last: True
+    pin_memory: False
+  val_dataloader:
+    num_workers: 4
+    pin_memory: False
+tensorboard:
+  train_images: False
+  val_images: False
+  model_params: False
+optim:
+  adam:
+    betas: (0.9, 0.999)
+scheduler:
+  epochs: 40
+  type: multistep
+  milestones: [30, 35]
+  lr_decay: 0.1
+  lr_min_factor: 0.001
+test:
+  test_id: 0
+  checkpoint: ''
+  output_dir: ''
+  batch_size: 256
+  dataloader:
+    num_workers: 2
+    pin_memory: False
+face_detector:
+  mode: dlib
+  dlib:
+    model: data/dlib/shape_predictor_68_face_landmarks.dat
+gaze_estimator:
+  checkpoint: ''
+  camera_params: ''
+  normalized_camera_params: data/calib/normalized_camera_params_eye.yaml
+  normalized_camera_distance: 0.6
+demo:
+  use_camera: True
+  display_on_screen: True
+  wait_time: 1
+  video_path: ''
+  output_dir: ''
+  output_file_extension: mp4
+  head_pose_axis_length: 0.05
+  gaze_visualization_length: 0.05
+  show_bbox: True
+  show_head_pose: True
+  show_landmarks: True
+  show_normalized_image: False
+  show_template_model: False
+cudnn:
+  benchmark: True
+  deterministic: False
+[2021-07-22 02:28:33] __main__ INFO: Val 0
+[2021-07-22 02:28:34] __main__ INFO: Epoch 0 loss 0.3246 Linear error 0.75
+[2021-07-22 02:28:34] __main__ INFO: Elapsed 0.63
+[2021-07-22 02:28:34] __main__ INFO: Train 1
+[2021-07-22 02:28:34] __main__ INFO: Epoch 1 Step 0/1181 lr 0.100000 loss 0.2669 (0.2669) Linear error 0.69 (0.69)
+[2021-07-22 02:28:35] __main__ INFO: Epoch 1 Step 100/1181 lr 0.100000 loss 0.0809 (0.0925) Linear error 0.37 (0.39)
+[2021-07-22 02:28:36] __main__ INFO: Epoch 1 Step 200/1181 lr 0.100000 loss 0.0722 (0.0830) Linear error 0.34 (0.37)
+[2021-07-22 02:28:37] __main__ INFO: Epoch 1 Step 300/1181 lr 0.100000 loss 0.0745 (0.0797) Linear error 0.36 (0.36)
+[2021-07-22 02:28:38] __main__ INFO: Epoch 1 Step 400/1181 lr 0.100000 loss 0.0662 (0.0772) Linear error 0.34 (0.36)
+[2021-07-22 02:28:39] __main__ INFO: Epoch 1 Step 500/1181 lr 0.100000 loss 0.0546 (0.0751) Linear error 0.30 (0.35)
+[2021-07-22 02:28:40] __main__ INFO: Epoch 1 Step 600/1181 lr 0.100000 loss 0.0936 (0.0735) Linear error 0.40 (0.35)
+[2021-07-22 02:28:41] __main__ INFO: Epoch 1 Step 700/1181 lr 0.100000 loss 0.0685 (0.0722) Linear error 0.34 (0.34)
+[2021-07-22 02:28:42] __main__ INFO: Epoch 1 Step 800/1181 lr 0.100000 loss 0.0707 (0.0711) Linear error 0.36 (0.34)
+[2021-07-22 02:28:43] __main__ INFO: Epoch 1 Step 900/1181 lr 0.100000 loss 0.0505 (0.0699) Linear error 0.30 (0.34)
+[2021-07-22 02:28:44] __main__ INFO: Epoch 1 Step 1000/1181 lr 0.100000 loss 0.0564 (0.0689) Linear error 0.30 (0.34)
+[2021-07-22 02:28:45] __main__ INFO: Epoch 1 Step 1100/1181 lr 0.100000 loss 0.0500 (0.0682) Linear error 0.28 (0.33)
+[2021-07-22 02:28:46] __main__ INFO: Elapsed 11.89
+[2021-07-22 02:28:46] __main__ INFO: Val 1
+[2021-07-22 02:28:47] __main__ INFO: Epoch 1 loss 0.0599 Linear error 0.31
+[2021-07-22 02:28:47] __main__ INFO: Elapsed 0.55
+[2021-07-22 02:28:47] __main__ INFO: Train 2
+[2021-07-22 02:28:47] __main__ INFO: Epoch 2 Step 0/1181 lr 0.100000 loss 0.0516 (0.0516) Linear error 0.30 (0.30)
+[2021-07-22 02:28:48] __main__ INFO: Epoch 2 Step 100/1181 lr 0.100000 loss 0.0686 (0.0572) Linear error 0.33 (0.30)
+[2021-07-22 02:28:49] __main__ INFO: Epoch 2 Step 200/1181 lr 0.100000 loss 0.0319 (0.0566) Linear error 0.22 (0.30)
+[2021-07-22 02:28:50] __main__ INFO: Epoch 2 Step 300/1181 lr 0.100000 loss 0.0488 (0.0562) Linear error 0.28 (0.30)
+[2021-07-22 02:28:51] __main__ INFO: Epoch 2 Step 400/1181 lr 0.100000 loss 0.0554 (0.0559) Linear error 0.30 (0.30)
+[2021-07-22 02:28:52] __main__ INFO: Epoch 2 Step 500/1181 lr 0.100000 loss 0.0548 (0.0557) Linear error 0.29 (0.30)
+[2021-07-22 02:28:53] __main__ INFO: Epoch 2 Step 600/1181 lr 0.100000 loss 0.0406 (0.0554) Linear error 0.25 (0.30)
+[2021-07-22 02:28:54] __main__ INFO: Epoch 2 Step 700/1181 lr 0.100000 loss 0.0465 (0.0551) Linear error 0.28 (0.30)
+[2021-07-22 02:28:55] __main__ INFO: Epoch 2 Step 800/1181 lr 0.100000 loss 0.0473 (0.0548) Linear error 0.28 (0.30)
+[2021-07-22 02:28:56] __main__ INFO: Epoch 2 Step 900/1181 lr 0.100000 loss 0.0488 (0.0546) Linear error 0.27 (0.29)
+[2021-07-22 02:28:57] __main__ INFO: Epoch 2 Step 1000/1181 lr 0.100000 loss 0.0356 (0.0542) Linear error 0.25 (0.29)
+[2021-07-22 02:28:58] __main__ INFO: Epoch 2 Step 1100/1181 lr 0.100000 loss 0.0636 (0.0540) Linear error 0.32 (0.29)
+[2021-07-22 02:28:58] __main__ INFO: Elapsed 11.88
+[2021-07-22 02:28:58] __main__ INFO: Val 2
+[2021-07-22 02:28:59] __main__ INFO: Epoch 2 loss 0.0492 Linear error 0.28
+[2021-07-22 02:28:59] __main__ INFO: Elapsed 0.56
+[2021-07-22 02:28:59] __main__ INFO: Train 3
+[2021-07-22 02:28:59] __main__ INFO: Epoch 3 Step 0/1181 lr 0.100000 loss 0.0491 (0.0491) Linear error 0.28 (0.28)
+[2021-07-22 02:29:00] __main__ INFO: Epoch 3 Step 100/1181 lr 0.100000 loss 0.0397 (0.0484) Linear error 0.26 (0.27)
+[2021-07-22 02:29:01] __main__ INFO: Epoch 3 Step 200/1181 lr 0.100000 loss 0.0713 (0.0482) Linear error 0.35 (0.27)
+[2021-07-22 02:29:02] __main__ INFO: Epoch 3 Step 300/1181 lr 0.100000 loss 0.0682 (0.0481) Linear error 0.33 (0.27)
+[2021-07-22 02:29:03] __main__ INFO: Epoch 3 Step 400/1181 lr 0.100000 loss 0.0503 (0.0480) Linear error 0.29 (0.27)
+[2021-07-22 02:29:04] __main__ INFO: Epoch 3 Step 500/1181 lr 0.100000 loss 0.0398 (0.0477) Linear error 0.25 (0.27)
+[2021-07-22 02:29:05] __main__ INFO: Epoch 3 Step 600/1181 lr 0.100000 loss 0.0555 (0.0475) Linear error 0.30 (0.27)
+[2021-07-22 02:29:06] __main__ INFO: Epoch 3 Step 700/1181 lr 0.100000 loss 0.0413 (0.0475) Linear error 0.25 (0.27)
+[2021-07-22 02:29:07] __main__ INFO: Epoch 3 Step 800/1181 lr 0.100000 loss 0.0434 (0.0474) Linear error 0.25 (0.27)
+[2021-07-22 02:29:08] __main__ INFO: Epoch 3 Step 900/1181 lr 0.100000 loss 0.0590 (0.0473) Linear error 0.31 (0.27)
+[2021-07-22 02:29:09] __main__ INFO: Epoch 3 Step 1000/1181 lr 0.100000 loss 0.0518 (0.0471) Linear error 0.27 (0.27)
+[2021-07-22 02:29:10] __main__ INFO: Epoch 3 Step 1100/1181 lr 0.100000 loss 0.0509 (0.0469) Linear error 0.27 (0.27)
+[2021-07-22 02:29:11] __main__ INFO: Elapsed 11.85
+[2021-07-22 02:29:11] __main__ INFO: Val 3
+[2021-07-22 02:29:11] __main__ INFO: Epoch 3 loss 0.0482 Linear error 0.27
+[2021-07-22 02:29:11] __main__ INFO: Elapsed 0.55
+[2021-07-22 02:29:11] __main__ INFO: Train 4
+[2021-07-22 02:29:12] __main__ INFO: Epoch 4 Step 0/1181 lr 0.100000 loss 0.0373 (0.0373) Linear error 0.24 (0.24)
+[2021-07-22 02:29:12] __main__ INFO: Epoch 4 Step 100/1181 lr 0.100000 loss 0.0356 (0.0430) Linear error 0.24 (0.25)
+[2021-07-22 02:29:13] __main__ INFO: Epoch 4 Step 200/1181 lr 0.100000 loss 0.0336 (0.0433) Linear error 0.22 (0.26)
+[2021-07-22 02:29:14] __main__ INFO: Epoch 4 Step 300/1181 lr 0.100000 loss 0.0489 (0.0434) Linear error 0.27 (0.26)
+[2021-07-22 02:29:15] __main__ INFO: Epoch 4 Step 400/1181 lr 0.100000 loss 0.0356 (0.0428) Linear error 0.23 (0.25)
+[2021-07-22 02:29:16] __main__ INFO: Epoch 4 Step 500/1181 lr 0.100000 loss 0.0562 (0.0429) Linear error 0.24 (0.25)
+[2021-07-22 02:29:17] __main__ INFO: Epoch 4 Step 600/1181 lr 0.100000 loss 0.0456 (0.0428) Linear error 0.26 (0.25)
+[2021-07-22 02:29:18] __main__ INFO: Epoch 4 Step 700/1181 lr 0.100000 loss 0.0228 (0.0428) Linear error 0.19 (0.25)
+[2021-07-22 02:29:19] __main__ INFO: Epoch 4 Step 800/1181 lr 0.100000 loss 0.0437 (0.0427) Linear error 0.25 (0.25)
+[2021-07-22 02:29:20] __main__ INFO: Epoch 4 Step 900/1181 lr 0.100000 loss 0.0303 (0.0428) Linear error 0.21 (0.25)
+[2021-07-22 02:29:21] __main__ INFO: Epoch 4 Step 1000/1181 lr 0.100000 loss 0.0477 (0.0428) Linear error 0.26 (0.25)
+[2021-07-22 02:29:22] __main__ INFO: Epoch 4 Step 1100/1181 lr 0.100000 loss 0.0297 (0.0427) Linear error 0.22 (0.25)
+[2021-07-22 02:29:23] __main__ INFO: Elapsed 11.85
+[2021-07-22 02:29:23] __main__ INFO: Val 4
+[2021-07-22 02:29:24] __main__ INFO: Epoch 4 loss 0.0438 Linear error 0.25
+[2021-07-22 02:29:24] __main__ INFO: Elapsed 0.57
+[2021-07-22 02:29:24] __main__ INFO: Train 5
+[2021-07-22 02:29:24] __main__ INFO: Epoch 5 Step 0/1181 lr 0.100000 loss 0.0302 (0.0302) Linear error 0.20 (0.20)
+[2021-07-22 02:29:25] __main__ INFO: Epoch 5 Step 100/1181 lr 0.100000 loss 0.0336 (0.0391) Linear error 0.23 (0.24)
+[2021-07-22 02:29:26] __main__ INFO: Epoch 5 Step 200/1181 lr 0.100000 loss 0.0323 (0.0386) Linear error 0.23 (0.24)
+[2021-07-22 02:29:27] __main__ INFO: Epoch 5 Step 300/1181 lr 0.100000 loss 0.0434 (0.0390) Linear error 0.25 (0.24)
+[2021-07-22 02:29:28] __main__ INFO: Epoch 5 Step 400/1181 lr 0.100000 loss 0.0355 (0.0388) Linear error 0.23 (0.24)
+[2021-07-22 02:29:29] __main__ INFO: Epoch 5 Step 500/1181 lr 0.100000 loss 0.0415 (0.0392) Linear error 0.25 (0.24)
+[2021-07-22 02:29:30] __main__ INFO: Epoch 5 Step 600/1181 lr 0.100000 loss 0.0387 (0.0396) Linear error 0.25 (0.24)
+[2021-07-22 02:29:31] __main__ INFO: Epoch 5 Step 700/1181 lr 0.100000 loss 0.0706 (0.0396) Linear error 0.32 (0.24)
+[2021-07-22 02:29:32] __main__ INFO: Epoch 5 Step 800/1181 lr 0.100000 loss 0.0435 (0.0396) Linear error 0.27 (0.24)
+[2021-07-22 02:29:33] __main__ INFO: Epoch 5 Step 900/1181 lr 0.100000 loss 0.0634 (0.0395) Linear error 0.31 (0.24)
+[2021-07-22 02:29:34] __main__ INFO: Epoch 5 Step 1000/1181 lr 0.100000 loss 0.0338 (0.0394) Linear error 0.23 (0.24)
+[2021-07-22 02:29:35] __main__ INFO: Epoch 5 Step 1100/1181 lr 0.100000 loss 0.0630 (0.0395) Linear error 0.32 (0.24)
+[2021-07-22 02:29:36] __main__ INFO: Elapsed 11.86
+[2021-07-22 02:29:36] __main__ INFO: Val 5
+[2021-07-22 02:29:36] __main__ INFO: Epoch 5 loss 0.0689 Linear error 0.33
+[2021-07-22 02:29:36] __main__ INFO: Elapsed 0.57
+[2021-07-22 02:29:36] __main__ INFO: Train 6
+[2021-07-22 02:29:36] __main__ INFO: Epoch 6 Step 0/1181 lr 0.100000 loss 0.0295 (0.0295) Linear error 0.20 (0.20)
+[2021-07-22 02:29:37] __main__ INFO: Epoch 6 Step 100/1181 lr 0.100000 loss 0.0262 (0.0368) Linear error 0.20 (0.23)
+[2021-07-22 02:29:38] __main__ INFO: Epoch 6 Step 200/1181 lr 0.100000 loss 0.0534 (0.0368) Linear error 0.28 (0.23)
+[2021-07-22 02:29:39] __main__ INFO: Epoch 6 Step 300/1181 lr 0.100000 loss 0.0369 (0.0369) Linear error 0.23 (0.23)
+[2021-07-22 02:29:40] __main__ INFO: Epoch 6 Step 400/1181 lr 0.100000 loss 0.0423 (0.0372) Linear error 0.25 (0.23)
+[2021-07-22 02:29:41] __main__ INFO: Epoch 6 Step 500/1181 lr 0.100000 loss 0.0348 (0.0371) Linear error 0.22 (0.23)
+[2021-07-22 02:29:42] __main__ INFO: Epoch 6 Step 600/1181 lr 0.100000 loss 0.0268 (0.0369) Linear error 0.19 (0.23)
+[2021-07-22 02:29:43] __main__ INFO: Epoch 6 Step 700/1181 lr 0.100000 loss 0.0292 (0.0371) Linear error 0.21 (0.23)
+[2021-07-22 02:29:44] __main__ INFO: Epoch 6 Step 800/1181 lr 0.100000 loss 0.0300 (0.0370) Linear error 0.22 (0.23)
+[2021-07-22 02:29:45] __main__ INFO: Epoch 6 Step 900/1181 lr 0.100000 loss 0.0477 (0.0371) Linear error 0.26 (0.23)
+[2021-07-22 02:29:46] __main__ INFO: Epoch 6 Step 1000/1181 lr 0.100000 loss 0.0497 (0.0370) Linear error 0.29 (0.23)
+[2021-07-22 02:29:47] __main__ INFO: Epoch 6 Step 1100/1181 lr 0.100000 loss 0.0224 (0.0369) Linear error 0.18 (0.23)
+[2021-07-22 02:29:48] __main__ INFO: Elapsed 11.87
+[2021-07-22 02:29:48] __main__ INFO: Val 6
+[2021-07-22 02:29:49] __main__ INFO: Epoch 6 loss 0.0439 Linear error 0.25
+[2021-07-22 02:29:49] __main__ INFO: Elapsed 0.55
+[2021-07-22 02:29:49] __main__ INFO: Train 7
+[2021-07-22 02:29:49] __main__ INFO: Epoch 7 Step 0/1181 lr 0.100000 loss 0.0282 (0.0282) Linear error 0.21 (0.21)
+[2021-07-22 02:29:50] __main__ INFO: Epoch 7 Step 100/1181 lr 0.100000 loss 0.0379 (0.0338) Linear error 0.25 (0.22)
+[2021-07-22 02:29:51] __main__ INFO: Epoch 7 Step 200/1181 lr 0.100000 loss 0.0365 (0.0342) Linear error 0.23 (0.23)
+[2021-07-22 02:29:52] __main__ INFO: Epoch 7 Step 300/1181 lr 0.100000 loss 0.0435 (0.0342) Linear error 0.24 (0.22)
+[2021-07-22 02:29:53] __main__ INFO: Epoch 7 Step 400/1181 lr 0.100000 loss 0.0313 (0.0345) Linear error 0.22 (0.23)
+[2021-07-22 02:29:54] __main__ INFO: Epoch 7 Step 500/1181 lr 0.100000 loss 0.0468 (0.0346) Linear error 0.27 (0.23)
+[2021-07-22 02:29:55] __main__ INFO: Epoch 7 Step 600/1181 lr 0.100000 loss 0.0325 (0.0348) Linear error 0.22 (0.23)
+[2021-07-22 02:29:56] __main__ INFO: Epoch 7 Step 700/1181 lr 0.100000 loss 0.0380 (0.0348) Linear error 0.26 (0.23)
+[2021-07-22 02:29:57] __main__ INFO: Epoch 7 Step 800/1181 lr 0.100000 loss 0.0413 (0.0350) Linear error 0.25 (0.23)
+[2021-07-22 02:29:58] __main__ INFO: Epoch 7 Step 900/1181 lr 0.100000 loss 0.0408 (0.0351) Linear error 0.25 (0.23)
+[2021-07-22 02:29:59] __main__ INFO: Epoch 7 Step 1000/1181 lr 0.100000 loss 0.0360 (0.0352) Linear error 0.23 (0.23)
+[2021-07-22 02:30:00] __main__ INFO: Epoch 7 Step 1100/1181 lr 0.100000 loss 0.0372 (0.0351) Linear error 0.24 (0.23)
+[2021-07-22 02:30:00] __main__ INFO: Elapsed 11.83
+[2021-07-22 02:30:00] __main__ INFO: Val 7
+[2021-07-22 02:30:01] __main__ INFO: Epoch 7 loss 0.0567 Linear error 0.29
+[2021-07-22 02:30:01] __main__ INFO: Elapsed 0.65
+[2021-07-22 02:30:01] __main__ INFO: Train 8
+[2021-07-22 02:30:01] __main__ INFO: Epoch 8 Step 0/1181 lr 0.100000 loss 0.0338 (0.0338) Linear error 0.23 (0.23)
+[2021-07-22 02:30:02] __main__ INFO: Epoch 8 Step 100/1181 lr 0.100000 loss 0.0262 (0.0308) Linear error 0.20 (0.21)
+[2021-07-22 02:30:03] __main__ INFO: Epoch 8 Step 200/1181 lr 0.100000 loss 0.0226 (0.0321) Linear error 0.19 (0.22)
+[2021-07-22 02:30:04] __main__ INFO: Epoch 8 Step 300/1181 lr 0.100000 loss 0.0361 (0.0323) Linear error 0.24 (0.22)
+[2021-07-22 02:30:05] __main__ INFO: Epoch 8 Step 400/1181 lr 0.100000 loss 0.0298 (0.0322) Linear error 0.22 (0.22)
+[2021-07-22 02:30:06] __main__ INFO: Epoch 8 Step 500/1181 lr 0.100000 loss 0.0266 (0.0324) Linear error 0.20 (0.22)
+[2021-07-22 02:30:07] __main__ INFO: Epoch 8 Step 600/1181 lr 0.100000 loss 0.0310 (0.0327) Linear error 0.22 (0.22)
+[2021-07-22 02:30:08] __main__ INFO: Epoch 8 Step 700/1181 lr 0.100000 loss 0.0396 (0.0328) Linear error 0.24 (0.22)
+[2021-07-22 02:30:09] __main__ INFO: Epoch 8 Step 800/1181 lr 0.100000 loss 0.0371 (0.0329) Linear error 0.24 (0.22)
+[2021-07-22 02:30:10] __main__ INFO: Epoch 8 Step 900/1181 lr 0.100000 loss 0.0476 (0.0331) Linear error 0.26 (0.22)
+[2021-07-22 02:30:11] __main__ INFO: Epoch 8 Step 1000/1181 lr 0.100000 loss 0.0346 (0.0332) Linear error 0.23 (0.22)
+[2021-07-22 02:30:12] __main__ INFO: Epoch 8 Step 1100/1181 lr 0.100000 loss 0.0380 (0.0335) Linear error 0.24 (0.22)
+[2021-07-22 02:30:13] __main__ INFO: Elapsed 11.84
+[2021-07-22 02:30:13] __main__ INFO: Val 8
+[2021-07-22 02:30:14] __main__ INFO: Epoch 8 loss 0.0398 Linear error 0.24
+[2021-07-22 02:30:14] __main__ INFO: Elapsed 0.60
+[2021-07-22 02:30:14] __main__ INFO: Train 9
+[2021-07-22 02:30:14] __main__ INFO: Epoch 9 Step 0/1181 lr 0.100000 loss 0.0215 (0.0215) Linear error 0.17 (0.17)
+[2021-07-22 02:30:15] __main__ INFO: Epoch 9 Step 100/1181 lr 0.100000 loss 0.0322 (0.0316) Linear error 0.23 (0.22)
+[2021-07-22 02:30:16] __main__ INFO: Epoch 9 Step 200/1181 lr 0.100000 loss 0.0383 (0.0320) Linear error 0.24 (0.22)
+[2021-07-22 02:30:17] __main__ INFO: Epoch 9 Step 300/1181 lr 0.100000 loss 0.0368 (0.0318) Linear error 0.24 (0.22)
+[2021-07-22 02:30:18] __main__ INFO: Epoch 9 Step 400/1181 lr 0.100000 loss 0.0309 (0.0318) Linear error 0.21 (0.22)
+[2021-07-22 02:30:19] __main__ INFO: Epoch 9 Step 500/1181 lr 0.100000 loss 0.0329 (0.0319) Linear error 0.21 (0.22)
+[2021-07-22 02:30:20] __main__ INFO: Epoch 9 Step 600/1181 lr 0.100000 loss 0.0224 (0.0322) Linear error 0.17 (0.22)
+[2021-07-22 02:30:21] __main__ INFO: Epoch 9 Step 700/1181 lr 0.100000 loss 0.0475 (0.0324) Linear error 0.28 (0.22)
+[2021-07-22 02:30:22] __main__ INFO: Epoch 9 Step 800/1181 lr 0.100000 loss 0.0368 (0.0324) Linear error 0.23 (0.22)
+[2021-07-22 02:30:23] __main__ INFO: Epoch 9 Step 900/1181 lr 0.100000 loss 0.0262 (0.0323) Linear error 0.20 (0.22)
+[2021-07-22 02:30:24] __main__ INFO: Epoch 9 Step 1000/1181 lr 0.100000 loss 0.0250 (0.0324) Linear error 0.19 (0.22)
+[2021-07-22 02:30:25] __main__ INFO: Epoch 9 Step 1100/1181 lr 0.100000 loss 0.0360 (0.0325) Linear error 0.22 (0.22)
+[2021-07-22 02:30:25] __main__ INFO: Elapsed 11.87
+[2021-07-22 02:30:25] __main__ INFO: Val 9
+[2021-07-22 02:30:26] __main__ INFO: Epoch 9 loss 0.0346 Linear error 0.22
+[2021-07-22 02:30:26] __main__ INFO: Elapsed 0.57
+[2021-07-22 02:30:26] __main__ INFO: Train 10
+[2021-07-22 02:30:26] __main__ INFO: Epoch 10 Step 0/1181 lr 0.100000 loss 0.0387 (0.0387) Linear error 0.26 (0.26)
+[2021-07-22 02:30:27] __main__ INFO: Epoch 10 Step 100/1181 lr 0.100000 loss 0.0178 (0.0291) Linear error 0.16 (0.21)
+[2021-07-22 02:30:28] __main__ INFO: Epoch 10 Step 200/1181 lr 0.100000 loss 0.0239 (0.0297) Linear error 0.20 (0.21)
+[2021-07-22 02:30:29] __main__ INFO: Epoch 10 Step 300/1181 lr 0.100000 loss 0.0497 (0.0302) Linear error 0.27 (0.21)
+[2021-07-22 02:30:30] __main__ INFO: Epoch 10 Step 400/1181 lr 0.100000 loss 0.0199 (0.0307) Linear error 0.18 (0.21)
+[2021-07-22 02:30:31] __main__ INFO: Epoch 10 Step 500/1181 lr 0.100000 loss 0.0313 (0.0307) Linear error 0.23 (0.21)
+[2021-07-22 02:30:32] __main__ INFO: Epoch 10 Step 600/1181 lr 0.100000 loss 0.0285 (0.0311) Linear error 0.21 (0.21)
+[2021-07-22 02:30:33] __main__ INFO: Epoch 10 Step 700/1181 lr 0.100000 loss 0.0372 (0.0314) Linear error 0.23 (0.21)
+[2021-07-22 02:30:34] __main__ INFO: Epoch 10 Step 800/1181 lr 0.100000 loss 0.0242 (0.0314) Linear error 0.19 (0.21)
+[2021-07-22 02:30:35] __main__ INFO: Epoch 10 Step 900/1181 lr 0.100000 loss 0.0217 (0.0314) Linear error 0.18 (0.21)
+[2021-07-22 02:30:36] __main__ INFO: Epoch 10 Step 1000/1181 lr 0.100000 loss 0.0296 (0.0313) Linear error 0.21 (0.21)
+[2021-07-22 02:30:37] __main__ INFO: Epoch 10 Step 1100/1181 lr 0.100000 loss 0.0330 (0.0314) Linear error 0.22 (0.21)
+[2021-07-22 02:30:38] __main__ INFO: Elapsed 11.83
+[2021-07-22 02:30:38] __main__ INFO: Val 10
+[2021-07-22 02:30:38] __main__ INFO: Epoch 10 loss 0.0404 Linear error 0.25
+[2021-07-22 02:30:38] __main__ INFO: Elapsed 0.58
+[2021-07-22 02:30:38] fvcore.common.checkpoint INFO: Saving checkpoint to experiments/mpiigaze/resnet_preact/exp00/12/checkpoint_0010.pth
+[2021-07-22 02:30:38] __main__ INFO: Train 11
+[2021-07-22 02:30:39] __main__ INFO: Epoch 11 Step 0/1181 lr 0.100000 loss 0.0373 (0.0373) Linear error 0.25 (0.25)
+[2021-07-22 02:30:40] __main__ INFO: Epoch 11 Step 100/1181 lr 0.100000 loss 0.0250 (0.0288) Linear error 0.20 (0.21)
+[2021-07-22 02:30:41] __main__ INFO: Epoch 11 Step 200/1181 lr 0.100000 loss 0.0283 (0.0296) Linear error 0.20 (0.21)
+[2021-07-22 02:30:42] __main__ INFO: Epoch 11 Step 300/1181 lr 0.100000 loss 0.0403 (0.0292) Linear error 0.24 (0.21)
+[2021-07-22 02:30:43] __main__ INFO: Epoch 11 Step 400/1181 lr 0.100000 loss 0.0249 (0.0298) Linear error 0.20 (0.21)
+[2021-07-22 02:30:44] __main__ INFO: Epoch 11 Step 500/1181 lr 0.100000 loss 0.0309 (0.0302) Linear error 0.22 (0.21)
+[2021-07-22 02:30:45] __main__ INFO: Epoch 11 Step 600/1181 lr 0.100000 loss 0.0255 (0.0301) Linear error 0.19 (0.21)
+[2021-07-22 02:30:46] __main__ INFO: Epoch 11 Step 700/1181 lr 0.100000 loss 0.0326 (0.0301) Linear error 0.22 (0.21)
+[2021-07-22 02:30:46] __main__ INFO: Epoch 11 Step 800/1181 lr 0.100000 loss 0.0325 (0.0303) Linear error 0.23 (0.21)
+[2021-07-22 02:30:47] __main__ INFO: Epoch 11 Step 900/1181 lr 0.100000 loss 0.0257 (0.0303) Linear error 0.19 (0.21)
+[2021-07-22 02:30:48] __main__ INFO: Epoch 11 Step 1000/1181 lr 0.100000 loss 0.0275 (0.0304) Linear error 0.20 (0.21)
+[2021-07-22 02:30:49] __main__ INFO: Epoch 11 Step 1100/1181 lr 0.100000 loss 0.0387 (0.0305) Linear error 0.24 (0.21)
+[2021-07-22 02:30:50] __main__ INFO: Elapsed 11.87
+[2021-07-22 02:30:50] __main__ INFO: Val 11
+[2021-07-22 02:30:51] __main__ INFO: Epoch 11 loss 0.0455 Linear error 0.26
+[2021-07-22 02:30:51] __main__ INFO: Elapsed 0.56
+[2021-07-22 02:30:51] __main__ INFO: Train 12
+[2021-07-22 02:30:51] __main__ INFO: Epoch 12 Step 0/1181 lr 0.100000 loss 0.0306 (0.0306) Linear error 0.21 (0.21)
+[2021-07-22 02:30:52] __main__ INFO: Epoch 12 Step 100/1181 lr 0.100000 loss 0.0304 (0.0274) Linear error 0.21 (0.20)
+[2021-07-22 02:30:53] __main__ INFO: Epoch 12 Step 200/1181 lr 0.100000 loss 0.0161 (0.0277) Linear error 0.16 (0.20)
+[2021-07-22 02:30:54] __main__ INFO: Epoch 12 Step 300/1181 lr 0.100000 loss 0.0285 (0.0286) Linear error 0.20 (0.21)
+[2021-07-22 02:30:55] __main__ INFO: Epoch 12 Step 400/1181 lr 0.100000 loss 0.0402 (0.0289) Linear error 0.24 (0.21)
+[2021-07-22 02:30:56] __main__ INFO: Epoch 12 Step 500/1181 lr 0.100000 loss 0.0403 (0.0293) Linear error 0.25 (0.21)
+[2021-07-22 02:30:57] __main__ INFO: Epoch 12 Step 600/1181 lr 0.100000 loss 0.0361 (0.0296) Linear error 0.24 (0.21)
+[2021-07-22 02:30:58] __main__ INFO: Epoch 12 Step 700/1181 lr 0.100000 loss 0.0200 (0.0296) Linear error 0.18 (0.21)
+[2021-07-22 02:30:59] __main__ INFO: Epoch 12 Step 800/1181 lr 0.100000 loss 0.0249 (0.0297) Linear error 0.20 (0.21)
+[2021-07-22 02:31:00] __main__ INFO: Epoch 12 Step 900/1181 lr 0.100000 loss 0.0257 (0.0298) Linear error 0.20 (0.21)
+[2021-07-22 02:31:01] __main__ INFO: Epoch 12 Step 1000/1181 lr 0.100000 loss 0.0327 (0.0299) Linear error 0.22 (0.21)
+[2021-07-22 02:31:02] __main__ INFO: Epoch 12 Step 1100/1181 lr 0.100000 loss 0.0388 (0.0300) Linear error 0.23 (0.21)
+[2021-07-22 02:31:03] __main__ INFO: Elapsed 11.87
+[2021-07-22 02:31:03] __main__ INFO: Val 12
+[2021-07-22 02:31:03] __main__ INFO: Epoch 12 loss 0.0349 Linear error 0.23
+[2021-07-22 02:31:03] __main__ INFO: Elapsed 0.55
+[2021-07-22 02:31:03] __main__ INFO: Train 13
+[2021-07-22 02:31:03] __main__ INFO: Epoch 13 Step 0/1181 lr 0.100000 loss 0.0314 (0.0314) Linear error 0.22 (0.22)
+[2021-07-22 02:31:04] __main__ INFO: Epoch 13 Step 100/1181 lr 0.100000 loss 0.0242 (0.0279) Linear error 0.19 (0.20)
+[2021-07-22 02:31:05] __main__ INFO: Epoch 13 Step 200/1181 lr 0.100000 loss 0.0390 (0.0287) Linear error 0.19 (0.21)
+[2021-07-22 02:31:06] __main__ INFO: Epoch 13 Step 300/1181 lr 0.100000 loss 0.0263 (0.0288) Linear error 0.20 (0.21)
+[2021-07-22 02:31:07] __main__ INFO: Epoch 13 Step 400/1181 lr 0.100000 loss 0.0244 (0.0291) Linear error 0.19 (0.21)
+[2021-07-22 02:31:08] __main__ INFO: Epoch 13 Step 500/1181 lr 0.100000 loss 0.0360 (0.0291) Linear error 0.23 (0.21)
+[2021-07-22 02:31:09] __main__ INFO: Epoch 13 Step 600/1181 lr 0.100000 loss 0.0304 (0.0291) Linear error 0.21 (0.21)
+[2021-07-22 02:31:10] __main__ INFO: Epoch 13 Step 700/1181 lr 0.100000 loss 0.0296 (0.0293) Linear error 0.22 (0.21)
+[2021-07-22 02:31:11] __main__ INFO: Epoch 13 Step 800/1181 lr 0.100000 loss 0.0223 (0.0293) Linear error 0.19 (0.21)
+[2021-07-22 02:31:12] __main__ INFO: Epoch 13 Step 900/1181 lr 0.100000 loss 0.0219 (0.0295) Linear error 0.19 (0.21)
+[2021-07-22 02:31:13] __main__ INFO: Epoch 13 Step 1000/1181 lr 0.100000 loss 0.0315 (0.0296) Linear error 0.23 (0.21)
+[2021-07-22 02:31:14] __main__ INFO: Epoch 13 Step 1100/1181 lr 0.100000 loss 0.0345 (0.0296) Linear error 0.23 (0.21)
+[2021-07-22 02:31:15] __main__ INFO: Elapsed 11.86
+[2021-07-22 02:31:15] __main__ INFO: Val 13
+[2021-07-22 02:31:16] __main__ INFO: Epoch 13 loss 0.0409 Linear error 0.25
+[2021-07-22 02:31:16] __main__ INFO: Elapsed 0.57
+[2021-07-22 02:31:16] __main__ INFO: Train 14
+[2021-07-22 02:31:16] __main__ INFO: Epoch 14 Step 0/1181 lr 0.100000 loss 0.0348 (0.0348) Linear error 0.21 (0.21)
+[2021-07-22 02:31:17] __main__ INFO: Epoch 14 Step 100/1181 lr 0.100000 loss 0.0296 (0.0257) Linear error 0.21 (0.19)
+[2021-07-22 02:31:18] __main__ INFO: Epoch 14 Step 200/1181 lr 0.100000 loss 0.0293 (0.0273) Linear error 0.21 (0.20)
+[2021-07-22 02:31:19] __main__ INFO: Epoch 14 Step 300/1181 lr 0.100000 loss 0.0240 (0.0274) Linear error 0.19 (0.20)
+[2021-07-22 02:31:20] __main__ INFO: Epoch 14 Step 400/1181 lr 0.100000 loss 0.0179 (0.0278) Linear error 0.16 (0.20)
+[2021-07-22 02:31:21] __main__ INFO: Epoch 14 Step 500/1181 lr 0.100000 loss 0.0312 (0.0281) Linear error 0.22 (0.20)
+[2021-07-22 02:31:22] __main__ INFO: Epoch 14 Step 600/1181 lr 0.100000 loss 0.0359 (0.0283) Linear error 0.22 (0.20)
+[2021-07-22 02:31:23] __main__ INFO: Epoch 14 Step 700/1181 lr 0.100000 loss 0.0217 (0.0284) Linear error 0.18 (0.20)
+[2021-07-22 02:31:24] __main__ INFO: Epoch 14 Step 800/1181 lr 0.100000 loss 0.0364 (0.0286) Linear error 0.24 (0.20)
+[2021-07-22 02:31:25] __main__ INFO: Epoch 14 Step 900/1181 lr 0.100000 loss 0.0256 (0.0287) Linear error 0.19 (0.21)
+[2021-07-22 02:31:26] __main__ INFO: Epoch 14 Step 1000/1181 lr 0.100000 loss 0.0307 (0.0287) Linear error 0.21 (0.21)
+[2021-07-22 02:31:27] __main__ INFO: Epoch 14 Step 1100/1181 lr 0.100000 loss 0.0273 (0.0289) Linear error 0.20 (0.21)
+[2021-07-22 02:31:28] __main__ INFO: Elapsed 11.87
+[2021-07-22 02:31:28] __main__ INFO: Val 14
+[2021-07-22 02:31:28] __main__ INFO: Epoch 14 loss 0.0438 Linear error 0.25
+[2021-07-22 02:31:28] __main__ INFO: Elapsed 0.57
+[2021-07-22 02:31:28] __main__ INFO: Train 15
+[2021-07-22 02:31:28] __main__ INFO: Epoch 15 Step 0/1181 lr 0.100000 loss 0.0254 (0.0254) Linear error 0.18 (0.18)
+[2021-07-22 02:31:29] __main__ INFO: Epoch 15 Step 100/1181 lr 0.100000 loss 0.0413 (0.0261) Linear error 0.26 (0.20)
+[2021-07-22 02:31:30] __main__ INFO: Epoch 15 Step 200/1181 lr 0.100000 loss 0.0221 (0.0269) Linear error 0.18 (0.20)
+[2021-07-22 02:31:31] __main__ INFO: Epoch 15 Step 300/1181 lr 0.100000 loss 0.0191 (0.0275) Linear error 0.18 (0.20)
+[2021-07-22 02:31:32] __main__ INFO: Epoch 15 Step 400/1181 lr 0.100000 loss 0.0305 (0.0278) Linear error 0.22 (0.20)
+[2021-07-22 02:31:33] __main__ INFO: Epoch 15 Step 500/1181 lr 0.100000 loss 0.0321 (0.0277) Linear error 0.22 (0.20)
+[2021-07-22 02:31:34] __main__ INFO: Epoch 15 Step 600/1181 lr 0.100000 loss 0.0329 (0.0276) Linear error 0.22 (0.20)
+[2021-07-22 02:31:35] __main__ INFO: Epoch 15 Step 700/1181 lr 0.100000 loss 0.0241 (0.0279) Linear error 0.18 (0.20)
+[2021-07-22 02:31:36] __main__ INFO: Epoch 15 Step 800/1181 lr 0.100000 loss 0.0306 (0.0280) Linear error 0.22 (0.20)
+[2021-07-22 02:31:37] __main__ INFO: Epoch 15 Step 900/1181 lr 0.100000 loss 0.0291 (0.0282) Linear error 0.21 (0.20)
+[2021-07-22 02:31:38] __main__ INFO: Epoch 15 Step 1000/1181 lr 0.100000 loss 0.0342 (0.0284) Linear error 0.22 (0.20)
+[2021-07-22 02:31:39] __main__ INFO: Epoch 15 Step 1100/1181 lr 0.100000 loss 0.0216 (0.0285) Linear error 0.18 (0.20)
+[2021-07-22 02:31:40] __main__ INFO: Elapsed 11.85
+[2021-07-22 02:31:40] __main__ INFO: Val 15
+[2021-07-22 02:31:41] __main__ INFO: Epoch 15 loss 0.0356 Linear error 0.23
+[2021-07-22 02:31:41] __main__ INFO: Elapsed 0.57
+[2021-07-22 02:31:41] __main__ INFO: Train 16
+[2021-07-22 02:31:41] __main__ INFO: Epoch 16 Step 0/1181 lr 0.100000 loss 0.0164 (0.0164) Linear error 0.16 (0.16)
+[2021-07-22 02:31:42] __main__ INFO: Epoch 16 Step 100/1181 lr 0.100000 loss 0.0221 (0.0272) Linear error 0.19 (0.20)
+[2021-07-22 02:31:43] __main__ INFO: Epoch 16 Step 200/1181 lr 0.100000 loss 0.0403 (0.0270) Linear error 0.25 (0.20)
+[2021-07-22 02:31:44] __main__ INFO: Epoch 16 Step 300/1181 lr 0.100000 loss 0.0242 (0.0272) Linear error 0.19 (0.20)
+[2021-07-22 02:31:45] __main__ INFO: Epoch 16 Step 400/1181 lr 0.100000 loss 0.0422 (0.0274) Linear error 0.26 (0.20)
+[2021-07-22 02:31:46] __main__ INFO: Epoch 16 Step 500/1181 lr 0.100000 loss 0.0217 (0.0273) Linear error 0.18 (0.20)
+[2021-07-22 02:31:47] __main__ INFO: Epoch 16 Step 600/1181 lr 0.100000 loss 0.0218 (0.0273) Linear error 0.18 (0.20)
+[2021-07-22 02:31:48] __main__ INFO: Epoch 16 Step 700/1181 lr 0.100000 loss 0.0269 (0.0275) Linear error 0.20 (0.20)
+[2021-07-22 02:31:49] __main__ INFO: Epoch 16 Step 800/1181 lr 0.100000 loss 0.0375 (0.0276) Linear error 0.23 (0.20)
+[2021-07-22 02:31:50] __main__ INFO: Epoch 16 Step 900/1181 lr 0.100000 loss 0.0244 (0.0278) Linear error 0.19 (0.20)
+[2021-07-22 02:31:51] __main__ INFO: Epoch 16 Step 1000/1181 lr 0.100000 loss 0.0282 (0.0278) Linear error 0.19 (0.20)
+[2021-07-22 02:31:52] __main__ INFO: Epoch 16 Step 1100/1181 lr 0.100000 loss 0.0201 (0.0278) Linear error 0.17 (0.20)
+[2021-07-22 02:31:52] __main__ INFO: Elapsed 11.89
+[2021-07-22 02:31:52] __main__ INFO: Val 16
+[2021-07-22 02:31:53] __main__ INFO: Epoch 16 loss 0.0396 Linear error 0.24
+[2021-07-22 02:31:53] __main__ INFO: Elapsed 0.57
+[2021-07-22 02:31:53] __main__ INFO: Train 17
+[2021-07-22 02:31:53] __main__ INFO: Epoch 17 Step 0/1181 lr 0.100000 loss 0.0219 (0.0219) Linear error 0.19 (0.19)
+[2021-07-22 02:31:54] __main__ INFO: Epoch 17 Step 100/1181 lr 0.100000 loss 0.0270 (0.0267) Linear error 0.20 (0.20)
+[2021-07-22 02:31:55] __main__ INFO: Epoch 17 Step 200/1181 lr 0.100000 loss 0.0320 (0.0267) Linear error 0.22 (0.20)
+[2021-07-22 02:31:56] __main__ INFO: Epoch 17 Step 300/1181 lr 0.100000 loss 0.0251 (0.0273) Linear error 0.19 (0.20)
+[2021-07-22 02:31:57] __main__ INFO: Epoch 17 Step 400/1181 lr 0.100000 loss 0.0222 (0.0272) Linear error 0.18 (0.20)
+[2021-07-22 02:31:58] __main__ INFO: Epoch 17 Step 500/1181 lr 0.100000 loss 0.0189 (0.0272) Linear error 0.17 (0.20)
+[2021-07-22 02:31:59] __main__ INFO: Epoch 17 Step 600/1181 lr 0.100000 loss 0.0181 (0.0272) Linear error 0.16 (0.20)
+[2021-07-22 02:32:00] __main__ INFO: Epoch 17 Step 700/1181 lr 0.100000 loss 0.0290 (0.0272) Linear error 0.20 (0.20)
+[2021-07-22 02:32:01] __main__ INFO: Epoch 17 Step 800/1181 lr 0.100000 loss 0.0232 (0.0274) Linear error 0.19 (0.20)
+[2021-07-22 02:32:02] __main__ INFO: Epoch 17 Step 900/1181 lr 0.100000 loss 0.0357 (0.0276) Linear error 0.24 (0.20)
+[2021-07-22 02:32:03] __main__ INFO: Epoch 17 Step 1000/1181 lr 0.100000 loss 0.0227 (0.0277) Linear error 0.18 (0.20)
+[2021-07-22 02:32:04] __main__ INFO: Epoch 17 Step 1100/1181 lr 0.100000 loss 0.0446 (0.0278) Linear error 0.26 (0.20)
+[2021-07-22 02:32:05] __main__ INFO: Elapsed 11.86
+[2021-07-22 02:32:05] __main__ INFO: Val 17
+[2021-07-22 02:32:05] __main__ INFO: Epoch 17 loss 0.0422 Linear error 0.25
+[2021-07-22 02:32:05] __main__ INFO: Elapsed 0.57
+[2021-07-22 02:32:05] __main__ INFO: Train 18
+[2021-07-22 02:32:06] __main__ INFO: Epoch 18 Step 0/1181 lr 0.100000 loss 0.0316 (0.0316) Linear error 0.21 (0.21)
+[2021-07-22 02:32:07] __main__ INFO: Epoch 18 Step 100/1181 lr 0.100000 loss 0.0217 (0.0254) Linear error 0.19 (0.19)
+[2021-07-22 02:32:08] __main__ INFO: Epoch 18 Step 200/1181 lr 0.100000 loss 0.0270 (0.0257) Linear error 0.18 (0.19)
+[2021-07-22 02:32:09] __main__ INFO: Epoch 18 Step 300/1181 lr 0.100000 loss 0.0282 (0.0259) Linear error 0.21 (0.20)
+[2021-07-22 02:32:10] __main__ INFO: Epoch 18 Step 400/1181 lr 0.100000 loss 0.0230 (0.0263) Linear error 0.20 (0.20)
+[2021-07-22 02:32:10] __main__ INFO: Epoch 18 Step 500/1181 lr 0.100000 loss 0.0190 (0.0265) Linear error 0.15 (0.20)
+[2021-07-22 02:32:11] __main__ INFO: Epoch 18 Step 600/1181 lr 0.100000 loss 0.0140 (0.0265) Linear error 0.15 (0.20)
+[2021-07-22 02:32:12] __main__ INFO: Epoch 18 Step 700/1181 lr 0.100000 loss 0.0203 (0.0265) Linear error 0.18 (0.20)
+[2021-07-22 02:32:13] __main__ INFO: Epoch 18 Step 800/1181 lr 0.100000 loss 0.0271 (0.0269) Linear error 0.21 (0.20)
+[2021-07-22 02:32:14] __main__ INFO: Epoch 18 Step 900/1181 lr 0.100000 loss 0.0233 (0.0269) Linear error 0.19 (0.20)
+[2021-07-22 02:32:15] __main__ INFO: Epoch 18 Step 1000/1181 lr 0.100000 loss 0.0306 (0.0269) Linear error 0.22 (0.20)
+[2021-07-22 02:32:16] __main__ INFO: Epoch 18 Step 1100/1181 lr 0.100000 loss 0.0259 (0.0269) Linear error 0.19 (0.20)
+[2021-07-22 02:32:17] __main__ INFO: Elapsed 11.84
+[2021-07-22 02:32:17] __main__ INFO: Val 18
+[2021-07-22 02:32:18] __main__ INFO: Epoch 18 loss 0.0527 Linear error 0.29
+[2021-07-22 02:32:18] __main__ INFO: Elapsed 0.57
+[2021-07-22 02:32:18] __main__ INFO: Train 19
+[2021-07-22 02:32:18] __main__ INFO: Epoch 19 Step 0/1181 lr 0.100000 loss 0.0206 (0.0206) Linear error 0.17 (0.17)
+[2021-07-22 02:32:19] __main__ INFO: Epoch 19 Step 100/1181 lr 0.100000 loss 0.0266 (0.0257) Linear error 0.20 (0.20)
+[2021-07-22 02:32:20] __main__ INFO: Epoch 19 Step 200/1181 lr 0.100000 loss 0.0369 (0.0264) Linear error 0.24 (0.20)
+[2021-07-22 02:32:21] __main__ INFO: Epoch 19 Step 300/1181 lr 0.100000 loss 0.0297 (0.0266) Linear error 0.20 (0.20)
+[2021-07-22 02:32:22] __main__ INFO: Epoch 19 Step 400/1181 lr 0.100000 loss 0.0220 (0.0264) Linear error 0.19 (0.20)
+[2021-07-22 02:32:23] __main__ INFO: Epoch 19 Step 500/1181 lr 0.100000 loss 0.0288 (0.0263) Linear error 0.20 (0.20)
+[2021-07-22 02:32:24] __main__ INFO: Epoch 19 Step 600/1181 lr 0.100000 loss 0.0249 (0.0266) Linear error 0.19 (0.20)
+[2021-07-22 02:32:25] __main__ INFO: Epoch 19 Step 700/1181 lr 0.100000 loss 0.0176 (0.0265) Linear error 0.17 (0.20)
+[2021-07-22 02:32:26] __main__ INFO: Epoch 19 Step 800/1181 lr 0.100000 loss 0.0204 (0.0267) Linear error 0.18 (0.20)
+[2021-07-22 02:32:27] __main__ INFO: Epoch 19 Step 900/1181 lr 0.100000 loss 0.0311 (0.0269) Linear error 0.22 (0.20)
+[2021-07-22 02:32:28] __main__ INFO: Epoch 19 Step 1000/1181 lr 0.100000 loss 0.0194 (0.0270) Linear error 0.18 (0.20)
+[2021-07-22 02:32:29] __main__ INFO: Epoch 19 Step 1100/1181 lr 0.100000 loss 0.0301 (0.0271) Linear error 0.22 (0.20)
+[2021-07-22 02:32:30] __main__ INFO: Elapsed 11.82
+[2021-07-22 02:32:30] __main__ INFO: Val 19
+[2021-07-22 02:32:30] __main__ INFO: Epoch 19 loss 0.0387 Linear error 0.24
+[2021-07-22 02:32:30] __main__ INFO: Elapsed 0.62
+[2021-07-22 02:32:30] __main__ INFO: Train 20
+[2021-07-22 02:32:30] __main__ INFO: Epoch 20 Step 0/1181 lr 0.100000 loss 0.0226 (0.0226) Linear error 0.18 (0.18)
+[2021-07-22 02:32:31] __main__ INFO: Epoch 20 Step 100/1181 lr 0.100000 loss 0.0308 (0.0259) Linear error 0.23 (0.20)
+[2021-07-22 02:32:32] __main__ INFO: Epoch 20 Step 200/1181 lr 0.100000 loss 0.0331 (0.0264) Linear error 0.23 (0.20)
+[2021-07-22 02:32:33] __main__ INFO: Epoch 20 Step 300/1181 lr 0.100000 loss 0.0288 (0.0263) Linear error 0.20 (0.20)
+[2021-07-22 02:32:34] __main__ INFO: Epoch 20 Step 400/1181 lr 0.100000 loss 0.0209 (0.0262) Linear error 0.17 (0.20)
+[2021-07-22 02:32:35] __main__ INFO: Epoch 20 Step 500/1181 lr 0.100000 loss 0.0481 (0.0263) Linear error 0.25 (0.20)
+[2021-07-22 02:32:36] __main__ INFO: Epoch 20 Step 600/1181 lr 0.100000 loss 0.0270 (0.0264) Linear error 0.19 (0.20)
+[2021-07-22 02:32:37] __main__ INFO: Epoch 20 Step 700/1181 lr 0.100000 loss 0.0369 (0.0266) Linear error 0.22 (0.20)
+[2021-07-22 02:32:38] __main__ INFO: Epoch 20 Step 800/1181 lr 0.100000 loss 0.0324 (0.0268) Linear error 0.22 (0.20)
+[2021-07-22 02:32:39] __main__ INFO: Epoch 20 Step 900/1181 lr 0.100000 loss 0.0216 (0.0269) Linear error 0.18 (0.20)
+[2021-07-22 02:32:40] __main__ INFO: Epoch 20 Step 1000/1181 lr 0.100000 loss 0.0277 (0.0269) Linear error 0.21 (0.20)
+[2021-07-22 02:32:41] __main__ INFO: Epoch 20 Step 1100/1181 lr 0.100000 loss 0.0286 (0.0269) Linear error 0.20 (0.20)
+[2021-07-22 02:32:42] __main__ INFO: Elapsed 11.86
+[2021-07-22 02:32:42] __main__ INFO: Val 20
+[2021-07-22 02:32:43] __main__ INFO: Epoch 20 loss 0.0353 Linear error 0.23
+[2021-07-22 02:32:43] __main__ INFO: Elapsed 0.57
+[2021-07-22 02:32:43] fvcore.common.checkpoint INFO: Saving checkpoint to experiments/mpiigaze/resnet_preact/exp00/12/checkpoint_0020.pth
+[2021-07-22 02:32:43] __main__ INFO: Train 21
+[2021-07-22 02:32:43] __main__ INFO: Epoch 21 Step 0/1181 lr 0.100000 loss 0.0274 (0.0274) Linear error 0.20 (0.20)
+[2021-07-22 02:32:44] __main__ INFO: Epoch 21 Step 100/1181 lr 0.100000 loss 0.0244 (0.0244) Linear error 0.18 (0.19)
+[2021-07-22 02:32:45] __main__ INFO: Epoch 21 Step 200/1181 lr 0.100000 loss 0.0246 (0.0249) Linear error 0.20 (0.19)
+[2021-07-22 02:32:46] __main__ INFO: Epoch 21 Step 300/1181 lr 0.100000 loss 0.0279 (0.0255) Linear error 0.21 (0.19)
+[2021-07-22 02:32:47] __main__ INFO: Epoch 21 Step 400/1181 lr 0.100000 loss 0.0152 (0.0256) Linear error 0.15 (0.19)
+[2021-07-22 02:32:48] __main__ INFO: Epoch 21 Step 500/1181 lr 0.100000 loss 0.0197 (0.0257) Linear error 0.17 (0.19)
+[2021-07-22 02:32:49] __main__ INFO: Epoch 21 Step 600/1181 lr 0.100000 loss 0.0243 (0.0257) Linear error 0.19 (0.19)
+[2021-07-22 02:32:50] __main__ INFO: Epoch 21 Step 700/1181 lr 0.100000 loss 0.0291 (0.0259) Linear error 0.20 (0.20)
+[2021-07-22 02:32:51] __main__ INFO: Epoch 21 Step 800/1181 lr 0.100000 loss 0.0219 (0.0260) Linear error 0.18 (0.20)
+[2021-07-22 02:32:52] __main__ INFO: Epoch 21 Step 900/1181 lr 0.100000 loss 0.0260 (0.0260) Linear error 0.20 (0.20)
+[2021-07-22 02:32:53] __main__ INFO: Epoch 21 Step 1000/1181 lr 0.100000 loss 0.0126 (0.0261) Linear error 0.14 (0.20)
+[2021-07-22 02:32:54] __main__ INFO: Epoch 21 Step 1100/1181 lr 0.100000 loss 0.0269 (0.0262) Linear error 0.20 (0.20)
+[2021-07-22 02:32:55] __main__ INFO: Elapsed 11.84
+[2021-07-22 02:32:55] __main__ INFO: Val 21
+[2021-07-22 02:32:55] __main__ INFO: Epoch 21 loss 0.0342 Linear error 0.22
+[2021-07-22 02:32:55] __main__ INFO: Elapsed 0.56
+[2021-07-22 02:32:55] __main__ INFO: Train 22
+[2021-07-22 02:32:55] __main__ INFO: Epoch 22 Step 0/1181 lr 0.100000 loss 0.0201 (0.0201) Linear error 0.16 (0.16)
+[2021-07-22 02:32:56] __main__ INFO: Epoch 22 Step 100/1181 lr 0.100000 loss 0.0257 (0.0258) Linear error 0.20 (0.20)
+[2021-07-22 02:32:57] __main__ INFO: Epoch 22 Step 200/1181 lr 0.100000 loss 0.0310 (0.0257) Linear error 0.21 (0.19)
+[2021-07-22 02:32:58] __main__ INFO: Epoch 22 Step 300/1181 lr 0.100000 loss 0.0207 (0.0259) Linear error 0.17 (0.19)
+[2021-07-22 02:32:59] __main__ INFO: Epoch 22 Step 400/1181 lr 0.100000 loss 0.0150 (0.0258) Linear error 0.14 (0.19)
+[2021-07-22 02:33:00] __main__ INFO: Epoch 22 Step 500/1181 lr 0.100000 loss 0.0219 (0.0258) Linear error 0.18 (0.19)
+[2021-07-22 02:33:01] __main__ INFO: Epoch 22 Step 600/1181 lr 0.100000 loss 0.0241 (0.0260) Linear error 0.20 (0.19)
+[2021-07-22 02:33:02] __main__ INFO: Epoch 22 Step 700/1181 lr 0.100000 loss 0.0162 (0.0260) Linear error 0.15 (0.20)
+[2021-07-22 02:33:03] __main__ INFO: Epoch 22 Step 800/1181 lr 0.100000 loss 0.0270 (0.0261) Linear error 0.20 (0.20)
+[2021-07-22 02:33:04] __main__ INFO: Epoch 22 Step 900/1181 lr 0.100000 loss 0.0270 (0.0262) Linear error 0.21 (0.20)
+[2021-07-22 02:33:05] __main__ INFO: Epoch 22 Step 1000/1181 lr 0.100000 loss 0.0261 (0.0262) Linear error 0.20 (0.20)
+[2021-07-22 02:33:06] __main__ INFO: Epoch 22 Step 1100/1181 lr 0.100000 loss 0.0310 (0.0262) Linear error 0.20 (0.20)
+[2021-07-22 02:33:07] __main__ INFO: Elapsed 12.04
+[2021-07-22 02:33:07] __main__ INFO: Val 22
+[2021-07-22 02:33:08] __main__ INFO: Epoch 22 loss 0.0351 Linear error 0.23
+[2021-07-22 02:33:08] __main__ INFO: Elapsed 0.58
+[2021-07-22 02:33:08] __main__ INFO: Train 23
+[2021-07-22 02:33:08] __main__ INFO: Epoch 23 Step 0/1181 lr 0.100000 loss 0.0252 (0.0252) Linear error 0.20 (0.20)
+[2021-07-22 02:33:09] __main__ INFO: Epoch 23 Step 100/1181 lr 0.100000 loss 0.0235 (0.0248) Linear error 0.19 (0.19)
+[2021-07-22 02:33:10] __main__ INFO: Epoch 23 Step 200/1181 lr 0.100000 loss 0.0226 (0.0248) Linear error 0.19 (0.19)
+[2021-07-22 02:33:11] __main__ INFO: Epoch 23 Step 300/1181 lr 0.100000 loss 0.0378 (0.0251) Linear error 0.24 (0.19)
+[2021-07-22 02:33:12] __main__ INFO: Epoch 23 Step 400/1181 lr 0.100000 loss 0.0196 (0.0251) Linear error 0.18 (0.19)
+[2021-07-22 02:33:13] __main__ INFO: Epoch 23 Step 500/1181 lr 0.100000 loss 0.0210 (0.0255) Linear error 0.17 (0.19)
+[2021-07-22 02:33:14] __main__ INFO: Epoch 23 Step 600/1181 lr 0.100000 loss 0.0429 (0.0254) Linear error 0.26 (0.19)
+[2021-07-22 02:33:15] __main__ INFO: Epoch 23 Step 700/1181 lr 0.100000 loss 0.0346 (0.0255) Linear error 0.22 (0.19)
+[2021-07-22 02:33:16] __main__ INFO: Epoch 23 Step 800/1181 lr 0.100000 loss 0.0249 (0.0255) Linear error 0.18 (0.19)
+[2021-07-22 02:33:17] __main__ INFO: Epoch 23 Step 900/1181 lr 0.100000 loss 0.0227 (0.0257) Linear error 0.16 (0.19)
+[2021-07-22 02:33:18] __main__ INFO: Epoch 23 Step 1000/1181 lr 0.100000 loss 0.0273 (0.0258) Linear error 0.19 (0.19)
+[2021-07-22 02:33:19] __main__ INFO: Epoch 23 Step 1100/1181 lr 0.100000 loss 0.0208 (0.0260) Linear error 0.17 (0.20)
+[2021-07-22 02:33:20] __main__ INFO: Elapsed 11.90
+[2021-07-22 02:33:20] __main__ INFO: Val 23
+[2021-07-22 02:33:20] __main__ INFO: Epoch 23 loss 0.0333 Linear error 0.22
+[2021-07-22 02:33:20] __main__ INFO: Elapsed 0.56
+[2021-07-22 02:33:20] __main__ INFO: Train 24
+[2021-07-22 02:33:20] __main__ INFO: Epoch 24 Step 0/1181 lr 0.100000 loss 0.0199 (0.0199) Linear error 0.18 (0.18)
+[2021-07-22 02:33:21] __main__ INFO: Epoch 24 Step 100/1181 lr 0.100000 loss 0.0179 (0.0244) Linear error 0.17 (0.19)
+[2021-07-22 02:33:22] __main__ INFO: Epoch 24 Step 200/1181 lr 0.100000 loss 0.0205 (0.0243) Linear error 0.18 (0.19)
+[2021-07-22 02:33:23] __main__ INFO: Epoch 24 Step 300/1181 lr 0.100000 loss 0.0241 (0.0247) Linear error 0.19 (0.19)
+[2021-07-22 02:33:24] __main__ INFO: Epoch 24 Step 400/1181 lr 0.100000 loss 0.0175 (0.0248) Linear error 0.17 (0.19)
+[2021-07-22 02:33:25] __main__ INFO: Epoch 24 Step 500/1181 lr 0.100000 loss 0.0349 (0.0249) Linear error 0.24 (0.19)
+[2021-07-22 02:33:26] __main__ INFO: Epoch 24 Step 600/1181 lr 0.100000 loss 0.0235 (0.0251) Linear error 0.17 (0.19)
+[2021-07-22 02:33:27] __main__ INFO: Epoch 24 Step 700/1181 lr 0.100000 loss 0.0335 (0.0252) Linear error 0.23 (0.19)
+[2021-07-22 02:33:28] __main__ INFO: Epoch 24 Step 800/1181 lr 0.100000 loss 0.0195 (0.0254) Linear error 0.17 (0.19)
+[2021-07-22 02:33:29] __main__ INFO: Epoch 24 Step 900/1181 lr 0.100000 loss 0.0243 (0.0255) Linear error 0.19 (0.19)
+[2021-07-22 02:33:30] __main__ INFO: Epoch 24 Step 1000/1181 lr 0.100000 loss 0.0251 (0.0257) Linear error 0.19 (0.19)
+[2021-07-22 02:33:31] __main__ INFO: Epoch 24 Step 1100/1181 lr 0.100000 loss 0.0234 (0.0257) Linear error 0.19 (0.19)
+[2021-07-22 02:33:32] __main__ INFO: Elapsed 11.95
+[2021-07-22 02:33:32] __main__ INFO: Val 24
+[2021-07-22 02:33:33] __main__ INFO: Epoch 24 loss 0.0390 Linear error 0.24
+[2021-07-22 02:33:33] __main__ INFO: Elapsed 0.56
+[2021-07-22 02:33:33] __main__ INFO: Train 25
+[2021-07-22 02:33:33] __main__ INFO: Epoch 25 Step 0/1181 lr 0.100000 loss 0.0206 (0.0206) Linear error 0.18 (0.18)
+[2021-07-22 02:33:34] __main__ INFO: Epoch 25 Step 100/1181 lr 0.100000 loss 0.0205 (0.0233) Linear error 0.18 (0.19)
+[2021-07-22 02:33:35] __main__ INFO: Epoch 25 Step 200/1181 lr 0.100000 loss 0.0188 (0.0235) Linear error 0.18 (0.19)
+[2021-07-22 02:33:36] __main__ INFO: Epoch 25 Step 300/1181 lr 0.100000 loss 0.0299 (0.0236) Linear error 0.22 (0.19)
+[2021-07-22 02:33:37] __main__ INFO: Epoch 25 Step 400/1181 lr 0.100000 loss 0.0236 (0.0240) Linear error 0.19 (0.19)
+[2021-07-22 02:33:38] __main__ INFO: Epoch 25 Step 500/1181 lr 0.100000 loss 0.0319 (0.0245) Linear error 0.22 (0.19)
+[2021-07-22 02:33:39] __main__ INFO: Epoch 25 Step 600/1181 lr 0.100000 loss 0.0207 (0.0246) Linear error 0.18 (0.19)
+[2021-07-22 02:33:40] __main__ INFO: Epoch 25 Step 700/1181 lr 0.100000 loss 0.0223 (0.0249) Linear error 0.18 (0.19)
+[2021-07-22 02:33:41] __main__ INFO: Epoch 25 Step 800/1181 lr 0.100000 loss 0.0230 (0.0251) Linear error 0.18 (0.19)
+[2021-07-22 02:33:42] __main__ INFO: Epoch 25 Step 900/1181 lr 0.100000 loss 0.0462 (0.0253) Linear error 0.27 (0.19)
+[2021-07-22 02:33:43] __main__ INFO: Epoch 25 Step 1000/1181 lr 0.100000 loss 0.0225 (0.0254) Linear error 0.18 (0.19)
+[2021-07-22 02:33:44] __main__ INFO: Epoch 25 Step 1100/1181 lr 0.100000 loss 0.0231 (0.0256) Linear error 0.19 (0.19)
+[2021-07-22 02:33:45] __main__ INFO: Elapsed 11.91
+[2021-07-22 02:33:45] __main__ INFO: Val 25
+[2021-07-22 02:33:45] __main__ INFO: Epoch 25 loss 0.0329 Linear error 0.22
+[2021-07-22 02:33:45] __main__ INFO: Elapsed 0.56
+[2021-07-22 02:33:45] __main__ INFO: Train 26
+[2021-07-22 02:33:45] __main__ INFO: Epoch 26 Step 0/1181 lr 0.100000 loss 0.0159 (0.0159) Linear error 0.16 (0.16)
+[2021-07-22 02:33:46] __main__ INFO: Epoch 26 Step 100/1181 lr 0.100000 loss 0.0202 (0.0230) Linear error 0.16 (0.18)
+[2021-07-22 02:33:47] __main__ INFO: Epoch 26 Step 200/1181 lr 0.100000 loss 0.0273 (0.0232) Linear error 0.20 (0.18)
+[2021-07-22 02:33:48] __main__ INFO: Epoch 26 Step 300/1181 lr 0.100000 loss 0.0226 (0.0237) Linear error 0.17 (0.19)
+[2021-07-22 02:33:49] __main__ INFO: Epoch 26 Step 400/1181 lr 0.100000 loss 0.0233 (0.0241) Linear error 0.18 (0.19)
+[2021-07-22 02:33:50] __main__ INFO: Epoch 26 Step 500/1181 lr 0.100000 loss 0.0263 (0.0242) Linear error 0.18 (0.19)
+[2021-07-22 02:33:51] __main__ INFO: Epoch 26 Step 600/1181 lr 0.100000 loss 0.0202 (0.0244) Linear error 0.18 (0.19)
+[2021-07-22 02:33:52] __main__ INFO: Epoch 26 Step 700/1181 lr 0.100000 loss 0.0160 (0.0246) Linear error 0.16 (0.19)
+[2021-07-22 02:33:53] __main__ INFO: Epoch 26 Step 800/1181 lr 0.100000 loss 0.0322 (0.0247) Linear error 0.22 (0.19)
+[2021-07-22 02:33:54] __main__ INFO: Epoch 26 Step 900/1181 lr 0.100000 loss 0.0221 (0.0248) Linear error 0.18 (0.19)
+[2021-07-22 02:33:55] __main__ INFO: Epoch 26 Step 1000/1181 lr 0.100000 loss 0.0214 (0.0250) Linear error 0.18 (0.19)
+[2021-07-22 02:33:56] __main__ INFO: Epoch 26 Step 1100/1181 lr 0.100000 loss 0.0231 (0.0253) Linear error 0.18 (0.19)
+[2021-07-22 02:33:57] __main__ INFO: Elapsed 11.90
+[2021-07-22 02:33:57] __main__ INFO: Val 26
+[2021-07-22 02:33:58] __main__ INFO: Epoch 26 loss 0.0315 Linear error 0.21
+[2021-07-22 02:33:58] __main__ INFO: Elapsed 0.57
+[2021-07-22 02:33:58] __main__ INFO: Train 27
+[2021-07-22 02:33:58] __main__ INFO: Epoch 27 Step 0/1181 lr 0.100000 loss 0.0209 (0.0209) Linear error 0.18 (0.18)
+[2021-07-22 02:33:59] __main__ INFO: Epoch 27 Step 100/1181 lr 0.100000 loss 0.0326 (0.0244) Linear error 0.21 (0.19)
+[2021-07-22 02:34:00] __main__ INFO: Epoch 27 Step 200/1181 lr 0.100000 loss 0.0256 (0.0244) Linear error 0.20 (0.19)
+[2021-07-22 02:34:01] __main__ INFO: Epoch 27 Step 300/1181 lr 0.100000 loss 0.0338 (0.0246) Linear error 0.22 (0.19)
+[2021-07-22 02:34:02] __main__ INFO: Epoch 27 Step 400/1181 lr 0.100000 loss 0.0267 (0.0245) Linear error 0.18 (0.19)
+[2021-07-22 02:34:03] __main__ INFO: Epoch 27 Step 500/1181 lr 0.100000 loss 0.0153 (0.0245) Linear error 0.15 (0.19)
+[2021-07-22 02:34:04] __main__ INFO: Epoch 27 Step 600/1181 lr 0.100000 loss 0.0227 (0.0245) Linear error 0.19 (0.19)
+[2021-07-22 02:34:05] __main__ INFO: Epoch 27 Step 700/1181 lr 0.100000 loss 0.0241 (0.0247) Linear error 0.18 (0.19)
+[2021-07-22 02:34:06] __main__ INFO: Epoch 27 Step 800/1181 lr 0.100000 loss 0.0243 (0.0247) Linear error 0.19 (0.19)
+[2021-07-22 02:34:07] __main__ INFO: Epoch 27 Step 900/1181 lr 0.100000 loss 0.0260 (0.0248) Linear error 0.20 (0.19)
+[2021-07-22 02:34:08] __main__ INFO: Epoch 27 Step 1000/1181 lr 0.100000 loss 0.0168 (0.0250) Linear error 0.17 (0.19)
+[2021-07-22 02:34:09] __main__ INFO: Epoch 27 Step 1100/1181 lr 0.100000 loss 0.0259 (0.0251) Linear error 0.20 (0.19)
+[2021-07-22 02:34:10] __main__ INFO: Elapsed 11.91
+[2021-07-22 02:34:10] __main__ INFO: Val 27
+[2021-07-22 02:34:10] __main__ INFO: Epoch 27 loss 0.0308 Linear error 0.21
+[2021-07-22 02:34:10] __main__ INFO: Elapsed 0.55
+[2021-07-22 02:34:10] __main__ INFO: Train 28
+[2021-07-22 02:34:10] __main__ INFO: Epoch 28 Step 0/1181 lr 0.100000 loss 0.0267 (0.0267) Linear error 0.20 (0.20)
+[2021-07-22 02:34:11] __main__ INFO: Epoch 28 Step 100/1181 lr 0.100000 loss 0.0230 (0.0224) Linear error 0.20 (0.18)
+[2021-07-22 02:34:12] __main__ INFO: Epoch 28 Step 200/1181 lr 0.100000 loss 0.0182 (0.0232) Linear error 0.16 (0.18)
+[2021-07-22 02:34:13] __main__ INFO: Epoch 28 Step 300/1181 lr 0.100000 loss 0.0387 (0.0238) Linear error 0.23 (0.19)
+[2021-07-22 02:34:14] __main__ INFO: Epoch 28 Step 400/1181 lr 0.100000 loss 0.0296 (0.0242) Linear error 0.19 (0.19)
+[2021-07-22 02:34:15] __main__ INFO: Epoch 28 Step 500/1181 lr 0.100000 loss 0.0153 (0.0244) Linear error 0.16 (0.19)
+[2021-07-22 02:34:16] __main__ INFO: Epoch 28 Step 600/1181 lr 0.100000 loss 0.0302 (0.0248) Linear error 0.21 (0.19)
+[2021-07-22 02:34:17] __main__ INFO: Epoch 28 Step 700/1181 lr 0.100000 loss 0.0237 (0.0249) Linear error 0.20 (0.19)
+[2021-07-22 02:34:18] __main__ INFO: Epoch 28 Step 800/1181 lr 0.100000 loss 0.0219 (0.0250) Linear error 0.18 (0.19)
+[2021-07-22 02:34:19] __main__ INFO: Epoch 28 Step 900/1181 lr 0.100000 loss 0.0252 (0.0251) Linear error 0.18 (0.19)
+[2021-07-22 02:34:20] __main__ INFO: Epoch 28 Step 1000/1181 lr 0.100000 loss 0.0263 (0.0251) Linear error 0.19 (0.19)
+[2021-07-22 02:34:21] __main__ INFO: Epoch 28 Step 1100/1181 lr 0.100000 loss 0.0251 (0.0251) Linear error 0.19 (0.19)
+[2021-07-22 02:34:22] __main__ INFO: Elapsed 11.90
+[2021-07-22 02:34:22] __main__ INFO: Val 28
+[2021-07-22 02:34:23] __main__ INFO: Epoch 28 loss 0.0340 Linear error 0.22
+[2021-07-22 02:34:23] __main__ INFO: Elapsed 0.57
+[2021-07-22 02:34:23] __main__ INFO: Train 29
+[2021-07-22 02:34:23] __main__ INFO: Epoch 29 Step 0/1181 lr 0.100000 loss 0.0192 (0.0192) Linear error 0.17 (0.17)
+[2021-07-22 02:34:24] __main__ INFO: Epoch 29 Step 100/1181 lr 0.100000 loss 0.0218 (0.0238) Linear error 0.18 (0.19)
+[2021-07-22 02:34:25] __main__ INFO: Epoch 29 Step 200/1181 lr 0.100000 loss 0.0311 (0.0243) Linear error 0.22 (0.19)
+[2021-07-22 02:34:26] __main__ INFO: Epoch 29 Step 300/1181 lr 0.100000 loss 0.0194 (0.0240) Linear error 0.18 (0.19)
+[2021-07-22 02:34:27] __main__ INFO: Epoch 29 Step 400/1181 lr 0.100000 loss 0.0286 (0.0245) Linear error 0.21 (0.19)
+[2021-07-22 02:34:28] __main__ INFO: Epoch 29 Step 500/1181 lr 0.100000 loss 0.0182 (0.0243) Linear error 0.17 (0.19)
+[2021-07-22 02:34:29] __main__ INFO: Epoch 29 Step 600/1181 lr 0.100000 loss 0.0207 (0.0243) Linear error 0.17 (0.19)
+[2021-07-22 02:34:30] __main__ INFO: Epoch 29 Step 700/1181 lr 0.100000 loss 0.0411 (0.0245) Linear error 0.26 (0.19)
+[2021-07-22 02:34:31] __main__ INFO: Epoch 29 Step 800/1181 lr 0.100000 loss 0.0215 (0.0246) Linear error 0.17 (0.19)
+[2021-07-22 02:34:32] __main__ INFO: Epoch 29 Step 900/1181 lr 0.100000 loss 0.0304 (0.0247) Linear error 0.21 (0.19)
+[2021-07-22 02:34:33] __main__ INFO: Epoch 29 Step 1000/1181 lr 0.100000 loss 0.0330 (0.0248) Linear error 0.22 (0.19)
+[2021-07-22 02:34:34] __main__ INFO: Epoch 29 Step 1100/1181 lr 0.100000 loss 0.0348 (0.0250) Linear error 0.22 (0.19)
+[2021-07-22 02:34:35] __main__ INFO: Elapsed 11.91
+[2021-07-22 02:34:35] __main__ INFO: Val 29
+[2021-07-22 02:34:35] __main__ INFO: Epoch 29 loss 0.0322 Linear error 0.21
+[2021-07-22 02:34:35] __main__ INFO: Elapsed 0.56
+[2021-07-22 02:34:35] __main__ INFO: Train 30
+[2021-07-22 02:34:35] __main__ INFO: Epoch 30 Step 0/1181 lr 0.100000 loss 0.0170 (0.0170) Linear error 0.16 (0.16)
+[2021-07-22 02:34:36] __main__ INFO: Epoch 30 Step 100/1181 lr 0.100000 loss 0.0241 (0.0227) Linear error 0.20 (0.18)
+[2021-07-22 02:34:37] __main__ INFO: Epoch 30 Step 200/1181 lr 0.100000 loss 0.0226 (0.0230) Linear error 0.19 (0.18)
+[2021-07-22 02:34:38] __main__ INFO: Epoch 30 Step 300/1181 lr 0.100000 loss 0.0270 (0.0233) Linear error 0.20 (0.19)
+[2021-07-22 02:34:39] __main__ INFO: Epoch 30 Step 400/1181 lr 0.100000 loss 0.0265 (0.0239) Linear error 0.21 (0.19)
+[2021-07-22 02:34:40] __main__ INFO: Epoch 30 Step 500/1181 lr 0.100000 loss 0.0209 (0.0239) Linear error 0.18 (0.19)
+[2021-07-22 02:34:41] __main__ INFO: Epoch 30 Step 600/1181 lr 0.100000 loss 0.0312 (0.0241) Linear error 0.21 (0.19)
+[2021-07-22 02:34:42] __main__ INFO: Epoch 30 Step 700/1181 lr 0.100000 loss 0.0236 (0.0242) Linear error 0.20 (0.19)
+[2021-07-22 02:34:43] __main__ INFO: Epoch 30 Step 800/1181 lr 0.100000 loss 0.0327 (0.0244) Linear error 0.18 (0.19)
+[2021-07-22 02:34:44] __main__ INFO: Epoch 30 Step 900/1181 lr 0.100000 loss 0.0232 (0.0245) Linear error 0.18 (0.19)
+[2021-07-22 02:34:45] __main__ INFO: Epoch 30 Step 1000/1181 lr 0.100000 loss 0.0210 (0.0247) Linear error 0.18 (0.19)
+[2021-07-22 02:34:46] __main__ INFO: Epoch 30 Step 1100/1181 lr 0.100000 loss 0.0241 (0.0246) Linear error 0.18 (0.19)
+[2021-07-22 02:34:47] __main__ INFO: Elapsed 11.93
+[2021-07-22 02:34:47] __main__ INFO: Val 30
+[2021-07-22 02:34:48] __main__ INFO: Epoch 30 loss 0.0328 Linear error 0.22
+[2021-07-22 02:34:48] __main__ INFO: Elapsed 0.56
+[2021-07-22 02:34:48] fvcore.common.checkpoint INFO: Saving checkpoint to experiments/mpiigaze/resnet_preact/exp00/12/checkpoint_0030.pth
+[2021-07-22 02:34:48] __main__ INFO: Train 31
+[2021-07-22 02:34:48] __main__ INFO: Epoch 31 Step 0/1181 lr 0.010000 loss 0.0211 (0.0211) Linear error 0.17 (0.17)
+[2021-07-22 02:34:49] __main__ INFO: Epoch 31 Step 100/1181 lr 0.010000 loss 0.0319 (0.0201) Linear error 0.20 (0.17)
+[2021-07-22 02:34:50] __main__ INFO: Epoch 31 Step 200/1181 lr 0.010000 loss 0.0181 (0.0196) Linear error 0.15 (0.17)
+[2021-07-22 02:34:51] __main__ INFO: Epoch 31 Step 300/1181 lr 0.010000 loss 0.0212 (0.0187) Linear error 0.15 (0.16)
+[2021-07-22 02:34:52] __main__ INFO: Epoch 31 Step 400/1181 lr 0.010000 loss 0.0157 (0.0184) Linear error 0.15 (0.16)
+[2021-07-22 02:34:53] __main__ INFO: Epoch 31 Step 500/1181 lr 0.010000 loss 0.0177 (0.0182) Linear error 0.15 (0.16)
+[2021-07-22 02:34:54] __main__ INFO: Epoch 31 Step 600/1181 lr 0.010000 loss 0.0150 (0.0179) Linear error 0.15 (0.16)
+[2021-07-22 02:34:55] __main__ INFO: Epoch 31 Step 700/1181 lr 0.010000 loss 0.0106 (0.0178) Linear error 0.12 (0.16)
+[2021-07-22 02:34:56] __main__ INFO: Epoch 31 Step 800/1181 lr 0.010000 loss 0.0182 (0.0177) Linear error 0.17 (0.16)
+[2021-07-22 02:34:57] __main__ INFO: Epoch 31 Step 900/1181 lr 0.010000 loss 0.0140 (0.0175) Linear error 0.15 (0.16)
+[2021-07-22 02:34:58] __main__ INFO: Epoch 31 Step 1000/1181 lr 0.010000 loss 0.0090 (0.0174) Linear error 0.11 (0.16)
+[2021-07-22 02:34:59] __main__ INFO: Epoch 31 Step 1100/1181 lr 0.010000 loss 0.0216 (0.0174) Linear error 0.17 (0.16)
+[2021-07-22 02:34:59] __main__ INFO: Elapsed 11.91
+[2021-07-22 02:34:59] __main__ INFO: Val 31
+[2021-07-22 02:35:00] __main__ INFO: Epoch 31 loss 0.0246 Linear error 0.18
+[2021-07-22 02:35:00] __main__ INFO: Elapsed 0.61
+[2021-07-22 02:35:00] __main__ INFO: Train 32
+[2021-07-22 02:35:00] __main__ INFO: Epoch 32 Step 0/1181 lr 0.010000 loss 0.0132 (0.0132) Linear error 0.14 (0.14)
+[2021-07-22 02:35:01] __main__ INFO: Epoch 32 Step 100/1181 lr 0.010000 loss 0.0111 (0.0153) Linear error 0.13 (0.15)
+[2021-07-22 02:35:02] __main__ INFO: Epoch 32 Step 200/1181 lr 0.010000 loss 0.0200 (0.0149) Linear error 0.16 (0.15)
+[2021-07-22 02:35:03] __main__ INFO: Epoch 32 Step 300/1181 lr 0.010000 loss 0.0202 (0.0151) Linear error 0.18 (0.15)
+[2021-07-22 02:35:04] __main__ INFO: Epoch 32 Step 400/1181 lr 0.010000 loss 0.0205 (0.0154) Linear error 0.16 (0.15)
+[2021-07-22 02:35:05] __main__ INFO: Epoch 32 Step 500/1181 lr 0.010000 loss 0.0140 (0.0153) Linear error 0.15 (0.15)
+[2021-07-22 02:35:06] __main__ INFO: Epoch 32 Step 600/1181 lr 0.010000 loss 0.0161 (0.0153) Linear error 0.16 (0.15)
+[2021-07-22 02:35:07] __main__ INFO: Epoch 32 Step 700/1181 lr 0.010000 loss 0.0146 (0.0154) Linear error 0.14 (0.15)
+[2021-07-22 02:35:08] __main__ INFO: Epoch 32 Step 800/1181 lr 0.010000 loss 0.0125 (0.0154) Linear error 0.13 (0.15)
+[2021-07-22 02:35:09] __main__ INFO: Epoch 32 Step 900/1181 lr 0.010000 loss 0.0130 (0.0154) Linear error 0.13 (0.15)
+[2021-07-22 02:35:10] __main__ INFO: Epoch 32 Step 1000/1181 lr 0.010000 loss 0.0131 (0.0154) Linear error 0.14 (0.15)
+[2021-07-22 02:35:11] __main__ INFO: Epoch 32 Step 1100/1181 lr 0.010000 loss 0.0134 (0.0154) Linear error 0.14 (0.15)
+[2021-07-22 02:35:12] __main__ INFO: Elapsed 11.91
+[2021-07-22 02:35:12] __main__ INFO: Val 32
+[2021-07-22 02:35:13] __main__ INFO: Epoch 32 loss 0.0246 Linear error 0.18
+[2021-07-22 02:35:13] __main__ INFO: Elapsed 0.59
+[2021-07-22 02:35:13] __main__ INFO: Train 33
+[2021-07-22 02:35:13] __main__ INFO: Epoch 33 Step 0/1181 lr 0.010000 loss 0.0149 (0.0149) Linear error 0.16 (0.16)
+[2021-07-22 02:35:14] __main__ INFO: Epoch 33 Step 100/1181 lr 0.010000 loss 0.0121 (0.0142) Linear error 0.14 (0.14)
+[2021-07-22 02:35:15] __main__ INFO: Epoch 33 Step 200/1181 lr 0.010000 loss 0.0138 (0.0146) Linear error 0.14 (0.15)
+[2021-07-22 02:35:16] __main__ INFO: Epoch 33 Step 300/1181 lr 0.010000 loss 0.0109 (0.0146) Linear error 0.13 (0.14)
+[2021-07-22 02:35:17] __main__ INFO: Epoch 33 Step 400/1181 lr 0.010000 loss 0.0150 (0.0146) Linear error 0.15 (0.14)
+[2021-07-22 02:35:18] __main__ INFO: Epoch 33 Step 500/1181 lr 0.010000 loss 0.0140 (0.0144) Linear error 0.15 (0.14)
+[2021-07-22 02:35:19] __main__ INFO: Epoch 33 Step 600/1181 lr 0.010000 loss 0.0187 (0.0146) Linear error 0.17 (0.15)
+[2021-07-22 02:35:20] __main__ INFO: Epoch 33 Step 700/1181 lr 0.010000 loss 0.0109 (0.0145) Linear error 0.13 (0.15)
+[2021-07-22 02:35:21] __main__ INFO: Epoch 33 Step 800/1181 lr 0.010000 loss 0.0067 (0.0146) Linear error 0.09 (0.15)
+[2021-07-22 02:35:22] __main__ INFO: Epoch 33 Step 900/1181 lr 0.010000 loss 0.0224 (0.0147) Linear error 0.17 (0.15)
+[2021-07-22 02:35:23] __main__ INFO: Epoch 33 Step 1000/1181 lr 0.010000 loss 0.0139 (0.0146) Linear error 0.14 (0.15)
+[2021-07-22 02:35:24] __main__ INFO: Epoch 33 Step 1100/1181 lr 0.010000 loss 0.0148 (0.0146) Linear error 0.16 (0.15)
+[2021-07-22 02:35:25] __main__ INFO: Elapsed 11.92
+[2021-07-22 02:35:25] __main__ INFO: Val 33
+[2021-07-22 02:35:25] __main__ INFO: Epoch 33 loss 0.0248 Linear error 0.18
+[2021-07-22 02:35:25] __main__ INFO: Elapsed 0.57
+[2021-07-22 02:35:25] __main__ INFO: Train 34
+[2021-07-22 02:35:25] __main__ INFO: Epoch 34 Step 0/1181 lr 0.010000 loss 0.0159 (0.0159) Linear error 0.15 (0.15)
+[2021-07-22 02:35:26] __main__ INFO: Epoch 34 Step 100/1181 lr 0.010000 loss 0.0142 (0.0143) Linear error 0.13 (0.14)
+[2021-07-22 02:35:27] __main__ INFO: Epoch 34 Step 200/1181 lr 0.010000 loss 0.0120 (0.0140) Linear error 0.14 (0.14)
+[2021-07-22 02:35:28] __main__ INFO: Epoch 34 Step 300/1181 lr 0.010000 loss 0.0085 (0.0141) Linear error 0.11 (0.14)
+[2021-07-22 02:35:29] __main__ INFO: Epoch 34 Step 400/1181 lr 0.010000 loss 0.0141 (0.0140) Linear error 0.14 (0.14)
+[2021-07-22 02:35:30] __main__ INFO: Epoch 34 Step 500/1181 lr 0.010000 loss 0.0071 (0.0140) Linear error 0.10 (0.14)
+[2021-07-22 02:35:31] __main__ INFO: Epoch 34 Step 600/1181 lr 0.010000 loss 0.0207 (0.0141) Linear error 0.18 (0.14)
+[2021-07-22 02:35:32] __main__ INFO: Epoch 34 Step 700/1181 lr 0.010000 loss 0.0121 (0.0140) Linear error 0.14 (0.14)
+[2021-07-22 02:35:33] __main__ INFO: Epoch 34 Step 800/1181 lr 0.010000 loss 0.0143 (0.0140) Linear error 0.15 (0.14)
+[2021-07-22 02:35:34] __main__ INFO: Epoch 34 Step 900/1181 lr 0.010000 loss 0.0094 (0.0141) Linear error 0.12 (0.14)
+[2021-07-22 02:35:35] __main__ INFO: Epoch 34 Step 1000/1181 lr 0.010000 loss 0.0162 (0.0141) Linear error 0.16 (0.14)
+[2021-07-22 02:35:36] __main__ INFO: Epoch 34 Step 1100/1181 lr 0.010000 loss 0.0140 (0.0142) Linear error 0.14 (0.14)
+[2021-07-22 02:35:37] __main__ INFO: Elapsed 11.93
+[2021-07-22 02:35:37] __main__ INFO: Val 34
+[2021-07-22 02:35:38] __main__ INFO: Epoch 34 loss 0.0245 Linear error 0.18
+[2021-07-22 02:35:38] __main__ INFO: Elapsed 0.55
+[2021-07-22 02:35:38] __main__ INFO: Train 35
+[2021-07-22 02:35:38] __main__ INFO: Epoch 35 Step 0/1181 lr 0.010000 loss 0.0158 (0.0158) Linear error 0.15 (0.15)
+[2021-07-22 02:35:39] __main__ INFO: Epoch 35 Step 100/1181 lr 0.010000 loss 0.0101 (0.0138) Linear error 0.12 (0.14)
+[2021-07-22 02:35:40] __main__ INFO: Epoch 35 Step 200/1181 lr 0.010000 loss 0.0117 (0.0137) Linear error 0.14 (0.14)
+[2021-07-22 02:35:41] __main__ INFO: Epoch 35 Step 300/1181 lr 0.010000 loss 0.0097 (0.0136) Linear error 0.12 (0.14)
+[2021-07-22 02:35:42] __main__ INFO: Epoch 35 Step 400/1181 lr 0.010000 loss 0.0150 (0.0135) Linear error 0.16 (0.14)
+[2021-07-22 02:35:43] __main__ INFO: Epoch 35 Step 500/1181 lr 0.010000 loss 0.0114 (0.0135) Linear error 0.14 (0.14)
+[2021-07-22 02:35:44] __main__ INFO: Epoch 35 Step 600/1181 lr 0.010000 loss 0.0142 (0.0135) Linear error 0.15 (0.14)
+[2021-07-22 02:35:45] __main__ INFO: Epoch 35 Step 700/1181 lr 0.010000 loss 0.0197 (0.0135) Linear error 0.17 (0.14)
+[2021-07-22 02:35:46] __main__ INFO: Epoch 35 Step 800/1181 lr 0.010000 loss 0.0180 (0.0136) Linear error 0.16 (0.14)
+[2021-07-22 02:35:47] __main__ INFO: Epoch 35 Step 900/1181 lr 0.010000 loss 0.0144 (0.0136) Linear error 0.15 (0.14)
+[2021-07-22 02:35:48] __main__ INFO: Epoch 35 Step 1000/1181 lr 0.010000 loss 0.0167 (0.0136) Linear error 0.16 (0.14)
+[2021-07-22 02:35:49] __main__ INFO: Epoch 35 Step 1100/1181 lr 0.010000 loss 0.0087 (0.0136) Linear error 0.11 (0.14)
+[2021-07-22 02:35:50] __main__ INFO: Elapsed 11.93
+[2021-07-22 02:35:50] __main__ INFO: Val 35
+[2021-07-22 02:35:50] __main__ INFO: Epoch 35 loss 0.0250 Linear error 0.18
+[2021-07-22 02:35:50] __main__ INFO: Elapsed 0.55
+[2021-07-22 02:35:50] __main__ INFO: Train 36
+[2021-07-22 02:35:50] __main__ INFO: Epoch 36 Step 0/1181 lr 0.001000 loss 0.0124 (0.0124) Linear error 0.13 (0.13)
+[2021-07-22 02:35:51] __main__ INFO: Epoch 36 Step 100/1181 lr 0.001000 loss 0.0142 (0.0128) Linear error 0.15 (0.13)
+[2021-07-22 02:35:52] __main__ INFO: Epoch 36 Step 200/1181 lr 0.001000 loss 0.0164 (0.0126) Linear error 0.16 (0.13)
+[2021-07-22 02:35:53] __main__ INFO: Epoch 36 Step 300/1181 lr 0.001000 loss 0.0172 (0.0125) Linear error 0.15 (0.13)
+[2021-07-22 02:35:54] __main__ INFO: Epoch 36 Step 400/1181 lr 0.001000 loss 0.0182 (0.0125) Linear error 0.16 (0.13)
+[2021-07-22 02:35:55] __main__ INFO: Epoch 36 Step 500/1181 lr 0.001000 loss 0.0102 (0.0125) Linear error 0.12 (0.13)
+[2021-07-22 02:35:56] __main__ INFO: Epoch 36 Step 600/1181 lr 0.001000 loss 0.0245 (0.0125) Linear error 0.21 (0.13)
+[2021-07-22 02:35:57] __main__ INFO: Epoch 36 Step 700/1181 lr 0.001000 loss 0.0068 (0.0125) Linear error 0.10 (0.13)
+[2021-07-22 02:35:58] __main__ INFO: Epoch 36 Step 800/1181 lr 0.001000 loss 0.0103 (0.0126) Linear error 0.13 (0.13)
+[2021-07-22 02:35:59] __main__ INFO: Epoch 36 Step 900/1181 lr 0.001000 loss 0.0126 (0.0125) Linear error 0.13 (0.13)
+[2021-07-22 02:36:00] __main__ INFO: Epoch 36 Step 1000/1181 lr 0.001000 loss 0.0127 (0.0124) Linear error 0.14 (0.13)
+[2021-07-22 02:36:01] __main__ INFO: Epoch 36 Step 1100/1181 lr 0.001000 loss 0.0103 (0.0124) Linear error 0.12 (0.13)
+[2021-07-22 02:36:02] __main__ INFO: Elapsed 11.89
+[2021-07-22 02:36:02] __main__ INFO: Val 36
+[2021-07-22 02:36:03] __main__ INFO: Epoch 36 loss 0.0242 Linear error 0.18
+[2021-07-22 02:36:03] __main__ INFO: Elapsed 0.56
+[2021-07-22 02:36:03] __main__ INFO: Train 37
+[2021-07-22 02:36:03] __main__ INFO: Epoch 37 Step 0/1181 lr 0.001000 loss 0.0122 (0.0122) Linear error 0.14 (0.14)
+[2021-07-22 02:36:04] __main__ INFO: Epoch 37 Step 100/1181 lr 0.001000 loss 0.0167 (0.0121) Linear error 0.13 (0.13)
+[2021-07-22 02:36:05] __main__ INFO: Epoch 37 Step 200/1181 lr 0.001000 loss 0.0113 (0.0122) Linear error 0.12 (0.13)
+[2021-07-22 02:36:06] __main__ INFO: Epoch 37 Step 300/1181 lr 0.001000 loss 0.0125 (0.0125) Linear error 0.13 (0.13)
+[2021-07-22 02:36:07] __main__ INFO: Epoch 37 Step 400/1181 lr 0.001000 loss 0.0202 (0.0123) Linear error 0.17 (0.13)
+[2021-07-22 02:36:08] __main__ INFO: Epoch 37 Step 500/1181 lr 0.001000 loss 0.0159 (0.0123) Linear error 0.14 (0.13)
+[2021-07-22 02:36:09] __main__ INFO: Epoch 37 Step 600/1181 lr 0.001000 loss 0.0128 (0.0124) Linear error 0.13 (0.13)
+[2021-07-22 02:36:10] __main__ INFO: Epoch 37 Step 700/1181 lr 0.001000 loss 0.0161 (0.0124) Linear error 0.16 (0.13)
+[2021-07-22 02:36:11] __main__ INFO: Epoch 37 Step 800/1181 lr 0.001000 loss 0.0099 (0.0124) Linear error 0.12 (0.13)
+[2021-07-22 02:36:12] __main__ INFO: Epoch 37 Step 900/1181 lr 0.001000 loss 0.0136 (0.0124) Linear error 0.14 (0.13)
+[2021-07-22 02:36:13] __main__ INFO: Epoch 37 Step 1000/1181 lr 0.001000 loss 0.0107 (0.0124) Linear error 0.13 (0.13)
+[2021-07-22 02:36:14] __main__ INFO: Epoch 37 Step 1100/1181 lr 0.001000 loss 0.0125 (0.0124) Linear error 0.14 (0.13)
+[2021-07-22 02:36:14] __main__ INFO: Elapsed 11.95
+[2021-07-22 02:36:14] __main__ INFO: Val 37
+[2021-07-22 02:36:15] __main__ INFO: Epoch 37 loss 0.0243 Linear error 0.18
+[2021-07-22 02:36:15] __main__ INFO: Elapsed 0.57
+[2021-07-22 02:36:15] __main__ INFO: Train 38
+[2021-07-22 02:36:15] __main__ INFO: Epoch 38 Step 0/1181 lr 0.001000 loss 0.0130 (0.0130) Linear error 0.14 (0.14)
+[2021-07-22 02:36:16] __main__ INFO: Epoch 38 Step 100/1181 lr 0.001000 loss 0.0134 (0.0121) Linear error 0.13 (0.13)
+[2021-07-22 02:36:17] __main__ INFO: Epoch 38 Step 200/1181 lr 0.001000 loss 0.0122 (0.0123) Linear error 0.13 (0.13)
+[2021-07-22 02:36:18] __main__ INFO: Epoch 38 Step 300/1181 lr 0.001000 loss 0.0188 (0.0123) Linear error 0.16 (0.13)
+[2021-07-22 02:36:19] __main__ INFO: Epoch 38 Step 400/1181 lr 0.001000 loss 0.0082 (0.0122) Linear error 0.12 (0.13)
+[2021-07-22 02:36:20] __main__ INFO: Epoch 38 Step 500/1181 lr 0.001000 loss 0.0093 (0.0122) Linear error 0.12 (0.13)
+[2021-07-22 02:36:21] __main__ INFO: Epoch 38 Step 600/1181 lr 0.001000 loss 0.0076 (0.0122) Linear error 0.11 (0.13)
+[2021-07-22 02:36:22] __main__ INFO: Epoch 38 Step 700/1181 lr 0.001000 loss 0.0117 (0.0123) Linear error 0.13 (0.13)
+[2021-07-22 02:36:23] __main__ INFO: Epoch 38 Step 800/1181 lr 0.001000 loss 0.0125 (0.0123) Linear error 0.13 (0.13)
+[2021-07-22 02:36:24] __main__ INFO: Epoch 38 Step 900/1181 lr 0.001000 loss 0.0168 (0.0123) Linear error 0.14 (0.13)
+[2021-07-22 02:36:25] __main__ INFO: Epoch 38 Step 1000/1181 lr 0.001000 loss 0.0112 (0.0123) Linear error 0.12 (0.13)
+[2021-07-22 02:36:26] __main__ INFO: Epoch 38 Step 1100/1181 lr 0.001000 loss 0.0155 (0.0123) Linear error 0.15 (0.13)
+[2021-07-22 02:36:27] __main__ INFO: Elapsed 11.92
+[2021-07-22 02:36:27] __main__ INFO: Val 38
+[2021-07-22 02:36:27] __main__ INFO: Epoch 38 loss 0.0243 Linear error 0.18
+[2021-07-22 02:36:27] __main__ INFO: Elapsed 0.55
+[2021-07-22 02:36:27] __main__ INFO: Train 39
+[2021-07-22 02:36:28] __main__ INFO: Epoch 39 Step 0/1181 lr 0.001000 loss 0.0110 (0.0110) Linear error 0.13 (0.13)
+[2021-07-22 02:36:29] __main__ INFO: Epoch 39 Step 100/1181 lr 0.001000 loss 0.0115 (0.0123) Linear error 0.13 (0.13)
+[2021-07-22 02:36:30] __main__ INFO: Epoch 39 Step 200/1181 lr 0.001000 loss 0.0121 (0.0119) Linear error 0.14 (0.13)
+[2021-07-22 02:36:31] __main__ INFO: Epoch 39 Step 300/1181 lr 0.001000 loss 0.0091 (0.0121) Linear error 0.11 (0.13)
+[2021-07-22 02:36:32] __main__ INFO: Epoch 39 Step 400/1181 lr 0.001000 loss 0.0107 (0.0122) Linear error 0.12 (0.13)
+[2021-07-22 02:36:33] __main__ INFO: Epoch 39 Step 500/1181 lr 0.001000 loss 0.0104 (0.0121) Linear error 0.13 (0.13)
+[2021-07-22 02:36:34] __main__ INFO: Epoch 39 Step 600/1181 lr 0.001000 loss 0.0129 (0.0120) Linear error 0.14 (0.13)
+[2021-07-22 02:36:35] __main__ INFO: Epoch 39 Step 700/1181 lr 0.001000 loss 0.0102 (0.0121) Linear error 0.13 (0.13)
+[2021-07-22 02:36:36] __main__ INFO: Epoch 39 Step 800/1181 lr 0.001000 loss 0.0146 (0.0122) Linear error 0.13 (0.13)
+[2021-07-22 02:36:37] __main__ INFO: Epoch 39 Step 900/1181 lr 0.001000 loss 0.0129 (0.0122) Linear error 0.13 (0.13)
+[2021-07-22 02:36:38] __main__ INFO: Epoch 39 Step 1000/1181 lr 0.001000 loss 0.0160 (0.0122) Linear error 0.15 (0.13)
+[2021-07-22 02:36:39] __main__ INFO: Epoch 39 Step 1100/1181 lr 0.001000 loss 0.0125 (0.0122) Linear error 0.14 (0.13)
+[2021-07-22 02:36:39] __main__ INFO: Elapsed 11.97
+[2021-07-22 02:36:39] __main__ INFO: Val 39
+[2021-07-22 02:36:40] __main__ INFO: Epoch 39 loss 0.0243 Linear error 0.18
+[2021-07-22 02:36:40] __main__ INFO: Elapsed 0.57
+[2021-07-22 02:36:40] __main__ INFO: Train 40
+[2021-07-22 02:36:40] __main__ INFO: Epoch 40 Step 0/1181 lr 0.001000 loss 0.0124 (0.0124) Linear error 0.14 (0.14)
+[2021-07-22 02:36:41] __main__ INFO: Epoch 40 Step 100/1181 lr 0.001000 loss 0.0143 (0.0121) Linear error 0.15 (0.13)
+[2021-07-22 02:36:42] __main__ INFO: Epoch 40 Step 200/1181 lr 0.001000 loss 0.0120 (0.0119) Linear error 0.13 (0.13)
+[2021-07-22 02:36:43] __main__ INFO: Epoch 40 Step 300/1181 lr 0.001000 loss 0.0106 (0.0121) Linear error 0.13 (0.13)
+[2021-07-22 02:36:44] __main__ INFO: Epoch 40 Step 400/1181 lr 0.001000 loss 0.0118 (0.0123) Linear error 0.13 (0.13)
+[2021-07-22 02:36:45] __main__ INFO: Epoch 40 Step 500/1181 lr 0.001000 loss 0.0089 (0.0122) Linear error 0.12 (0.13)
+[2021-07-22 02:36:46] __main__ INFO: Epoch 40 Step 600/1181 lr 0.001000 loss 0.0156 (0.0123) Linear error 0.15 (0.13)
+[2021-07-22 02:36:47] __main__ INFO: Epoch 40 Step 700/1181 lr 0.001000 loss 0.0147 (0.0123) Linear error 0.15 (0.13)
+[2021-07-22 02:36:48] __main__ INFO: Epoch 40 Step 800/1181 lr 0.001000 loss 0.0176 (0.0123) Linear error 0.17 (0.13)
+[2021-07-22 02:36:49] __main__ INFO: Epoch 40 Step 900/1181 lr 0.001000 loss 0.0098 (0.0122) Linear error 0.13 (0.13)
+[2021-07-22 02:36:50] __main__ INFO: Epoch 40 Step 1000/1181 lr 0.001000 loss 0.0121 (0.0122) Linear error 0.13 (0.13)
+[2021-07-22 02:36:51] __main__ INFO: Epoch 40 Step 1100/1181 lr 0.001000 loss 0.0128 (0.0123) Linear error 0.14 (0.13)
+[2021-07-22 02:36:52] __main__ INFO: Elapsed 11.91
+[2021-07-22 02:36:52] __main__ INFO: Val 40
+[2021-07-22 02:36:53] __main__ INFO: Epoch 40 loss 0.0245 Linear error 0.18
+[2021-07-22 02:36:53] __main__ INFO: Elapsed 0.58
+[2021-07-22 02:36:53] fvcore.common.checkpoint INFO: Saving checkpoint to experiments/mpiigaze/resnet_preact/exp00/12/checkpoint_0040.pth

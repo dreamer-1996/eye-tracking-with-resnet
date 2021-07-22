@@ -1,0 +1,773 @@
+[32m[2021-07-22 00:47:26] __main__ INFO: [0mmode: MPIIGaze
+dataset:
+  dataset_dir: datasets/MPIIGaze.h5
+transform:
+  mpiifacegaze_face_size: 224
+  mpiifacegaze_gray: False
+device: cuda
+model:
+  name: resnet_preact
+  backbone:
+    name: resnet_simple
+    pretrained: resnet18
+    resnet_block: basic
+    resnet_layers: [2, 2, 2]
+train:
+  batch_size: 32
+  optimizer: sgd
+  base_lr: 0.1
+  momentum: 0.9
+  nesterov: True
+  weight_decay: 0.0001
+  no_weight_decay_on_bn: False
+  loss: L2
+  seed: 0
+  val_first: True
+  val_period: 1
+  test_id: 0
+  val_ratio: 0.1
+  output_dir: experiments/mpiigaze/resnet_preact/exp00/
+  log_period: 100
+  checkpoint_period: 10
+  use_tensorboard: True
+  train_dataloader:
+    num_workers: 4
+    drop_last: True
+    pin_memory: False
+  val_dataloader:
+    num_workers: 4
+    pin_memory: False
+tensorboard:
+  train_images: False
+  val_images: False
+  model_params: False
+optim:
+  adam:
+    betas: (0.9, 0.999)
+scheduler:
+  epochs: 40
+  type: multistep
+  milestones: [30, 35]
+  lr_decay: 0.1
+  lr_min_factor: 0.001
+test:
+  test_id: 0
+  checkpoint: ''
+  output_dir: ''
+  batch_size: 256
+  dataloader:
+    num_workers: 2
+    pin_memory: False
+face_detector:
+  mode: dlib
+  dlib:
+    model: data/dlib/shape_predictor_68_face_landmarks.dat
+gaze_estimator:
+  checkpoint: ''
+  camera_params: ''
+  normalized_camera_params: data/calib/normalized_camera_params_eye.yaml
+  normalized_camera_distance: 0.6
+demo:
+  use_camera: True
+  display_on_screen: True
+  wait_time: 1
+  video_path: ''
+  output_dir: ''
+  output_file_extension: mp4
+  head_pose_axis_length: 0.05
+  gaze_visualization_length: 0.05
+  show_bbox: True
+  show_head_pose: True
+  show_landmarks: True
+  show_normalized_image: False
+  show_template_model: False
+cudnn:
+  benchmark: True
+  deterministic: False
+[32m[2021-07-22 00:47:29] __main__ INFO: [0mVal 0
+[32m[2021-07-22 00:47:30] __main__ INFO: [0mEpoch 0 loss 0.3225 Linear error 0.75
+[32m[2021-07-22 00:47:30] __main__ INFO: [0mElapsed 0.61
+[32m[2021-07-22 00:47:30] __main__ INFO: [0mTrain 1
+[32m[2021-07-22 00:47:30] __main__ INFO: [0mEpoch 1 Step 0/1181 lr 0.100000 loss 0.3458 (0.3458) Linear error 0.78 (0.78)
+[32m[2021-07-22 00:47:31] __main__ INFO: [0mEpoch 1 Step 100/1181 lr 0.100000 loss 0.0717 (0.0965) Linear error 0.34 (0.40)
+[32m[2021-07-22 00:47:32] __main__ INFO: [0mEpoch 1 Step 200/1181 lr 0.100000 loss 0.0618 (0.0864) Linear error 0.33 (0.38)
+[32m[2021-07-22 00:47:33] __main__ INFO: [0mEpoch 1 Step 300/1181 lr 0.100000 loss 0.0517 (0.0820) Linear error 0.28 (0.37)
+[32m[2021-07-22 00:47:34] __main__ INFO: [0mEpoch 1 Step 400/1181 lr 0.100000 loss 0.0789 (0.0787) Linear error 0.37 (0.36)
+[32m[2021-07-22 00:47:35] __main__ INFO: [0mEpoch 1 Step 500/1181 lr 0.100000 loss 0.0614 (0.0764) Linear error 0.31 (0.35)
+[32m[2021-07-22 00:47:36] __main__ INFO: [0mEpoch 1 Step 600/1181 lr 0.100000 loss 0.0808 (0.0746) Linear error 0.35 (0.35)
+[32m[2021-07-22 00:47:37] __main__ INFO: [0mEpoch 1 Step 700/1181 lr 0.100000 loss 0.0604 (0.0733) Linear error 0.32 (0.35)
+[32m[2021-07-22 00:47:38] __main__ INFO: [0mEpoch 1 Step 800/1181 lr 0.100000 loss 0.0559 (0.0722) Linear error 0.30 (0.34)
+[32m[2021-07-22 00:47:39] __main__ INFO: [0mEpoch 1 Step 900/1181 lr 0.100000 loss 0.0582 (0.0711) Linear error 0.32 (0.34)
+[32m[2021-07-22 00:47:40] __main__ INFO: [0mEpoch 1 Step 1000/1181 lr 0.100000 loss 0.0642 (0.0702) Linear error 0.33 (0.34)
+[32m[2021-07-22 00:47:41] __main__ INFO: [0mEpoch 1 Step 1100/1181 lr 0.100000 loss 0.0491 (0.0695) Linear error 0.27 (0.34)
+[32m[2021-07-22 00:47:42] __main__ INFO: [0mElapsed 11.82
+[32m[2021-07-22 00:47:42] __main__ INFO: [0mVal 1
+[32m[2021-07-22 00:47:42] __main__ INFO: [0mEpoch 1 loss 0.0782 Linear error 0.36
+[32m[2021-07-22 00:47:42] __main__ INFO: [0mElapsed 0.54
+[32m[2021-07-22 00:47:42] __main__ INFO: [0mTrain 2
+[32m[2021-07-22 00:47:42] __main__ INFO: [0mEpoch 2 Step 0/1181 lr 0.100000 loss 0.0665 (0.0665) Linear error 0.33 (0.33)
+[32m[2021-07-22 00:47:44] __main__ INFO: [0mEpoch 2 Step 100/1181 lr 0.100000 loss 0.0579 (0.0617) Linear error 0.31 (0.32)
+[32m[2021-07-22 00:47:44] __main__ INFO: [0mEpoch 2 Step 200/1181 lr 0.100000 loss 0.0779 (0.0599) Linear error 0.36 (0.31)
+[32m[2021-07-22 00:47:45] __main__ INFO: [0mEpoch 2 Step 300/1181 lr 0.100000 loss 0.0683 (0.0601) Linear error 0.35 (0.31)
+[32m[2021-07-22 00:47:46] __main__ INFO: [0mEpoch 2 Step 400/1181 lr 0.100000 loss 0.0539 (0.0598) Linear error 0.30 (0.31)
+[32m[2021-07-22 00:47:47] __main__ INFO: [0mEpoch 2 Step 500/1181 lr 0.100000 loss 0.0679 (0.0592) Linear error 0.35 (0.31)
+[32m[2021-07-22 00:47:48] __main__ INFO: [0mEpoch 2 Step 600/1181 lr 0.100000 loss 0.0374 (0.0590) Linear error 0.24 (0.31)
+[32m[2021-07-22 00:47:49] __main__ INFO: [0mEpoch 2 Step 700/1181 lr 0.100000 loss 0.0400 (0.0585) Linear error 0.25 (0.31)
+[32m[2021-07-22 00:47:50] __main__ INFO: [0mEpoch 2 Step 800/1181 lr 0.100000 loss 0.0456 (0.0582) Linear error 0.26 (0.31)
+[32m[2021-07-22 00:47:51] __main__ INFO: [0mEpoch 2 Step 900/1181 lr 0.100000 loss 0.0566 (0.0579) Linear error 0.30 (0.30)
+[32m[2021-07-22 00:47:52] __main__ INFO: [0mEpoch 2 Step 1000/1181 lr 0.100000 loss 0.0392 (0.0576) Linear error 0.25 (0.30)
+[32m[2021-07-22 00:47:53] __main__ INFO: [0mEpoch 2 Step 1100/1181 lr 0.100000 loss 0.0513 (0.0574) Linear error 0.29 (0.30)
+[32m[2021-07-22 00:47:54] __main__ INFO: [0mElapsed 11.71
+[32m[2021-07-22 00:47:54] __main__ INFO: [0mVal 2
+[32m[2021-07-22 00:47:55] __main__ INFO: [0mEpoch 2 loss 0.0609 Linear error 0.31
+[32m[2021-07-22 00:47:55] __main__ INFO: [0mElapsed 0.56
+[32m[2021-07-22 00:47:55] __main__ INFO: [0mTrain 3
+[32m[2021-07-22 00:47:55] __main__ INFO: [0mEpoch 3 Step 0/1181 lr 0.100000 loss 0.0476 (0.0476) Linear error 0.28 (0.28)
+[32m[2021-07-22 00:47:56] __main__ INFO: [0mEpoch 3 Step 100/1181 lr 0.100000 loss 0.0535 (0.0517) Linear error 0.31 (0.28)
+[32m[2021-07-22 00:47:57] __main__ INFO: [0mEpoch 3 Step 200/1181 lr 0.100000 loss 0.0444 (0.0517) Linear error 0.26 (0.28)
+[32m[2021-07-22 00:47:58] __main__ INFO: [0mEpoch 3 Step 300/1181 lr 0.100000 loss 0.0562 (0.0516) Linear error 0.30 (0.29)
+[32m[2021-07-22 00:47:59] __main__ INFO: [0mEpoch 3 Step 400/1181 lr 0.100000 loss 0.0644 (0.0514) Linear error 0.30 (0.28)
+[32m[2021-07-22 00:48:00] __main__ INFO: [0mEpoch 3 Step 500/1181 lr 0.100000 loss 0.0544 (0.0514) Linear error 0.29 (0.28)
+[32m[2021-07-22 00:48:01] __main__ INFO: [0mEpoch 3 Step 600/1181 lr 0.100000 loss 0.0486 (0.0513) Linear error 0.27 (0.28)
+[32m[2021-07-22 00:48:02] __main__ INFO: [0mEpoch 3 Step 700/1181 lr 0.100000 loss 0.0518 (0.0511) Linear error 0.27 (0.28)
+[32m[2021-07-22 00:48:03] __main__ INFO: [0mEpoch 3 Step 800/1181 lr 0.100000 loss 0.0484 (0.0510) Linear error 0.27 (0.28)
+[32m[2021-07-22 00:48:04] __main__ INFO: [0mEpoch 3 Step 900/1181 lr 0.100000 loss 0.0587 (0.0505) Linear error 0.32 (0.28)
+[32m[2021-07-22 00:48:05] __main__ INFO: [0mEpoch 3 Step 1000/1181 lr 0.100000 loss 0.0393 (0.0503) Linear error 0.24 (0.28)
+[32m[2021-07-22 00:48:06] __main__ INFO: [0mEpoch 3 Step 1100/1181 lr 0.100000 loss 0.0611 (0.0502) Linear error 0.31 (0.28)
+[32m[2021-07-22 00:48:07] __main__ INFO: [0mElapsed 11.92
+[32m[2021-07-22 00:48:07] __main__ INFO: [0mVal 3
+[32m[2021-07-22 00:48:07] __main__ INFO: [0mEpoch 3 loss 0.0502 Linear error 0.28
+[32m[2021-07-22 00:48:07] __main__ INFO: [0mElapsed 0.54
+[32m[2021-07-22 00:48:07] __main__ INFO: [0mTrain 4
+[32m[2021-07-22 00:48:07] __main__ INFO: [0mEpoch 4 Step 0/1181 lr 0.100000 loss 0.0595 (0.0595) Linear error 0.30 (0.30)
+[32m[2021-07-22 00:48:08] __main__ INFO: [0mEpoch 4 Step 100/1181 lr 0.100000 loss 0.0490 (0.0454) Linear error 0.27 (0.26)
+[32m[2021-07-22 00:48:09] __main__ INFO: [0mEpoch 4 Step 200/1181 lr 0.100000 loss 0.0487 (0.0464) Linear error 0.28 (0.27)
+[32m[2021-07-22 00:48:10] __main__ INFO: [0mEpoch 4 Step 300/1181 lr 0.100000 loss 0.0537 (0.0462) Linear error 0.28 (0.27)
+[32m[2021-07-22 00:48:11] __main__ INFO: [0mEpoch 4 Step 400/1181 lr 0.100000 loss 0.0456 (0.0460) Linear error 0.27 (0.27)
+[32m[2021-07-22 00:48:12] __main__ INFO: [0mEpoch 4 Step 500/1181 lr 0.100000 loss 0.0539 (0.0461) Linear error 0.30 (0.27)
+[32m[2021-07-22 00:48:13] __main__ INFO: [0mEpoch 4 Step 600/1181 lr 0.100000 loss 0.0316 (0.0464) Linear error 0.22 (0.27)
+[32m[2021-07-22 00:48:14] __main__ INFO: [0mEpoch 4 Step 700/1181 lr 0.100000 loss 0.0369 (0.0463) Linear error 0.23 (0.27)
+[32m[2021-07-22 00:48:15] __main__ INFO: [0mEpoch 4 Step 800/1181 lr 0.100000 loss 0.0415 (0.0460) Linear error 0.25 (0.26)
+[32m[2021-07-22 00:48:16] __main__ INFO: [0mEpoch 4 Step 900/1181 lr 0.100000 loss 0.0447 (0.0458) Linear error 0.25 (0.26)
+[32m[2021-07-22 00:48:17] __main__ INFO: [0mEpoch 4 Step 1000/1181 lr 0.100000 loss 0.0378 (0.0456) Linear error 0.25 (0.26)
+[32m[2021-07-22 00:48:18] __main__ INFO: [0mEpoch 4 Step 1100/1181 lr 0.100000 loss 0.0349 (0.0455) Linear error 0.23 (0.26)
+[32m[2021-07-22 00:48:19] __main__ INFO: [0mElapsed 11.78
+[32m[2021-07-22 00:48:19] __main__ INFO: [0mVal 4
+[32m[2021-07-22 00:48:19] __main__ INFO: [0mEpoch 4 loss 0.0447 Linear error 0.26
+[32m[2021-07-22 00:48:19] __main__ INFO: [0mElapsed 0.54
+[32m[2021-07-22 00:48:19] __main__ INFO: [0mTrain 5
+[32m[2021-07-22 00:48:20] __main__ INFO: [0mEpoch 5 Step 0/1181 lr 0.100000 loss 0.0278 (0.0278) Linear error 0.21 (0.21)
+[32m[2021-07-22 00:48:21] __main__ INFO: [0mEpoch 5 Step 100/1181 lr 0.100000 loss 0.0411 (0.0411) Linear error 0.24 (0.25)
+[32m[2021-07-22 00:48:22] __main__ INFO: [0mEpoch 5 Step 200/1181 lr 0.100000 loss 0.0396 (0.0413) Linear error 0.25 (0.25)
+[32m[2021-07-22 00:48:23] __main__ INFO: [0mEpoch 5 Step 300/1181 lr 0.100000 loss 0.0436 (0.0413) Linear error 0.26 (0.25)
+[32m[2021-07-22 00:48:24] __main__ INFO: [0mEpoch 5 Step 400/1181 lr 0.100000 loss 0.0383 (0.0417) Linear error 0.23 (0.25)
+[32m[2021-07-22 00:48:25] __main__ INFO: [0mEpoch 5 Step 500/1181 lr 0.100000 loss 0.0500 (0.0418) Linear error 0.29 (0.25)
+[32m[2021-07-22 00:48:26] __main__ INFO: [0mEpoch 5 Step 600/1181 lr 0.100000 loss 0.0390 (0.0418) Linear error 0.23 (0.25)
+[32m[2021-07-22 00:48:27] __main__ INFO: [0mEpoch 5 Step 700/1181 lr 0.100000 loss 0.0476 (0.0419) Linear error 0.29 (0.25)
+[32m[2021-07-22 00:48:28] __main__ INFO: [0mEpoch 5 Step 800/1181 lr 0.100000 loss 0.0461 (0.0417) Linear error 0.27 (0.25)
+[32m[2021-07-22 00:48:29] __main__ INFO: [0mEpoch 5 Step 900/1181 lr 0.100000 loss 0.0556 (0.0418) Linear error 0.29 (0.25)
+[32m[2021-07-22 00:48:30] __main__ INFO: [0mEpoch 5 Step 1000/1181 lr 0.100000 loss 0.0395 (0.0418) Linear error 0.24 (0.25)
+[32m[2021-07-22 00:48:31] __main__ INFO: [0mEpoch 5 Step 1100/1181 lr 0.100000 loss 0.0470 (0.0417) Linear error 0.27 (0.25)
+[32m[2021-07-22 00:48:31] __main__ INFO: [0mElapsed 11.98
+[32m[2021-07-22 00:48:31] __main__ INFO: [0mVal 5
+[32m[2021-07-22 00:48:32] __main__ INFO: [0mEpoch 5 loss 0.0525 Linear error 0.29
+[32m[2021-07-22 00:48:32] __main__ INFO: [0mElapsed 0.55
+[32m[2021-07-22 00:48:32] __main__ INFO: [0mTrain 6
+[32m[2021-07-22 00:48:32] __main__ INFO: [0mEpoch 6 Step 0/1181 lr 0.100000 loss 0.0443 (0.0443) Linear error 0.27 (0.27)
+[32m[2021-07-22 00:48:33] __main__ INFO: [0mEpoch 6 Step 100/1181 lr 0.100000 loss 0.0354 (0.0385) Linear error 0.24 (0.24)
+[32m[2021-07-22 00:48:34] __main__ INFO: [0mEpoch 6 Step 200/1181 lr 0.100000 loss 0.0356 (0.0384) Linear error 0.25 (0.24)
+[32m[2021-07-22 00:48:35] __main__ INFO: [0mEpoch 6 Step 300/1181 lr 0.100000 loss 0.0547 (0.0388) Linear error 0.31 (0.24)
+[32m[2021-07-22 00:48:36] __main__ INFO: [0mEpoch 6 Step 400/1181 lr 0.100000 loss 0.0338 (0.0386) Linear error 0.22 (0.24)
+[32m[2021-07-22 00:48:37] __main__ INFO: [0mEpoch 6 Step 500/1181 lr 0.100000 loss 0.0421 (0.0389) Linear error 0.24 (0.24)
+[32m[2021-07-22 00:48:38] __main__ INFO: [0mEpoch 6 Step 600/1181 lr 0.100000 loss 0.0452 (0.0391) Linear error 0.25 (0.24)
+[32m[2021-07-22 00:48:39] __main__ INFO: [0mEpoch 6 Step 700/1181 lr 0.100000 loss 0.0390 (0.0394) Linear error 0.25 (0.24)
+[32m[2021-07-22 00:48:40] __main__ INFO: [0mEpoch 6 Step 800/1181 lr 0.100000 loss 0.0420 (0.0394) Linear error 0.26 (0.24)
+[32m[2021-07-22 00:48:41] __main__ INFO: [0mEpoch 6 Step 900/1181 lr 0.100000 loss 0.0403 (0.0394) Linear error 0.25 (0.24)
+[32m[2021-07-22 00:48:42] __main__ INFO: [0mEpoch 6 Step 1000/1181 lr 0.100000 loss 0.0501 (0.0393) Linear error 0.29 (0.24)
+[32m[2021-07-22 00:48:43] __main__ INFO: [0mEpoch 6 Step 1100/1181 lr 0.100000 loss 0.0476 (0.0393) Linear error 0.27 (0.24)
+[32m[2021-07-22 00:48:44] __main__ INFO: [0mElapsed 11.79
+[32m[2021-07-22 00:48:44] __main__ INFO: [0mVal 6
+[32m[2021-07-22 00:48:44] __main__ INFO: [0mEpoch 6 loss 0.0405 Linear error 0.24
+[32m[2021-07-22 00:48:44] __main__ INFO: [0mElapsed 0.56
+[32m[2021-07-22 00:48:44] __main__ INFO: [0mTrain 7
+[32m[2021-07-22 00:48:44] __main__ INFO: [0mEpoch 7 Step 0/1181 lr 0.100000 loss 0.0311 (0.0311) Linear error 0.21 (0.21)
+[32m[2021-07-22 00:48:45] __main__ INFO: [0mEpoch 7 Step 100/1181 lr 0.100000 loss 0.0500 (0.0370) Linear error 0.27 (0.23)
+[32m[2021-07-22 00:48:46] __main__ INFO: [0mEpoch 7 Step 200/1181 lr 0.100000 loss 0.0317 (0.0364) Linear error 0.22 (0.23)
+[32m[2021-07-22 00:48:47] __main__ INFO: [0mEpoch 7 Step 300/1181 lr 0.100000 loss 0.0334 (0.0361) Linear error 0.21 (0.23)
+[32m[2021-07-22 00:48:48] __main__ INFO: [0mEpoch 7 Step 400/1181 lr 0.100000 loss 0.0462 (0.0365) Linear error 0.27 (0.23)
+[32m[2021-07-22 00:48:49] __main__ INFO: [0mEpoch 7 Step 500/1181 lr 0.100000 loss 0.0378 (0.0368) Linear error 0.24 (0.23)
+[32m[2021-07-22 00:48:50] __main__ INFO: [0mEpoch 7 Step 600/1181 lr 0.100000 loss 0.0395 (0.0370) Linear error 0.25 (0.23)
+[32m[2021-07-22 00:48:51] __main__ INFO: [0mEpoch 7 Step 700/1181 lr 0.100000 loss 0.0496 (0.0369) Linear error 0.27 (0.23)
+[32m[2021-07-22 00:48:52] __main__ INFO: [0mEpoch 7 Step 800/1181 lr 0.100000 loss 0.0372 (0.0368) Linear error 0.22 (0.23)
+[32m[2021-07-22 00:48:53] __main__ INFO: [0mEpoch 7 Step 900/1181 lr 0.100000 loss 0.0362 (0.0369) Linear error 0.22 (0.23)
+[32m[2021-07-22 00:48:54] __main__ INFO: [0mEpoch 7 Step 1000/1181 lr 0.100000 loss 0.0474 (0.0370) Linear error 0.28 (0.23)
+[32m[2021-07-22 00:48:55] __main__ INFO: [0mEpoch 7 Step 1100/1181 lr 0.100000 loss 0.0342 (0.0372) Linear error 0.23 (0.23)
+[32m[2021-07-22 00:48:56] __main__ INFO: [0mElapsed 11.91
+[32m[2021-07-22 00:48:56] __main__ INFO: [0mVal 7
+[32m[2021-07-22 00:48:57] __main__ INFO: [0mEpoch 7 loss 0.0399 Linear error 0.24
+[32m[2021-07-22 00:48:57] __main__ INFO: [0mElapsed 0.54
+[32m[2021-07-22 00:48:57] __main__ INFO: [0mTrain 8
+[32m[2021-07-22 00:48:57] __main__ INFO: [0mEpoch 8 Step 0/1181 lr 0.100000 loss 0.0360 (0.0360) Linear error 0.23 (0.23)
+[32m[2021-07-22 00:48:58] __main__ INFO: [0mEpoch 8 Step 100/1181 lr 0.100000 loss 0.0377 (0.0351) Linear error 0.23 (0.23)
+[32m[2021-07-22 00:48:59] __main__ INFO: [0mEpoch 8 Step 200/1181 lr 0.100000 loss 0.0386 (0.0351) Linear error 0.25 (0.23)
+[32m[2021-07-22 00:49:00] __main__ INFO: [0mEpoch 8 Step 300/1181 lr 0.100000 loss 0.0339 (0.0354) Linear error 0.23 (0.23)
+[32m[2021-07-22 00:49:01] __main__ INFO: [0mEpoch 8 Step 400/1181 lr 0.100000 loss 0.0450 (0.0356) Linear error 0.28 (0.23)
+[32m[2021-07-22 00:49:02] __main__ INFO: [0mEpoch 8 Step 500/1181 lr 0.100000 loss 0.0447 (0.0356) Linear error 0.26 (0.23)
+[32m[2021-07-22 00:49:03] __main__ INFO: [0mEpoch 8 Step 600/1181 lr 0.100000 loss 0.0361 (0.0357) Linear error 0.24 (0.23)
+[32m[2021-07-22 00:49:04] __main__ INFO: [0mEpoch 8 Step 700/1181 lr 0.100000 loss 0.0471 (0.0358) Linear error 0.28 (0.23)
+[32m[2021-07-22 00:49:05] __main__ INFO: [0mEpoch 8 Step 800/1181 lr 0.100000 loss 0.0244 (0.0357) Linear error 0.20 (0.23)
+[32m[2021-07-22 00:49:06] __main__ INFO: [0mEpoch 8 Step 900/1181 lr 0.100000 loss 0.0322 (0.0358) Linear error 0.22 (0.23)
+[32m[2021-07-22 00:49:07] __main__ INFO: [0mEpoch 8 Step 1000/1181 lr 0.100000 loss 0.0314 (0.0357) Linear error 0.22 (0.23)
+[32m[2021-07-22 00:49:08] __main__ INFO: [0mEpoch 8 Step 1100/1181 lr 0.100000 loss 0.0276 (0.0357) Linear error 0.21 (0.23)
+[32m[2021-07-22 00:49:09] __main__ INFO: [0mElapsed 11.83
+[32m[2021-07-22 00:49:09] __main__ INFO: [0mVal 8
+[32m[2021-07-22 00:49:09] __main__ INFO: [0mEpoch 8 loss 0.0474 Linear error 0.27
+[32m[2021-07-22 00:49:09] __main__ INFO: [0mElapsed 0.54
+[32m[2021-07-22 00:49:09] __main__ INFO: [0mTrain 9
+[32m[2021-07-22 00:49:09] __main__ INFO: [0mEpoch 9 Step 0/1181 lr 0.100000 loss 0.0356 (0.0356) Linear error 0.23 (0.23)
+[32m[2021-07-22 00:49:10] __main__ INFO: [0mEpoch 9 Step 100/1181 lr 0.100000 loss 0.0469 (0.0341) Linear error 0.26 (0.22)
+[32m[2021-07-22 00:49:11] __main__ INFO: [0mEpoch 9 Step 200/1181 lr 0.100000 loss 0.0414 (0.0335) Linear error 0.25 (0.22)
+[32m[2021-07-22 00:49:12] __main__ INFO: [0mEpoch 9 Step 300/1181 lr 0.100000 loss 0.0339 (0.0337) Linear error 0.22 (0.22)
+[32m[2021-07-22 00:49:13] __main__ INFO: [0mEpoch 9 Step 400/1181 lr 0.100000 loss 0.0391 (0.0338) Linear error 0.23 (0.22)
+[32m[2021-07-22 00:49:14] __main__ INFO: [0mEpoch 9 Step 500/1181 lr 0.100000 loss 0.0519 (0.0339) Linear error 0.29 (0.22)
+[32m[2021-07-22 00:49:15] __main__ INFO: [0mEpoch 9 Step 600/1181 lr 0.100000 loss 0.0437 (0.0341) Linear error 0.25 (0.22)
+[32m[2021-07-22 00:49:16] __main__ INFO: [0mEpoch 9 Step 700/1181 lr 0.100000 loss 0.0450 (0.0343) Linear error 0.26 (0.22)
+[32m[2021-07-22 00:49:17] __main__ INFO: [0mEpoch 9 Step 800/1181 lr 0.100000 loss 0.0293 (0.0344) Linear error 0.21 (0.22)
+[32m[2021-07-22 00:49:18] __main__ INFO: [0mEpoch 9 Step 900/1181 lr 0.100000 loss 0.0422 (0.0343) Linear error 0.25 (0.22)
+[32m[2021-07-22 00:49:19] __main__ INFO: [0mEpoch 9 Step 1000/1181 lr 0.100000 loss 0.0295 (0.0344) Linear error 0.21 (0.23)
+[32m[2021-07-22 00:49:20] __main__ INFO: [0mEpoch 9 Step 1100/1181 lr 0.100000 loss 0.0247 (0.0344) Linear error 0.18 (0.23)
+[32m[2021-07-22 00:49:21] __main__ INFO: [0mElapsed 11.71
+[32m[2021-07-22 00:49:21] __main__ INFO: [0mVal 9
+[32m[2021-07-22 00:49:21] __main__ INFO: [0mEpoch 9 loss 0.0369 Linear error 0.23
+[32m[2021-07-22 00:49:21] __main__ INFO: [0mElapsed 0.53
+[32m[2021-07-22 00:49:21] __main__ INFO: [0mTrain 10
+[32m[2021-07-22 00:49:22] __main__ INFO: [0mEpoch 10 Step 0/1181 lr 0.100000 loss 0.0432 (0.0432) Linear error 0.24 (0.24)
+[32m[2021-07-22 00:49:22] __main__ INFO: [0mEpoch 10 Step 100/1181 lr 0.100000 loss 0.0327 (0.0317) Linear error 0.22 (0.22)
+[32m[2021-07-22 00:49:23] __main__ INFO: [0mEpoch 10 Step 200/1181 lr 0.100000 loss 0.0335 (0.0321) Linear error 0.22 (0.22)
+[32m[2021-07-22 00:49:24] __main__ INFO: [0mEpoch 10 Step 300/1181 lr 0.100000 loss 0.0367 (0.0325) Linear error 0.24 (0.22)
+[32m[2021-07-22 00:49:25] __main__ INFO: [0mEpoch 10 Step 400/1181 lr 0.100000 loss 0.0348 (0.0328) Linear error 0.24 (0.22)
+[32m[2021-07-22 00:49:26] __main__ INFO: [0mEpoch 10 Step 500/1181 lr 0.100000 loss 0.0169 (0.0328) Linear error 0.17 (0.22)
+[32m[2021-07-22 00:49:27] __main__ INFO: [0mEpoch 10 Step 600/1181 lr 0.100000 loss 0.0228 (0.0330) Linear error 0.19 (0.22)
+[32m[2021-07-22 00:49:28] __main__ INFO: [0mEpoch 10 Step 700/1181 lr 0.100000 loss 0.0217 (0.0332) Linear error 0.18 (0.22)
+[32m[2021-07-22 00:49:30] __main__ INFO: [0mEpoch 10 Step 800/1181 lr 0.100000 loss 0.0340 (0.0335) Linear error 0.23 (0.22)
+[32m[2021-07-22 00:49:31] __main__ INFO: [0mEpoch 10 Step 900/1181 lr 0.100000 loss 0.0387 (0.0336) Linear error 0.24 (0.22)
+[32m[2021-07-22 00:49:32] __main__ INFO: [0mEpoch 10 Step 1000/1181 lr 0.100000 loss 0.0277 (0.0335) Linear error 0.19 (0.22)
+[32m[2021-07-22 00:49:33] __main__ INFO: [0mEpoch 10 Step 1100/1181 lr 0.100000 loss 0.0354 (0.0336) Linear error 0.24 (0.22)
+[32m[2021-07-22 00:49:33] __main__ INFO: [0mElapsed 11.98
+[32m[2021-07-22 00:49:33] __main__ INFO: [0mVal 10
+[32m[2021-07-22 00:49:34] __main__ INFO: [0mEpoch 10 loss 0.0372 Linear error 0.23
+[32m[2021-07-22 00:49:34] __main__ INFO: [0mElapsed 0.55
+[32m[2021-07-22 00:49:34] fvcore.common.checkpoint INFO: [0mSaving checkpoint to experiments/mpiigaze/resnet_preact/exp00/00/checkpoint_0010.pth
+[32m[2021-07-22 00:49:34] __main__ INFO: [0mTrain 11
+[32m[2021-07-22 00:49:34] __main__ INFO: [0mEpoch 11 Step 0/1181 lr 0.100000 loss 0.0222 (0.0222) Linear error 0.17 (0.17)
+[32m[2021-07-22 00:49:35] __main__ INFO: [0mEpoch 11 Step 100/1181 lr 0.100000 loss 0.0294 (0.0312) Linear error 0.20 (0.21)
+[32m[2021-07-22 00:49:36] __main__ INFO: [0mEpoch 11 Step 200/1181 lr 0.100000 loss 0.0168 (0.0315) Linear error 0.17 (0.22)
+[32m[2021-07-22 00:49:37] __main__ INFO: [0mEpoch 11 Step 300/1181 lr 0.100000 loss 0.0222 (0.0316) Linear error 0.18 (0.22)
+[32m[2021-07-22 00:49:38] __main__ INFO: [0mEpoch 11 Step 400/1181 lr 0.100000 loss 0.0257 (0.0314) Linear error 0.20 (0.22)
+[32m[2021-07-22 00:49:39] __main__ INFO: [0mEpoch 11 Step 500/1181 lr 0.100000 loss 0.0442 (0.0318) Linear error 0.26 (0.22)
+[32m[2021-07-22 00:49:40] __main__ INFO: [0mEpoch 11 Step 600/1181 lr 0.100000 loss 0.0339 (0.0321) Linear error 0.22 (0.22)
+[32m[2021-07-22 00:49:41] __main__ INFO: [0mEpoch 11 Step 700/1181 lr 0.100000 loss 0.0329 (0.0324) Linear error 0.23 (0.22)
+[32m[2021-07-22 00:49:42] __main__ INFO: [0mEpoch 11 Step 800/1181 lr 0.100000 loss 0.0191 (0.0324) Linear error 0.17 (0.22)
+[32m[2021-07-22 00:49:43] __main__ INFO: [0mEpoch 11 Step 900/1181 lr 0.100000 loss 0.0382 (0.0325) Linear error 0.23 (0.22)
+[32m[2021-07-22 00:49:44] __main__ INFO: [0mEpoch 11 Step 1000/1181 lr 0.100000 loss 0.0298 (0.0327) Linear error 0.20 (0.22)
+[32m[2021-07-22 00:49:45] __main__ INFO: [0mEpoch 11 Step 1100/1181 lr 0.100000 loss 0.0295 (0.0328) Linear error 0.21 (0.22)
+[32m[2021-07-22 00:49:46] __main__ INFO: [0mElapsed 12.06
+[32m[2021-07-22 00:49:46] __main__ INFO: [0mVal 11
+[32m[2021-07-22 00:49:47] __main__ INFO: [0mEpoch 11 loss 0.0362 Linear error 0.23
+[32m[2021-07-22 00:49:47] __main__ INFO: [0mElapsed 0.53
+[32m[2021-07-22 00:49:47] __main__ INFO: [0mTrain 12
+[32m[2021-07-22 00:49:47] __main__ INFO: [0mEpoch 12 Step 0/1181 lr 0.100000 loss 0.0315 (0.0315) Linear error 0.21 (0.21)
+[32m[2021-07-22 00:49:48] __main__ INFO: [0mEpoch 12 Step 100/1181 lr 0.100000 loss 0.0330 (0.0291) Linear error 0.23 (0.21)
+[32m[2021-07-22 00:49:49] __main__ INFO: [0mEpoch 12 Step 200/1181 lr 0.100000 loss 0.0344 (0.0300) Linear error 0.22 (0.21)
+[32m[2021-07-22 00:49:50] __main__ INFO: [0mEpoch 12 Step 300/1181 lr 0.100000 loss 0.0335 (0.0307) Linear error 0.23 (0.21)
+[32m[2021-07-22 00:49:51] __main__ INFO: [0mEpoch 12 Step 400/1181 lr 0.100000 loss 0.0275 (0.0309) Linear error 0.20 (0.21)
+[32m[2021-07-22 00:49:52] __main__ INFO: [0mEpoch 12 Step 500/1181 lr 0.100000 loss 0.0317 (0.0312) Linear error 0.21 (0.21)
+[32m[2021-07-22 00:49:53] __main__ INFO: [0mEpoch 12 Step 600/1181 lr 0.100000 loss 0.0318 (0.0311) Linear error 0.20 (0.21)
+[32m[2021-07-22 00:49:54] __main__ INFO: [0mEpoch 12 Step 700/1181 lr 0.100000 loss 0.0322 (0.0313) Linear error 0.23 (0.21)
+[32m[2021-07-22 00:49:54] __main__ INFO: [0mEpoch 12 Step 800/1181 lr 0.100000 loss 0.0293 (0.0316) Linear error 0.19 (0.22)
+[32m[2021-07-22 00:49:56] __main__ INFO: [0mEpoch 12 Step 900/1181 lr 0.100000 loss 0.0283 (0.0316) Linear error 0.21 (0.22)
+[32m[2021-07-22 00:49:57] __main__ INFO: [0mEpoch 12 Step 1000/1181 lr 0.100000 loss 0.0254 (0.0318) Linear error 0.20 (0.22)
+[32m[2021-07-22 00:49:57] __main__ INFO: [0mEpoch 12 Step 1100/1181 lr 0.100000 loss 0.0307 (0.0319) Linear error 0.21 (0.22)
+[32m[2021-07-22 00:49:58] __main__ INFO: [0mElapsed 11.79
+[32m[2021-07-22 00:49:58] __main__ INFO: [0mVal 12
+[32m[2021-07-22 00:49:59] __main__ INFO: [0mEpoch 12 loss 0.0516 Linear error 0.28
+[32m[2021-07-22 00:49:59] __main__ INFO: [0mElapsed 0.53
+[32m[2021-07-22 00:49:59] __main__ INFO: [0mTrain 13
+[32m[2021-07-22 00:49:59] __main__ INFO: [0mEpoch 13 Step 0/1181 lr 0.100000 loss 0.0248 (0.0248) Linear error 0.19 (0.19)
+[32m[2021-07-22 00:50:00] __main__ INFO: [0mEpoch 13 Step 100/1181 lr 0.100000 loss 0.0293 (0.0306) Linear error 0.20 (0.21)
+[32m[2021-07-22 00:50:01] __main__ INFO: [0mEpoch 13 Step 200/1181 lr 0.100000 loss 0.0329 (0.0303) Linear error 0.23 (0.21)
+[32m[2021-07-22 00:50:02] __main__ INFO: [0mEpoch 13 Step 300/1181 lr 0.100000 loss 0.0306 (0.0306) Linear error 0.21 (0.21)
+[32m[2021-07-22 00:50:03] __main__ INFO: [0mEpoch 13 Step 400/1181 lr 0.100000 loss 0.0296 (0.0308) Linear error 0.21 (0.21)
+[32m[2021-07-22 00:50:04] __main__ INFO: [0mEpoch 13 Step 500/1181 lr 0.100000 loss 0.0303 (0.0306) Linear error 0.22 (0.21)
+[32m[2021-07-22 00:50:05] __main__ INFO: [0mEpoch 13 Step 600/1181 lr 0.100000 loss 0.0297 (0.0307) Linear error 0.19 (0.21)
+[32m[2021-07-22 00:50:06] __main__ INFO: [0mEpoch 13 Step 700/1181 lr 0.100000 loss 0.0287 (0.0309) Linear error 0.21 (0.21)
+[32m[2021-07-22 00:50:07] __main__ INFO: [0mEpoch 13 Step 800/1181 lr 0.100000 loss 0.0259 (0.0310) Linear error 0.19 (0.21)
+[32m[2021-07-22 00:50:08] __main__ INFO: [0mEpoch 13 Step 900/1181 lr 0.100000 loss 0.0261 (0.0311) Linear error 0.20 (0.21)
+[32m[2021-07-22 00:50:09] __main__ INFO: [0mEpoch 13 Step 1000/1181 lr 0.100000 loss 0.0285 (0.0312) Linear error 0.22 (0.21)
+[32m[2021-07-22 00:50:10] __main__ INFO: [0mEpoch 13 Step 1100/1181 lr 0.100000 loss 0.0290 (0.0312) Linear error 0.21 (0.21)
+[32m[2021-07-22 00:50:11] __main__ INFO: [0mElapsed 11.92
+[32m[2021-07-22 00:50:11] __main__ INFO: [0mVal 13
+[32m[2021-07-22 00:50:11] __main__ INFO: [0mEpoch 13 loss 0.0391 Linear error 0.24
+[32m[2021-07-22 00:50:11] __main__ INFO: [0mElapsed 0.55
+[32m[2021-07-22 00:50:11] __main__ INFO: [0mTrain 14
+[32m[2021-07-22 00:50:11] __main__ INFO: [0mEpoch 14 Step 0/1181 lr 0.100000 loss 0.0368 (0.0368) Linear error 0.24 (0.24)
+[32m[2021-07-22 00:50:12] __main__ INFO: [0mEpoch 14 Step 100/1181 lr 0.100000 loss 0.0367 (0.0293) Linear error 0.23 (0.21)
+[32m[2021-07-22 00:50:13] __main__ INFO: [0mEpoch 14 Step 200/1181 lr 0.100000 loss 0.0314 (0.0299) Linear error 0.22 (0.21)
+[32m[2021-07-22 00:50:14] __main__ INFO: [0mEpoch 14 Step 300/1181 lr 0.100000 loss 0.0286 (0.0301) Linear error 0.21 (0.21)
+[32m[2021-07-22 00:50:15] __main__ INFO: [0mEpoch 14 Step 400/1181 lr 0.100000 loss 0.0338 (0.0301) Linear error 0.23 (0.21)
+[32m[2021-07-22 00:50:16] __main__ INFO: [0mEpoch 14 Step 500/1181 lr 0.100000 loss 0.0191 (0.0304) Linear error 0.17 (0.21)
+[32m[2021-07-22 00:50:17] __main__ INFO: [0mEpoch 14 Step 600/1181 lr 0.100000 loss 0.0272 (0.0306) Linear error 0.21 (0.21)
+[32m[2021-07-22 00:50:18] __main__ INFO: [0mEpoch 14 Step 700/1181 lr 0.100000 loss 0.0219 (0.0308) Linear error 0.19 (0.21)
+[32m[2021-07-22 00:50:19] __main__ INFO: [0mEpoch 14 Step 800/1181 lr 0.100000 loss 0.0376 (0.0307) Linear error 0.24 (0.21)
+[32m[2021-07-22 00:50:20] __main__ INFO: [0mEpoch 14 Step 900/1181 lr 0.100000 loss 0.0244 (0.0308) Linear error 0.19 (0.21)
+[32m[2021-07-22 00:50:22] __main__ INFO: [0mEpoch 14 Step 1000/1181 lr 0.100000 loss 0.0328 (0.0309) Linear error 0.21 (0.21)
+[32m[2021-07-22 00:50:23] __main__ INFO: [0mEpoch 14 Step 1100/1181 lr 0.100000 loss 0.0381 (0.0309) Linear error 0.22 (0.21)
+[32m[2021-07-22 00:50:23] __main__ INFO: [0mElapsed 12.13
+[32m[2021-07-22 00:50:23] __main__ INFO: [0mVal 14
+[32m[2021-07-22 00:50:24] __main__ INFO: [0mEpoch 14 loss 0.0535 Linear error 0.29
+[32m[2021-07-22 00:50:24] __main__ INFO: [0mElapsed 0.57
+[32m[2021-07-22 00:50:24] __main__ INFO: [0mTrain 15
+[32m[2021-07-22 00:50:24] __main__ INFO: [0mEpoch 15 Step 0/1181 lr 0.100000 loss 0.0315 (0.0315) Linear error 0.23 (0.23)
+[32m[2021-07-22 00:50:25] __main__ INFO: [0mEpoch 15 Step 100/1181 lr 0.100000 loss 0.0336 (0.0283) Linear error 0.22 (0.20)
+[32m[2021-07-22 00:50:26] __main__ INFO: [0mEpoch 15 Step 200/1181 lr 0.100000 loss 0.0258 (0.0283) Linear error 0.21 (0.21)
+[32m[2021-07-22 00:50:27] __main__ INFO: [0mEpoch 15 Step 300/1181 lr 0.100000 loss 0.0287 (0.0292) Linear error 0.21 (0.21)
+[32m[2021-07-22 00:50:28] __main__ INFO: [0mEpoch 15 Step 400/1181 lr 0.100000 loss 0.0246 (0.0295) Linear error 0.20 (0.21)
+[32m[2021-07-22 00:50:29] __main__ INFO: [0mEpoch 15 Step 500/1181 lr 0.100000 loss 0.0344 (0.0297) Linear error 0.22 (0.21)
+[32m[2021-07-22 00:50:30] __main__ INFO: [0mEpoch 15 Step 600/1181 lr 0.100000 loss 0.0326 (0.0299) Linear error 0.23 (0.21)
+[32m[2021-07-22 00:50:31] __main__ INFO: [0mEpoch 15 Step 700/1181 lr 0.100000 loss 0.0202 (0.0301) Linear error 0.18 (0.21)
+[32m[2021-07-22 00:50:32] __main__ INFO: [0mEpoch 15 Step 800/1181 lr 0.100000 loss 0.0229 (0.0302) Linear error 0.19 (0.21)
+[32m[2021-07-22 00:50:33] __main__ INFO: [0mEpoch 15 Step 900/1181 lr 0.100000 loss 0.0308 (0.0303) Linear error 0.21 (0.21)
+[32m[2021-07-22 00:50:34] __main__ INFO: [0mEpoch 15 Step 1000/1181 lr 0.100000 loss 0.0324 (0.0304) Linear error 0.23 (0.21)
+[32m[2021-07-22 00:50:35] __main__ INFO: [0mEpoch 15 Step 1100/1181 lr 0.100000 loss 0.0310 (0.0306) Linear error 0.22 (0.21)
+[32m[2021-07-22 00:50:36] __main__ INFO: [0mElapsed 12.09
+[32m[2021-07-22 00:50:36] __main__ INFO: [0mVal 15
+[32m[2021-07-22 00:50:37] __main__ INFO: [0mEpoch 15 loss 0.0460 Linear error 0.26
+[32m[2021-07-22 00:50:37] __main__ INFO: [0mElapsed 0.60
+[32m[2021-07-22 00:50:37] __main__ INFO: [0mTrain 16
+[32m[2021-07-22 00:50:37] __main__ INFO: [0mEpoch 16 Step 0/1181 lr 0.100000 loss 0.0255 (0.0255) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:50:38] __main__ INFO: [0mEpoch 16 Step 100/1181 lr 0.100000 loss 0.0394 (0.0279) Linear error 0.24 (0.20)
+[32m[2021-07-22 00:50:39] __main__ INFO: [0mEpoch 16 Step 200/1181 lr 0.100000 loss 0.0248 (0.0284) Linear error 0.18 (0.20)
+[32m[2021-07-22 00:50:40] __main__ INFO: [0mEpoch 16 Step 300/1181 lr 0.100000 loss 0.0348 (0.0288) Linear error 0.22 (0.21)
+[32m[2021-07-22 00:50:41] __main__ INFO: [0mEpoch 16 Step 400/1181 lr 0.100000 loss 0.0245 (0.0290) Linear error 0.19 (0.21)
+[32m[2021-07-22 00:50:42] __main__ INFO: [0mEpoch 16 Step 500/1181 lr 0.100000 loss 0.0254 (0.0289) Linear error 0.19 (0.21)
+[32m[2021-07-22 00:50:43] __main__ INFO: [0mEpoch 16 Step 600/1181 lr 0.100000 loss 0.0314 (0.0290) Linear error 0.21 (0.21)
+[32m[2021-07-22 00:50:44] __main__ INFO: [0mEpoch 16 Step 700/1181 lr 0.100000 loss 0.0272 (0.0290) Linear error 0.20 (0.21)
+[32m[2021-07-22 00:50:45] __main__ INFO: [0mEpoch 16 Step 800/1181 lr 0.100000 loss 0.0403 (0.0291) Linear error 0.25 (0.21)
+[32m[2021-07-22 00:50:46] __main__ INFO: [0mEpoch 16 Step 900/1181 lr 0.100000 loss 0.0319 (0.0292) Linear error 0.22 (0.21)
+[32m[2021-07-22 00:50:47] __main__ INFO: [0mEpoch 16 Step 1000/1181 lr 0.100000 loss 0.0442 (0.0295) Linear error 0.25 (0.21)
+[32m[2021-07-22 00:50:48] __main__ INFO: [0mEpoch 16 Step 1100/1181 lr 0.100000 loss 0.0398 (0.0295) Linear error 0.24 (0.21)
+[32m[2021-07-22 00:50:49] __main__ INFO: [0mElapsed 11.89
+[32m[2021-07-22 00:50:49] __main__ INFO: [0mVal 16
+[32m[2021-07-22 00:50:49] __main__ INFO: [0mEpoch 16 loss 0.0391 Linear error 0.24
+[32m[2021-07-22 00:50:49] __main__ INFO: [0mElapsed 0.55
+[32m[2021-07-22 00:50:49] __main__ INFO: [0mTrain 17
+[32m[2021-07-22 00:50:49] __main__ INFO: [0mEpoch 17 Step 0/1181 lr 0.100000 loss 0.0175 (0.0175) Linear error 0.16 (0.16)
+[32m[2021-07-22 00:50:50] __main__ INFO: [0mEpoch 17 Step 100/1181 lr 0.100000 loss 0.0267 (0.0291) Linear error 0.19 (0.21)
+[32m[2021-07-22 00:50:51] __main__ INFO: [0mEpoch 17 Step 200/1181 lr 0.100000 loss 0.0272 (0.0292) Linear error 0.21 (0.21)
+[32m[2021-07-22 00:50:52] __main__ INFO: [0mEpoch 17 Step 300/1181 lr 0.100000 loss 0.0219 (0.0287) Linear error 0.19 (0.21)
+[32m[2021-07-22 00:50:53] __main__ INFO: [0mEpoch 17 Step 400/1181 lr 0.100000 loss 0.0283 (0.0291) Linear error 0.22 (0.21)
+[32m[2021-07-22 00:50:54] __main__ INFO: [0mEpoch 17 Step 500/1181 lr 0.100000 loss 0.0199 (0.0290) Linear error 0.18 (0.21)
+[32m[2021-07-22 00:50:55] __main__ INFO: [0mEpoch 17 Step 600/1181 lr 0.100000 loss 0.0266 (0.0293) Linear error 0.20 (0.21)
+[32m[2021-07-22 00:50:56] __main__ INFO: [0mEpoch 17 Step 700/1181 lr 0.100000 loss 0.0239 (0.0293) Linear error 0.18 (0.21)
+[32m[2021-07-22 00:50:57] __main__ INFO: [0mEpoch 17 Step 800/1181 lr 0.100000 loss 0.0460 (0.0295) Linear error 0.26 (0.21)
+[32m[2021-07-22 00:50:58] __main__ INFO: [0mEpoch 17 Step 900/1181 lr 0.100000 loss 0.0329 (0.0296) Linear error 0.22 (0.21)
+[32m[2021-07-22 00:50:59] __main__ INFO: [0mEpoch 17 Step 1000/1181 lr 0.100000 loss 0.0281 (0.0297) Linear error 0.20 (0.21)
+[32m[2021-07-22 00:51:00] __main__ INFO: [0mEpoch 17 Step 1100/1181 lr 0.100000 loss 0.0368 (0.0297) Linear error 0.22 (0.21)
+[32m[2021-07-22 00:51:01] __main__ INFO: [0mElapsed 11.78
+[32m[2021-07-22 00:51:01] __main__ INFO: [0mVal 17
+[32m[2021-07-22 00:51:01] __main__ INFO: [0mEpoch 17 loss 0.0354 Linear error 0.22
+[32m[2021-07-22 00:51:01] __main__ INFO: [0mElapsed 0.53
+[32m[2021-07-22 00:51:01] __main__ INFO: [0mTrain 18
+[32m[2021-07-22 00:51:02] __main__ INFO: [0mEpoch 18 Step 0/1181 lr 0.100000 loss 0.0275 (0.0275) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:51:03] __main__ INFO: [0mEpoch 18 Step 100/1181 lr 0.100000 loss 0.0262 (0.0280) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:51:04] __main__ INFO: [0mEpoch 18 Step 200/1181 lr 0.100000 loss 0.0234 (0.0277) Linear error 0.18 (0.20)
+[32m[2021-07-22 00:51:05] __main__ INFO: [0mEpoch 18 Step 300/1181 lr 0.100000 loss 0.0248 (0.0274) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:51:06] __main__ INFO: [0mEpoch 18 Step 400/1181 lr 0.100000 loss 0.0202 (0.0275) Linear error 0.18 (0.20)
+[32m[2021-07-22 00:51:06] __main__ INFO: [0mEpoch 18 Step 500/1181 lr 0.100000 loss 0.0304 (0.0276) Linear error 0.22 (0.20)
+[32m[2021-07-22 00:51:07] __main__ INFO: [0mEpoch 18 Step 600/1181 lr 0.100000 loss 0.0209 (0.0279) Linear error 0.17 (0.20)
+[32m[2021-07-22 00:51:08] __main__ INFO: [0mEpoch 18 Step 700/1181 lr 0.100000 loss 0.0292 (0.0283) Linear error 0.22 (0.20)
+[32m[2021-07-22 00:51:09] __main__ INFO: [0mEpoch 18 Step 800/1181 lr 0.100000 loss 0.0297 (0.0286) Linear error 0.21 (0.21)
+[32m[2021-07-22 00:51:10] __main__ INFO: [0mEpoch 18 Step 900/1181 lr 0.100000 loss 0.0582 (0.0288) Linear error 0.24 (0.21)
+[32m[2021-07-22 00:51:11] __main__ INFO: [0mEpoch 18 Step 1000/1181 lr 0.100000 loss 0.0324 (0.0290) Linear error 0.21 (0.21)
+[32m[2021-07-22 00:51:12] __main__ INFO: [0mEpoch 18 Step 1100/1181 lr 0.100000 loss 0.0330 (0.0291) Linear error 0.22 (0.21)
+[32m[2021-07-22 00:51:13] __main__ INFO: [0mElapsed 11.77
+[32m[2021-07-22 00:51:13] __main__ INFO: [0mVal 18
+[32m[2021-07-22 00:51:14] __main__ INFO: [0mEpoch 18 loss 0.0354 Linear error 0.23
+[32m[2021-07-22 00:51:14] __main__ INFO: [0mElapsed 0.53
+[32m[2021-07-22 00:51:14] __main__ INFO: [0mTrain 19
+[32m[2021-07-22 00:51:14] __main__ INFO: [0mEpoch 19 Step 0/1181 lr 0.100000 loss 0.0287 (0.0287) Linear error 0.19 (0.19)
+[32m[2021-07-22 00:51:15] __main__ INFO: [0mEpoch 19 Step 100/1181 lr 0.100000 loss 0.0388 (0.0273) Linear error 0.26 (0.20)
+[32m[2021-07-22 00:51:16] __main__ INFO: [0mEpoch 19 Step 200/1181 lr 0.100000 loss 0.0289 (0.0272) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:51:17] __main__ INFO: [0mEpoch 19 Step 300/1181 lr 0.100000 loss 0.0246 (0.0269) Linear error 0.19 (0.20)
+[32m[2021-07-22 00:51:18] __main__ INFO: [0mEpoch 19 Step 400/1181 lr 0.100000 loss 0.0275 (0.0273) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:51:19] __main__ INFO: [0mEpoch 19 Step 500/1181 lr 0.100000 loss 0.0270 (0.0275) Linear error 0.19 (0.20)
+[32m[2021-07-22 00:51:20] __main__ INFO: [0mEpoch 19 Step 600/1181 lr 0.100000 loss 0.0349 (0.0278) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:51:21] __main__ INFO: [0mEpoch 19 Step 700/1181 lr 0.100000 loss 0.0279 (0.0280) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:51:22] __main__ INFO: [0mEpoch 19 Step 800/1181 lr 0.100000 loss 0.0204 (0.0280) Linear error 0.18 (0.20)
+[32m[2021-07-22 00:51:23] __main__ INFO: [0mEpoch 19 Step 900/1181 lr 0.100000 loss 0.0316 (0.0282) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:51:24] __main__ INFO: [0mEpoch 19 Step 1000/1181 lr 0.100000 loss 0.0374 (0.0283) Linear error 0.25 (0.20)
+[32m[2021-07-22 00:51:25] __main__ INFO: [0mEpoch 19 Step 1100/1181 lr 0.100000 loss 0.0245 (0.0284) Linear error 0.19 (0.20)
+[32m[2021-07-22 00:51:25] __main__ INFO: [0mElapsed 11.75
+[32m[2021-07-22 00:51:25] __main__ INFO: [0mVal 19
+[32m[2021-07-22 00:51:26] __main__ INFO: [0mEpoch 19 loss 0.0407 Linear error 0.24
+[32m[2021-07-22 00:51:26] __main__ INFO: [0mElapsed 0.54
+[32m[2021-07-22 00:51:26] __main__ INFO: [0mTrain 20
+[32m[2021-07-22 00:51:26] __main__ INFO: [0mEpoch 20 Step 0/1181 lr 0.100000 loss 0.0251 (0.0251) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:51:27] __main__ INFO: [0mEpoch 20 Step 100/1181 lr 0.100000 loss 0.0271 (0.0274) Linear error 0.22 (0.20)
+[32m[2021-07-22 00:51:28] __main__ INFO: [0mEpoch 20 Step 200/1181 lr 0.100000 loss 0.0297 (0.0275) Linear error 0.22 (0.20)
+[32m[2021-07-22 00:51:29] __main__ INFO: [0mEpoch 20 Step 300/1181 lr 0.100000 loss 0.0310 (0.0277) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:51:30] __main__ INFO: [0mEpoch 20 Step 400/1181 lr 0.100000 loss 0.0231 (0.0278) Linear error 0.19 (0.20)
+[32m[2021-07-22 00:51:31] __main__ INFO: [0mEpoch 20 Step 500/1181 lr 0.100000 loss 0.0757 (0.0279) Linear error 0.30 (0.20)
+[32m[2021-07-22 00:51:32] __main__ INFO: [0mEpoch 20 Step 600/1181 lr 0.100000 loss 0.0310 (0.0280) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:51:33] __main__ INFO: [0mEpoch 20 Step 700/1181 lr 0.100000 loss 0.0254 (0.0280) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:51:34] __main__ INFO: [0mEpoch 20 Step 800/1181 lr 0.100000 loss 0.0302 (0.0281) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:51:35] __main__ INFO: [0mEpoch 20 Step 900/1181 lr 0.100000 loss 0.0210 (0.0283) Linear error 0.18 (0.20)
+[32m[2021-07-22 00:51:36] __main__ INFO: [0mEpoch 20 Step 1000/1181 lr 0.100000 loss 0.0143 (0.0283) Linear error 0.15 (0.20)
+[32m[2021-07-22 00:51:37] __main__ INFO: [0mEpoch 20 Step 1100/1181 lr 0.100000 loss 0.0398 (0.0283) Linear error 0.25 (0.20)
+[32m[2021-07-22 00:51:38] __main__ INFO: [0mElapsed 11.77
+[32m[2021-07-22 00:51:38] __main__ INFO: [0mVal 20
+[32m[2021-07-22 00:51:38] __main__ INFO: [0mEpoch 20 loss 0.0406 Linear error 0.25
+[32m[2021-07-22 00:51:38] __main__ INFO: [0mElapsed 0.53
+[32m[2021-07-22 00:51:38] fvcore.common.checkpoint INFO: [0mSaving checkpoint to experiments/mpiigaze/resnet_preact/exp00/00/checkpoint_0020.pth
+[32m[2021-07-22 00:51:38] __main__ INFO: [0mTrain 21
+[32m[2021-07-22 00:51:38] __main__ INFO: [0mEpoch 21 Step 0/1181 lr 0.100000 loss 0.0306 (0.0306) Linear error 0.22 (0.22)
+[32m[2021-07-22 00:51:39] __main__ INFO: [0mEpoch 21 Step 100/1181 lr 0.100000 loss 0.0266 (0.0265) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:51:40] __main__ INFO: [0mEpoch 21 Step 200/1181 lr 0.100000 loss 0.0344 (0.0261) Linear error 0.24 (0.20)
+[32m[2021-07-22 00:51:41] __main__ INFO: [0mEpoch 21 Step 300/1181 lr 0.100000 loss 0.0345 (0.0265) Linear error 0.23 (0.20)
+[32m[2021-07-22 00:51:42] __main__ INFO: [0mEpoch 21 Step 400/1181 lr 0.100000 loss 0.0317 (0.0269) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:51:43] __main__ INFO: [0mEpoch 21 Step 500/1181 lr 0.100000 loss 0.0258 (0.0274) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:51:44] __main__ INFO: [0mEpoch 21 Step 600/1181 lr 0.100000 loss 0.0238 (0.0275) Linear error 0.19 (0.20)
+[32m[2021-07-22 00:51:45] __main__ INFO: [0mEpoch 21 Step 700/1181 lr 0.100000 loss 0.0349 (0.0277) Linear error 0.24 (0.20)
+[32m[2021-07-22 00:51:46] __main__ INFO: [0mEpoch 21 Step 800/1181 lr 0.100000 loss 0.0330 (0.0277) Linear error 0.23 (0.20)
+[32m[2021-07-22 00:51:47] __main__ INFO: [0mEpoch 21 Step 900/1181 lr 0.100000 loss 0.0313 (0.0279) Linear error 0.22 (0.20)
+[32m[2021-07-22 00:51:48] __main__ INFO: [0mEpoch 21 Step 1000/1181 lr 0.100000 loss 0.0446 (0.0281) Linear error 0.26 (0.20)
+[32m[2021-07-22 00:51:49] __main__ INFO: [0mEpoch 21 Step 1100/1181 lr 0.100000 loss 0.0234 (0.0282) Linear error 0.19 (0.20)
+[32m[2021-07-22 00:51:50] __main__ INFO: [0mElapsed 11.75
+[32m[2021-07-22 00:51:50] __main__ INFO: [0mVal 21
+[32m[2021-07-22 00:51:51] __main__ INFO: [0mEpoch 21 loss 0.0456 Linear error 0.26
+[32m[2021-07-22 00:51:51] __main__ INFO: [0mElapsed 0.54
+[32m[2021-07-22 00:51:51] __main__ INFO: [0mTrain 22
+[32m[2021-07-22 00:51:51] __main__ INFO: [0mEpoch 22 Step 0/1181 lr 0.100000 loss 0.0275 (0.0275) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:51:52] __main__ INFO: [0mEpoch 22 Step 100/1181 lr 0.100000 loss 0.0225 (0.0269) Linear error 0.18 (0.20)
+[32m[2021-07-22 00:51:53] __main__ INFO: [0mEpoch 22 Step 200/1181 lr 0.100000 loss 0.0253 (0.0268) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:51:54] __main__ INFO: [0mEpoch 22 Step 300/1181 lr 0.100000 loss 0.0208 (0.0268) Linear error 0.17 (0.20)
+[32m[2021-07-22 00:51:55] __main__ INFO: [0mEpoch 22 Step 400/1181 lr 0.100000 loss 0.0375 (0.0271) Linear error 0.23 (0.20)
+[32m[2021-07-22 00:51:56] __main__ INFO: [0mEpoch 22 Step 500/1181 lr 0.100000 loss 0.0258 (0.0273) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:51:57] __main__ INFO: [0mEpoch 22 Step 600/1181 lr 0.100000 loss 0.0222 (0.0272) Linear error 0.19 (0.20)
+[32m[2021-07-22 00:51:58] __main__ INFO: [0mEpoch 22 Step 700/1181 lr 0.100000 loss 0.0397 (0.0273) Linear error 0.26 (0.20)
+[32m[2021-07-22 00:51:59] __main__ INFO: [0mEpoch 22 Step 800/1181 lr 0.100000 loss 0.0231 (0.0275) Linear error 0.19 (0.20)
+[32m[2021-07-22 00:52:00] __main__ INFO: [0mEpoch 22 Step 900/1181 lr 0.100000 loss 0.0295 (0.0278) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:52:01] __main__ INFO: [0mEpoch 22 Step 1000/1181 lr 0.100000 loss 0.0206 (0.0279) Linear error 0.18 (0.20)
+[32m[2021-07-22 00:52:02] __main__ INFO: [0mEpoch 22 Step 1100/1181 lr 0.100000 loss 0.0266 (0.0279) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:52:02] __main__ INFO: [0mElapsed 11.80
+[32m[2021-07-22 00:52:02] __main__ INFO: [0mVal 22
+[32m[2021-07-22 00:52:03] __main__ INFO: [0mEpoch 22 loss 0.0440 Linear error 0.25
+[32m[2021-07-22 00:52:03] __main__ INFO: [0mElapsed 0.52
+[32m[2021-07-22 00:52:03] __main__ INFO: [0mTrain 23
+[32m[2021-07-22 00:52:03] __main__ INFO: [0mEpoch 23 Step 0/1181 lr 0.100000 loss 0.0285 (0.0285) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:52:04] __main__ INFO: [0mEpoch 23 Step 100/1181 lr 0.100000 loss 0.0254 (0.0258) Linear error 0.19 (0.19)
+[32m[2021-07-22 00:52:05] __main__ INFO: [0mEpoch 23 Step 200/1181 lr 0.100000 loss 0.0222 (0.0262) Linear error 0.19 (0.20)
+[32m[2021-07-22 00:52:06] __main__ INFO: [0mEpoch 23 Step 300/1181 lr 0.100000 loss 0.0312 (0.0264) Linear error 0.22 (0.20)
+[32m[2021-07-22 00:52:07] __main__ INFO: [0mEpoch 23 Step 400/1181 lr 0.100000 loss 0.0314 (0.0268) Linear error 0.22 (0.20)
+[32m[2021-07-22 00:52:08] __main__ INFO: [0mEpoch 23 Step 500/1181 lr 0.100000 loss 0.0233 (0.0269) Linear error 0.19 (0.20)
+[32m[2021-07-22 00:52:09] __main__ INFO: [0mEpoch 23 Step 600/1181 lr 0.100000 loss 0.0298 (0.0270) Linear error 0.22 (0.20)
+[32m[2021-07-22 00:52:10] __main__ INFO: [0mEpoch 23 Step 700/1181 lr 0.100000 loss 0.0314 (0.0270) Linear error 0.22 (0.20)
+[32m[2021-07-22 00:52:11] __main__ INFO: [0mEpoch 23 Step 800/1181 lr 0.100000 loss 0.0390 (0.0272) Linear error 0.22 (0.20)
+[32m[2021-07-22 00:52:12] __main__ INFO: [0mEpoch 23 Step 900/1181 lr 0.100000 loss 0.0370 (0.0274) Linear error 0.23 (0.20)
+[32m[2021-07-22 00:52:13] __main__ INFO: [0mEpoch 23 Step 1000/1181 lr 0.100000 loss 0.0263 (0.0275) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:52:14] __main__ INFO: [0mEpoch 23 Step 1100/1181 lr 0.100000 loss 0.0329 (0.0275) Linear error 0.23 (0.20)
+[32m[2021-07-22 00:52:15] __main__ INFO: [0mElapsed 11.82
+[32m[2021-07-22 00:52:15] __main__ INFO: [0mVal 23
+[32m[2021-07-22 00:52:15] __main__ INFO: [0mEpoch 23 loss 0.0561 Linear error 0.30
+[32m[2021-07-22 00:52:15] __main__ INFO: [0mElapsed 0.53
+[32m[2021-07-22 00:52:15] __main__ INFO: [0mTrain 24
+[32m[2021-07-22 00:52:15] __main__ INFO: [0mEpoch 24 Step 0/1181 lr 0.100000 loss 0.0221 (0.0221) Linear error 0.17 (0.17)
+[32m[2021-07-22 00:52:16] __main__ INFO: [0mEpoch 24 Step 100/1181 lr 0.100000 loss 0.0335 (0.0264) Linear error 0.23 (0.20)
+[32m[2021-07-22 00:52:17] __main__ INFO: [0mEpoch 24 Step 200/1181 lr 0.100000 loss 0.0324 (0.0259) Linear error 0.23 (0.20)
+[32m[2021-07-22 00:52:18] __main__ INFO: [0mEpoch 24 Step 300/1181 lr 0.100000 loss 0.0174 (0.0262) Linear error 0.17 (0.20)
+[32m[2021-07-22 00:52:19] __main__ INFO: [0mEpoch 24 Step 400/1181 lr 0.100000 loss 0.0265 (0.0266) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:52:20] __main__ INFO: [0mEpoch 24 Step 500/1181 lr 0.100000 loss 0.0270 (0.0269) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:52:21] __main__ INFO: [0mEpoch 24 Step 600/1181 lr 0.100000 loss 0.0242 (0.0268) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:52:22] __main__ INFO: [0mEpoch 24 Step 700/1181 lr 0.100000 loss 0.0212 (0.0269) Linear error 0.18 (0.20)
+[32m[2021-07-22 00:52:23] __main__ INFO: [0mEpoch 24 Step 800/1181 lr 0.100000 loss 0.0396 (0.0270) Linear error 0.26 (0.20)
+[32m[2021-07-22 00:52:24] __main__ INFO: [0mEpoch 24 Step 900/1181 lr 0.100000 loss 0.0235 (0.0271) Linear error 0.19 (0.20)
+[32m[2021-07-22 00:52:25] __main__ INFO: [0mEpoch 24 Step 1000/1181 lr 0.100000 loss 0.0263 (0.0272) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:52:26] __main__ INFO: [0mEpoch 24 Step 1100/1181 lr 0.100000 loss 0.0208 (0.0274) Linear error 0.18 (0.20)
+[32m[2021-07-22 00:52:27] __main__ INFO: [0mElapsed 11.79
+[32m[2021-07-22 00:52:27] __main__ INFO: [0mVal 24
+[32m[2021-07-22 00:52:28] __main__ INFO: [0mEpoch 24 loss 0.0410 Linear error 0.25
+[32m[2021-07-22 00:52:28] __main__ INFO: [0mElapsed 0.54
+[32m[2021-07-22 00:52:28] __main__ INFO: [0mTrain 25
+[32m[2021-07-22 00:52:28] __main__ INFO: [0mEpoch 25 Step 0/1181 lr 0.100000 loss 0.0212 (0.0212) Linear error 0.19 (0.19)
+[32m[2021-07-22 00:52:29] __main__ INFO: [0mEpoch 25 Step 100/1181 lr 0.100000 loss 0.0236 (0.0257) Linear error 0.19 (0.20)
+[32m[2021-07-22 00:52:30] __main__ INFO: [0mEpoch 25 Step 200/1181 lr 0.100000 loss 0.0305 (0.0258) Linear error 0.21 (0.19)
+[32m[2021-07-22 00:52:31] __main__ INFO: [0mEpoch 25 Step 300/1181 lr 0.100000 loss 0.0312 (0.0256) Linear error 0.21 (0.19)
+[32m[2021-07-22 00:52:32] __main__ INFO: [0mEpoch 25 Step 400/1181 lr 0.100000 loss 0.0333 (0.0259) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:52:33] __main__ INFO: [0mEpoch 25 Step 500/1181 lr 0.100000 loss 0.0288 (0.0262) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:52:34] __main__ INFO: [0mEpoch 25 Step 600/1181 lr 0.100000 loss 0.0318 (0.0263) Linear error 0.22 (0.20)
+[32m[2021-07-22 00:52:35] __main__ INFO: [0mEpoch 25 Step 700/1181 lr 0.100000 loss 0.0342 (0.0264) Linear error 0.23 (0.20)
+[32m[2021-07-22 00:52:36] __main__ INFO: [0mEpoch 25 Step 800/1181 lr 0.100000 loss 0.0336 (0.0268) Linear error 0.22 (0.20)
+[32m[2021-07-22 00:52:37] __main__ INFO: [0mEpoch 25 Step 900/1181 lr 0.100000 loss 0.0293 (0.0268) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:52:38] __main__ INFO: [0mEpoch 25 Step 1000/1181 lr 0.100000 loss 0.0263 (0.0270) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:52:39] __main__ INFO: [0mEpoch 25 Step 1100/1181 lr 0.100000 loss 0.0251 (0.0272) Linear error 0.19 (0.20)
+[32m[2021-07-22 00:52:39] __main__ INFO: [0mElapsed 11.78
+[32m[2021-07-22 00:52:39] __main__ INFO: [0mVal 25
+[32m[2021-07-22 00:52:40] __main__ INFO: [0mEpoch 25 loss 0.0416 Linear error 0.24
+[32m[2021-07-22 00:52:40] __main__ INFO: [0mElapsed 0.53
+[32m[2021-07-22 00:52:40] __main__ INFO: [0mTrain 26
+[32m[2021-07-22 00:52:40] __main__ INFO: [0mEpoch 26 Step 0/1181 lr 0.100000 loss 0.0154 (0.0154) Linear error 0.15 (0.15)
+[32m[2021-07-22 00:52:41] __main__ INFO: [0mEpoch 26 Step 100/1181 lr 0.100000 loss 0.0212 (0.0256) Linear error 0.18 (0.20)
+[32m[2021-07-22 00:52:42] __main__ INFO: [0mEpoch 26 Step 200/1181 lr 0.100000 loss 0.0213 (0.0261) Linear error 0.16 (0.20)
+[32m[2021-07-22 00:52:43] __main__ INFO: [0mEpoch 26 Step 300/1181 lr 0.100000 loss 0.0386 (0.0263) Linear error 0.24 (0.20)
+[32m[2021-07-22 00:52:44] __main__ INFO: [0mEpoch 26 Step 400/1181 lr 0.100000 loss 0.0337 (0.0259) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:52:45] __main__ INFO: [0mEpoch 26 Step 500/1181 lr 0.100000 loss 0.0249 (0.0261) Linear error 0.18 (0.20)
+[32m[2021-07-22 00:52:46] __main__ INFO: [0mEpoch 26 Step 600/1181 lr 0.100000 loss 0.0260 (0.0265) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:52:47] __main__ INFO: [0mEpoch 26 Step 700/1181 lr 0.100000 loss 0.0268 (0.0269) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:52:48] __main__ INFO: [0mEpoch 26 Step 800/1181 lr 0.100000 loss 0.0236 (0.0268) Linear error 0.19 (0.20)
+[32m[2021-07-22 00:52:49] __main__ INFO: [0mEpoch 26 Step 900/1181 lr 0.100000 loss 0.0317 (0.0269) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:52:50] __main__ INFO: [0mEpoch 26 Step 1000/1181 lr 0.100000 loss 0.0304 (0.0270) Linear error 0.22 (0.20)
+[32m[2021-07-22 00:52:51] __main__ INFO: [0mEpoch 26 Step 1100/1181 lr 0.100000 loss 0.0284 (0.0271) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:52:52] __main__ INFO: [0mElapsed 11.80
+[32m[2021-07-22 00:52:52] __main__ INFO: [0mVal 26
+[32m[2021-07-22 00:52:52] __main__ INFO: [0mEpoch 26 loss 0.0469 Linear error 0.27
+[32m[2021-07-22 00:52:52] __main__ INFO: [0mElapsed 0.59
+[32m[2021-07-22 00:52:52] __main__ INFO: [0mTrain 27
+[32m[2021-07-22 00:52:52] __main__ INFO: [0mEpoch 27 Step 0/1181 lr 0.100000 loss 0.0299 (0.0299) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:52:53] __main__ INFO: [0mEpoch 27 Step 100/1181 lr 0.100000 loss 0.0247 (0.0236) Linear error 0.20 (0.19)
+[32m[2021-07-22 00:52:54] __main__ INFO: [0mEpoch 27 Step 200/1181 lr 0.100000 loss 0.0260 (0.0250) Linear error 0.20 (0.19)
+[32m[2021-07-22 00:52:55] __main__ INFO: [0mEpoch 27 Step 300/1181 lr 0.100000 loss 0.0233 (0.0253) Linear error 0.18 (0.19)
+[32m[2021-07-22 00:52:56] __main__ INFO: [0mEpoch 27 Step 400/1181 lr 0.100000 loss 0.0265 (0.0255) Linear error 0.19 (0.19)
+[32m[2021-07-22 00:52:57] __main__ INFO: [0mEpoch 27 Step 500/1181 lr 0.100000 loss 0.0158 (0.0256) Linear error 0.16 (0.19)
+[32m[2021-07-22 00:52:58] __main__ INFO: [0mEpoch 27 Step 600/1181 lr 0.100000 loss 0.0226 (0.0259) Linear error 0.18 (0.20)
+[32m[2021-07-22 00:52:59] __main__ INFO: [0mEpoch 27 Step 700/1181 lr 0.100000 loss 0.0215 (0.0259) Linear error 0.18 (0.20)
+[32m[2021-07-22 00:53:00] __main__ INFO: [0mEpoch 27 Step 800/1181 lr 0.100000 loss 0.0360 (0.0260) Linear error 0.23 (0.20)
+[32m[2021-07-22 00:53:01] __main__ INFO: [0mEpoch 27 Step 900/1181 lr 0.100000 loss 0.0257 (0.0261) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:53:02] __main__ INFO: [0mEpoch 27 Step 1000/1181 lr 0.100000 loss 0.0344 (0.0263) Linear error 0.24 (0.20)
+[32m[2021-07-22 00:53:03] __main__ INFO: [0mEpoch 27 Step 1100/1181 lr 0.100000 loss 0.0250 (0.0265) Linear error 0.18 (0.20)
+[32m[2021-07-22 00:53:04] __main__ INFO: [0mElapsed 11.78
+[32m[2021-07-22 00:53:04] __main__ INFO: [0mVal 27
+[32m[2021-07-22 00:53:05] __main__ INFO: [0mEpoch 27 loss 0.0401 Linear error 0.24
+[32m[2021-07-22 00:53:05] __main__ INFO: [0mElapsed 0.54
+[32m[2021-07-22 00:53:05] __main__ INFO: [0mTrain 28
+[32m[2021-07-22 00:53:05] __main__ INFO: [0mEpoch 28 Step 0/1181 lr 0.100000 loss 0.0266 (0.0266) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:53:06] __main__ INFO: [0mEpoch 28 Step 100/1181 lr 0.100000 loss 0.0150 (0.0241) Linear error 0.15 (0.19)
+[32m[2021-07-22 00:53:07] __main__ INFO: [0mEpoch 28 Step 200/1181 lr 0.100000 loss 0.0189 (0.0255) Linear error 0.17 (0.19)
+[32m[2021-07-22 00:53:08] __main__ INFO: [0mEpoch 28 Step 300/1181 lr 0.100000 loss 0.0218 (0.0257) Linear error 0.17 (0.19)
+[32m[2021-07-22 00:53:09] __main__ INFO: [0mEpoch 28 Step 400/1181 lr 0.100000 loss 0.0233 (0.0260) Linear error 0.19 (0.20)
+[32m[2021-07-22 00:53:10] __main__ INFO: [0mEpoch 28 Step 500/1181 lr 0.100000 loss 0.0232 (0.0262) Linear error 0.19 (0.20)
+[32m[2021-07-22 00:53:11] __main__ INFO: [0mEpoch 28 Step 600/1181 lr 0.100000 loss 0.0370 (0.0263) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:53:12] __main__ INFO: [0mEpoch 28 Step 700/1181 lr 0.100000 loss 0.0259 (0.0264) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:53:13] __main__ INFO: [0mEpoch 28 Step 800/1181 lr 0.100000 loss 0.0263 (0.0265) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:53:14] __main__ INFO: [0mEpoch 28 Step 900/1181 lr 0.100000 loss 0.0255 (0.0266) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:53:15] __main__ INFO: [0mEpoch 28 Step 1000/1181 lr 0.100000 loss 0.0249 (0.0265) Linear error 0.18 (0.20)
+[32m[2021-07-22 00:53:16] __main__ INFO: [0mEpoch 28 Step 1100/1181 lr 0.100000 loss 0.0304 (0.0266) Linear error 0.22 (0.20)
+[32m[2021-07-22 00:53:16] __main__ INFO: [0mElapsed 11.81
+[32m[2021-07-22 00:53:16] __main__ INFO: [0mVal 28
+[32m[2021-07-22 00:53:17] __main__ INFO: [0mEpoch 28 loss 0.0386 Linear error 0.24
+[32m[2021-07-22 00:53:17] __main__ INFO: [0mElapsed 0.53
+[32m[2021-07-22 00:53:17] __main__ INFO: [0mTrain 29
+[32m[2021-07-22 00:53:17] __main__ INFO: [0mEpoch 29 Step 0/1181 lr 0.100000 loss 0.0266 (0.0266) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:53:18] __main__ INFO: [0mEpoch 29 Step 100/1181 lr 0.100000 loss 0.0309 (0.0252) Linear error 0.22 (0.19)
+[32m[2021-07-22 00:53:19] __main__ INFO: [0mEpoch 29 Step 200/1181 lr 0.100000 loss 0.0279 (0.0253) Linear error 0.21 (0.19)
+[32m[2021-07-22 00:53:20] __main__ INFO: [0mEpoch 29 Step 300/1181 lr 0.100000 loss 0.0208 (0.0253) Linear error 0.18 (0.19)
+[32m[2021-07-22 00:53:21] __main__ INFO: [0mEpoch 29 Step 400/1181 lr 0.100000 loss 0.0209 (0.0257) Linear error 0.17 (0.20)
+[32m[2021-07-22 00:53:22] __main__ INFO: [0mEpoch 29 Step 500/1181 lr 0.100000 loss 0.0204 (0.0255) Linear error 0.18 (0.19)
+[32m[2021-07-22 00:53:23] __main__ INFO: [0mEpoch 29 Step 600/1181 lr 0.100000 loss 0.0309 (0.0257) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:53:24] __main__ INFO: [0mEpoch 29 Step 700/1181 lr 0.100000 loss 0.0321 (0.0262) Linear error 0.21 (0.20)
+[32m[2021-07-22 00:53:25] __main__ INFO: [0mEpoch 29 Step 800/1181 lr 0.100000 loss 0.0507 (0.0264) Linear error 0.30 (0.20)
+[32m[2021-07-22 00:53:26] __main__ INFO: [0mEpoch 29 Step 900/1181 lr 0.100000 loss 0.0230 (0.0263) Linear error 0.18 (0.20)
+[32m[2021-07-22 00:53:27] __main__ INFO: [0mEpoch 29 Step 1000/1181 lr 0.100000 loss 0.0284 (0.0264) Linear error 0.22 (0.20)
+[32m[2021-07-22 00:53:28] __main__ INFO: [0mEpoch 29 Step 1100/1181 lr 0.100000 loss 0.0309 (0.0266) Linear error 0.22 (0.20)
+[32m[2021-07-22 00:53:29] __main__ INFO: [0mElapsed 11.82
+[32m[2021-07-22 00:53:29] __main__ INFO: [0mVal 29
+[32m[2021-07-22 00:53:29] __main__ INFO: [0mEpoch 29 loss 0.0355 Linear error 0.23
+[32m[2021-07-22 00:53:29] __main__ INFO: [0mElapsed 0.53
+[32m[2021-07-22 00:53:29] __main__ INFO: [0mTrain 30
+[32m[2021-07-22 00:53:29] __main__ INFO: [0mEpoch 30 Step 0/1181 lr 0.100000 loss 0.0291 (0.0291) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:53:30] __main__ INFO: [0mEpoch 30 Step 100/1181 lr 0.100000 loss 0.0233 (0.0250) Linear error 0.18 (0.19)
+[32m[2021-07-22 00:53:31] __main__ INFO: [0mEpoch 30 Step 200/1181 lr 0.100000 loss 0.0290 (0.0249) Linear error 0.19 (0.19)
+[32m[2021-07-22 00:53:32] __main__ INFO: [0mEpoch 30 Step 300/1181 lr 0.100000 loss 0.0228 (0.0246) Linear error 0.19 (0.19)
+[32m[2021-07-22 00:53:33] __main__ INFO: [0mEpoch 30 Step 400/1181 lr 0.100000 loss 0.0280 (0.0250) Linear error 0.22 (0.19)
+[32m[2021-07-22 00:53:34] __main__ INFO: [0mEpoch 30 Step 500/1181 lr 0.100000 loss 0.0238 (0.0252) Linear error 0.19 (0.19)
+[32m[2021-07-22 00:53:35] __main__ INFO: [0mEpoch 30 Step 600/1181 lr 0.100000 loss 0.0243 (0.0253) Linear error 0.19 (0.19)
+[32m[2021-07-22 00:53:36] __main__ INFO: [0mEpoch 30 Step 700/1181 lr 0.100000 loss 0.0189 (0.0255) Linear error 0.17 (0.19)
+[32m[2021-07-22 00:53:37] __main__ INFO: [0mEpoch 30 Step 800/1181 lr 0.100000 loss 0.0357 (0.0257) Linear error 0.23 (0.19)
+[32m[2021-07-22 00:53:38] __main__ INFO: [0mEpoch 30 Step 900/1181 lr 0.100000 loss 0.0272 (0.0258) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:53:39] __main__ INFO: [0mEpoch 30 Step 1000/1181 lr 0.100000 loss 0.0294 (0.0259) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:53:40] __main__ INFO: [0mEpoch 30 Step 1100/1181 lr 0.100000 loss 0.0256 (0.0263) Linear error 0.18 (0.20)
+[32m[2021-07-22 00:53:41] __main__ INFO: [0mElapsed 11.85
+[32m[2021-07-22 00:53:41] __main__ INFO: [0mVal 30
+[32m[2021-07-22 00:53:42] __main__ INFO: [0mEpoch 30 loss 0.0438 Linear error 0.26
+[32m[2021-07-22 00:53:42] __main__ INFO: [0mElapsed 0.53
+[32m[2021-07-22 00:53:42] fvcore.common.checkpoint INFO: [0mSaving checkpoint to experiments/mpiigaze/resnet_preact/exp00/00/checkpoint_0030.pth
+[32m[2021-07-22 00:53:42] __main__ INFO: [0mTrain 31
+[32m[2021-07-22 00:53:42] __main__ INFO: [0mEpoch 31 Step 0/1181 lr 0.010000 loss 0.0211 (0.0211) Linear error 0.18 (0.18)
+[32m[2021-07-22 00:53:43] __main__ INFO: [0mEpoch 31 Step 100/1181 lr 0.010000 loss 0.0229 (0.0219) Linear error 0.18 (0.18)
+[32m[2021-07-22 00:53:44] __main__ INFO: [0mEpoch 31 Step 200/1181 lr 0.010000 loss 0.0242 (0.0210) Linear error 0.18 (0.17)
+[32m[2021-07-22 00:53:45] __main__ INFO: [0mEpoch 31 Step 300/1181 lr 0.010000 loss 0.0217 (0.0205) Linear error 0.17 (0.17)
+[32m[2021-07-22 00:53:46] __main__ INFO: [0mEpoch 31 Step 400/1181 lr 0.010000 loss 0.0121 (0.0203) Linear error 0.13 (0.17)
+[32m[2021-07-22 00:53:47] __main__ INFO: [0mEpoch 31 Step 500/1181 lr 0.010000 loss 0.0235 (0.0200) Linear error 0.18 (0.17)
+[32m[2021-07-22 00:53:48] __main__ INFO: [0mEpoch 31 Step 600/1181 lr 0.010000 loss 0.0204 (0.0197) Linear error 0.16 (0.17)
+[32m[2021-07-22 00:53:49] __main__ INFO: [0mEpoch 31 Step 700/1181 lr 0.010000 loss 0.0152 (0.0194) Linear error 0.15 (0.17)
+[32m[2021-07-22 00:53:50] __main__ INFO: [0mEpoch 31 Step 800/1181 lr 0.010000 loss 0.0194 (0.0191) Linear error 0.16 (0.17)
+[32m[2021-07-22 00:53:51] __main__ INFO: [0mEpoch 31 Step 900/1181 lr 0.010000 loss 0.0203 (0.0190) Linear error 0.17 (0.17)
+[32m[2021-07-22 00:53:52] __main__ INFO: [0mEpoch 31 Step 1000/1181 lr 0.010000 loss 0.0109 (0.0189) Linear error 0.13 (0.16)
+[32m[2021-07-22 00:53:53] __main__ INFO: [0mEpoch 31 Step 1100/1181 lr 0.010000 loss 0.0146 (0.0187) Linear error 0.15 (0.16)
+[32m[2021-07-22 00:53:54] __main__ INFO: [0mElapsed 11.83
+[32m[2021-07-22 00:53:54] __main__ INFO: [0mVal 31
+[32m[2021-07-22 00:53:54] __main__ INFO: [0mEpoch 31 loss 0.0284 Linear error 0.20
+[32m[2021-07-22 00:53:54] __main__ INFO: [0mElapsed 0.54
+[32m[2021-07-22 00:53:54] __main__ INFO: [0mTrain 32
+[32m[2021-07-22 00:53:54] __main__ INFO: [0mEpoch 32 Step 0/1181 lr 0.010000 loss 0.0274 (0.0274) Linear error 0.20 (0.20)
+[32m[2021-07-22 00:53:55] __main__ INFO: [0mEpoch 32 Step 100/1181 lr 0.010000 loss 0.0213 (0.0168) Linear error 0.19 (0.16)
+[32m[2021-07-22 00:53:56] __main__ INFO: [0mEpoch 32 Step 200/1181 lr 0.010000 loss 0.0156 (0.0163) Linear error 0.15 (0.15)
+[32m[2021-07-22 00:53:57] __main__ INFO: [0mEpoch 32 Step 300/1181 lr 0.010000 loss 0.0153 (0.0164) Linear error 0.15 (0.15)
+[32m[2021-07-22 00:53:58] __main__ INFO: [0mEpoch 32 Step 400/1181 lr 0.010000 loss 0.0218 (0.0165) Linear error 0.16 (0.16)
+[32m[2021-07-22 00:53:59] __main__ INFO: [0mEpoch 32 Step 500/1181 lr 0.010000 loss 0.0188 (0.0164) Linear error 0.16 (0.15)
+[32m[2021-07-22 00:54:00] __main__ INFO: [0mEpoch 32 Step 600/1181 lr 0.010000 loss 0.0123 (0.0164) Linear error 0.14 (0.15)
+[32m[2021-07-22 00:54:01] __main__ INFO: [0mEpoch 32 Step 700/1181 lr 0.010000 loss 0.0164 (0.0164) Linear error 0.16 (0.15)
+[32m[2021-07-22 00:54:02] __main__ INFO: [0mEpoch 32 Step 800/1181 lr 0.010000 loss 0.0136 (0.0164) Linear error 0.15 (0.15)
+[32m[2021-07-22 00:54:03] __main__ INFO: [0mEpoch 32 Step 900/1181 lr 0.010000 loss 0.0195 (0.0163) Linear error 0.18 (0.15)
+[32m[2021-07-22 00:54:04] __main__ INFO: [0mEpoch 32 Step 1000/1181 lr 0.010000 loss 0.0167 (0.0163) Linear error 0.16 (0.15)
+[32m[2021-07-22 00:54:05] __main__ INFO: [0mEpoch 32 Step 1100/1181 lr 0.010000 loss 0.0275 (0.0164) Linear error 0.19 (0.15)
+[32m[2021-07-22 00:54:06] __main__ INFO: [0mElapsed 11.85
+[32m[2021-07-22 00:54:06] __main__ INFO: [0mVal 32
+[32m[2021-07-22 00:54:07] __main__ INFO: [0mEpoch 32 loss 0.0291 Linear error 0.20
+[32m[2021-07-22 00:54:07] __main__ INFO: [0mElapsed 0.54
+[32m[2021-07-22 00:54:07] __main__ INFO: [0mTrain 33
+[32m[2021-07-22 00:54:07] __main__ INFO: [0mEpoch 33 Step 0/1181 lr 0.010000 loss 0.0104 (0.0104) Linear error 0.13 (0.13)
+[32m[2021-07-22 00:54:08] __main__ INFO: [0mEpoch 33 Step 100/1181 lr 0.010000 loss 0.0126 (0.0149) Linear error 0.14 (0.15)
+[32m[2021-07-22 00:54:09] __main__ INFO: [0mEpoch 33 Step 200/1181 lr 0.010000 loss 0.0152 (0.0153) Linear error 0.14 (0.15)
+[32m[2021-07-22 00:54:10] __main__ INFO: [0mEpoch 33 Step 300/1181 lr 0.010000 loss 0.0129 (0.0155) Linear error 0.14 (0.15)
+[32m[2021-07-22 00:54:11] __main__ INFO: [0mEpoch 33 Step 400/1181 lr 0.010000 loss 0.0143 (0.0155) Linear error 0.15 (0.15)
+[32m[2021-07-22 00:54:12] __main__ INFO: [0mEpoch 33 Step 500/1181 lr 0.010000 loss 0.0160 (0.0156) Linear error 0.14 (0.15)
+[32m[2021-07-22 00:54:13] __main__ INFO: [0mEpoch 33 Step 600/1181 lr 0.010000 loss 0.0189 (0.0156) Linear error 0.18 (0.15)
+[32m[2021-07-22 00:54:14] __main__ INFO: [0mEpoch 33 Step 700/1181 lr 0.010000 loss 0.0119 (0.0157) Linear error 0.13 (0.15)
+[32m[2021-07-22 00:54:15] __main__ INFO: [0mEpoch 33 Step 800/1181 lr 0.010000 loss 0.0164 (0.0157) Linear error 0.16 (0.15)
+[32m[2021-07-22 00:54:16] __main__ INFO: [0mEpoch 33 Step 900/1181 lr 0.010000 loss 0.0250 (0.0157) Linear error 0.20 (0.15)
+[32m[2021-07-22 00:54:17] __main__ INFO: [0mEpoch 33 Step 1000/1181 lr 0.010000 loss 0.0165 (0.0157) Linear error 0.16 (0.15)
+[32m[2021-07-22 00:54:18] __main__ INFO: [0mEpoch 33 Step 1100/1181 lr 0.010000 loss 0.0207 (0.0156) Linear error 0.18 (0.15)
+[32m[2021-07-22 00:54:18] __main__ INFO: [0mElapsed 11.80
+[32m[2021-07-22 00:54:18] __main__ INFO: [0mVal 33
+[32m[2021-07-22 00:54:19] __main__ INFO: [0mEpoch 33 loss 0.0280 Linear error 0.20
+[32m[2021-07-22 00:54:19] __main__ INFO: [0mElapsed 0.54
+[32m[2021-07-22 00:54:19] __main__ INFO: [0mTrain 34
+[32m[2021-07-22 00:54:19] __main__ INFO: [0mEpoch 34 Step 0/1181 lr 0.010000 loss 0.0119 (0.0119) Linear error 0.13 (0.13)
+[32m[2021-07-22 00:54:20] __main__ INFO: [0mEpoch 34 Step 100/1181 lr 0.010000 loss 0.0094 (0.0149) Linear error 0.12 (0.15)
+[32m[2021-07-22 00:54:21] __main__ INFO: [0mEpoch 34 Step 200/1181 lr 0.010000 loss 0.0227 (0.0149) Linear error 0.19 (0.15)
+[32m[2021-07-22 00:54:22] __main__ INFO: [0mEpoch 34 Step 300/1181 lr 0.010000 loss 0.0137 (0.0147) Linear error 0.14 (0.15)
+[32m[2021-07-22 00:54:23] __main__ INFO: [0mEpoch 34 Step 400/1181 lr 0.010000 loss 0.0158 (0.0146) Linear error 0.16 (0.15)
+[32m[2021-07-22 00:54:24] __main__ INFO: [0mEpoch 34 Step 500/1181 lr 0.010000 loss 0.0131 (0.0146) Linear error 0.14 (0.15)
+[32m[2021-07-22 00:54:25] __main__ INFO: [0mEpoch 34 Step 600/1181 lr 0.010000 loss 0.0140 (0.0147) Linear error 0.12 (0.15)
+[32m[2021-07-22 00:54:26] __main__ INFO: [0mEpoch 34 Step 700/1181 lr 0.010000 loss 0.0203 (0.0148) Linear error 0.17 (0.15)
+[32m[2021-07-22 00:54:27] __main__ INFO: [0mEpoch 34 Step 800/1181 lr 0.010000 loss 0.0144 (0.0148) Linear error 0.14 (0.15)
+[32m[2021-07-22 00:54:28] __main__ INFO: [0mEpoch 34 Step 900/1181 lr 0.010000 loss 0.0199 (0.0149) Linear error 0.16 (0.15)
+[32m[2021-07-22 00:54:29] __main__ INFO: [0mEpoch 34 Step 1000/1181 lr 0.010000 loss 0.0128 (0.0149) Linear error 0.14 (0.15)
+[32m[2021-07-22 00:54:30] __main__ INFO: [0mEpoch 34 Step 1100/1181 lr 0.010000 loss 0.0148 (0.0150) Linear error 0.15 (0.15)
+[32m[2021-07-22 00:54:31] __main__ INFO: [0mElapsed 11.80
+[32m[2021-07-22 00:54:31] __main__ INFO: [0mVal 34
+[32m[2021-07-22 00:54:31] __main__ INFO: [0mEpoch 34 loss 0.0298 Linear error 0.20
+[32m[2021-07-22 00:54:31] __main__ INFO: [0mElapsed 0.54
+[32m[2021-07-22 00:54:31] __main__ INFO: [0mTrain 35
+[32m[2021-07-22 00:54:31] __main__ INFO: [0mEpoch 35 Step 0/1181 lr 0.010000 loss 0.0120 (0.0120) Linear error 0.13 (0.13)
+[32m[2021-07-22 00:54:32] __main__ INFO: [0mEpoch 35 Step 100/1181 lr 0.010000 loss 0.0145 (0.0146) Linear error 0.14 (0.15)
+[32m[2021-07-22 00:54:33] __main__ INFO: [0mEpoch 35 Step 200/1181 lr 0.010000 loss 0.0161 (0.0146) Linear error 0.15 (0.15)
+[32m[2021-07-22 00:54:34] __main__ INFO: [0mEpoch 35 Step 300/1181 lr 0.010000 loss 0.0091 (0.0144) Linear error 0.12 (0.15)
+[32m[2021-07-22 00:54:35] __main__ INFO: [0mEpoch 35 Step 400/1181 lr 0.010000 loss 0.0096 (0.0146) Linear error 0.12 (0.15)
+[32m[2021-07-22 00:54:36] __main__ INFO: [0mEpoch 35 Step 500/1181 lr 0.010000 loss 0.0127 (0.0145) Linear error 0.14 (0.15)
+[32m[2021-07-22 00:54:37] __main__ INFO: [0mEpoch 35 Step 600/1181 lr 0.010000 loss 0.0150 (0.0145) Linear error 0.15 (0.15)
+[32m[2021-07-22 00:54:38] __main__ INFO: [0mEpoch 35 Step 700/1181 lr 0.010000 loss 0.0209 (0.0145) Linear error 0.17 (0.15)
+[32m[2021-07-22 00:54:39] __main__ INFO: [0mEpoch 35 Step 800/1181 lr 0.010000 loss 0.0149 (0.0145) Linear error 0.15 (0.15)
+[32m[2021-07-22 00:54:40] __main__ INFO: [0mEpoch 35 Step 900/1181 lr 0.010000 loss 0.0128 (0.0145) Linear error 0.15 (0.15)
+[32m[2021-07-22 00:54:41] __main__ INFO: [0mEpoch 35 Step 1000/1181 lr 0.010000 loss 0.0162 (0.0145) Linear error 0.15 (0.15)
+[32m[2021-07-22 00:54:42] __main__ INFO: [0mEpoch 35 Step 1100/1181 lr 0.010000 loss 0.0100 (0.0145) Linear error 0.12 (0.15)
+[32m[2021-07-22 00:54:43] __main__ INFO: [0mElapsed 11.80
+[32m[2021-07-22 00:54:43] __main__ INFO: [0mVal 35
+[32m[2021-07-22 00:54:44] __main__ INFO: [0mEpoch 35 loss 0.0282 Linear error 0.20
+[32m[2021-07-22 00:54:44] __main__ INFO: [0mElapsed 0.53
+[32m[2021-07-22 00:54:44] __main__ INFO: [0mTrain 36
+[32m[2021-07-22 00:54:44] __main__ INFO: [0mEpoch 36 Step 0/1181 lr 0.001000 loss 0.0267 (0.0267) Linear error 0.18 (0.18)
+[32m[2021-07-22 00:54:45] __main__ INFO: [0mEpoch 36 Step 100/1181 lr 0.001000 loss 0.0172 (0.0132) Linear error 0.15 (0.14)
+[32m[2021-07-22 00:54:46] __main__ INFO: [0mEpoch 36 Step 200/1181 lr 0.001000 loss 0.0135 (0.0132) Linear error 0.14 (0.14)
+[32m[2021-07-22 00:54:47] __main__ INFO: [0mEpoch 36 Step 300/1181 lr 0.001000 loss 0.0128 (0.0133) Linear error 0.15 (0.14)
+[32m[2021-07-22 00:54:48] __main__ INFO: [0mEpoch 36 Step 400/1181 lr 0.001000 loss 0.0169 (0.0133) Linear error 0.15 (0.14)
+[32m[2021-07-22 00:54:49] __main__ INFO: [0mEpoch 36 Step 500/1181 lr 0.001000 loss 0.0119 (0.0133) Linear error 0.13 (0.14)
+[32m[2021-07-22 00:54:50] __main__ INFO: [0mEpoch 36 Step 600/1181 lr 0.001000 loss 0.0146 (0.0133) Linear error 0.14 (0.14)
+[32m[2021-07-22 00:54:51] __main__ INFO: [0mEpoch 36 Step 700/1181 lr 0.001000 loss 0.0113 (0.0133) Linear error 0.13 (0.14)
+[32m[2021-07-22 00:54:52] __main__ INFO: [0mEpoch 36 Step 800/1181 lr 0.001000 loss 0.0216 (0.0133) Linear error 0.19 (0.14)
+[32m[2021-07-22 00:54:53] __main__ INFO: [0mEpoch 36 Step 900/1181 lr 0.001000 loss 0.0097 (0.0133) Linear error 0.12 (0.14)
+[32m[2021-07-22 00:54:53] __main__ INFO: [0mEpoch 36 Step 1000/1181 lr 0.001000 loss 0.0126 (0.0133) Linear error 0.14 (0.14)
+[32m[2021-07-22 00:54:54] __main__ INFO: [0mEpoch 36 Step 1100/1181 lr 0.001000 loss 0.0072 (0.0132) Linear error 0.11 (0.14)
+[32m[2021-07-22 00:54:55] __main__ INFO: [0mElapsed 11.81
+[32m[2021-07-22 00:54:55] __main__ INFO: [0mVal 36
+[32m[2021-07-22 00:54:56] __main__ INFO: [0mEpoch 36 loss 0.0276 Linear error 0.19
+[32m[2021-07-22 00:54:56] __main__ INFO: [0mElapsed 0.54
+[32m[2021-07-22 00:54:56] __main__ INFO: [0mTrain 37
+[32m[2021-07-22 00:54:56] __main__ INFO: [0mEpoch 37 Step 0/1181 lr 0.001000 loss 0.0138 (0.0138) Linear error 0.14 (0.14)
+[32m[2021-07-22 00:54:57] __main__ INFO: [0mEpoch 37 Step 100/1181 lr 0.001000 loss 0.0121 (0.0131) Linear error 0.14 (0.14)
+[32m[2021-07-22 00:54:58] __main__ INFO: [0mEpoch 37 Step 200/1181 lr 0.001000 loss 0.0153 (0.0131) Linear error 0.15 (0.14)
+[32m[2021-07-22 00:54:59] __main__ INFO: [0mEpoch 37 Step 300/1181 lr 0.001000 loss 0.0101 (0.0132) Linear error 0.12 (0.14)
+[32m[2021-07-22 00:55:00] __main__ INFO: [0mEpoch 37 Step 400/1181 lr 0.001000 loss 0.0186 (0.0133) Linear error 0.17 (0.14)
+[32m[2021-07-22 00:55:01] __main__ INFO: [0mEpoch 37 Step 500/1181 lr 0.001000 loss 0.0129 (0.0131) Linear error 0.14 (0.14)
+[32m[2021-07-22 00:55:02] __main__ INFO: [0mEpoch 37 Step 600/1181 lr 0.001000 loss 0.0129 (0.0130) Linear error 0.14 (0.14)
+[32m[2021-07-22 00:55:03] __main__ INFO: [0mEpoch 37 Step 700/1181 lr 0.001000 loss 0.0153 (0.0130) Linear error 0.15 (0.14)
+[32m[2021-07-22 00:55:04] __main__ INFO: [0mEpoch 37 Step 800/1181 lr 0.001000 loss 0.0165 (0.0130) Linear error 0.14 (0.14)
+[32m[2021-07-22 00:55:05] __main__ INFO: [0mEpoch 37 Step 900/1181 lr 0.001000 loss 0.0153 (0.0130) Linear error 0.15 (0.14)
+[32m[2021-07-22 00:55:06] __main__ INFO: [0mEpoch 37 Step 1000/1181 lr 0.001000 loss 0.0129 (0.0130) Linear error 0.14 (0.14)
+[32m[2021-07-22 00:55:07] __main__ INFO: [0mEpoch 37 Step 1100/1181 lr 0.001000 loss 0.0126 (0.0130) Linear error 0.14 (0.14)
+[32m[2021-07-22 00:55:08] __main__ INFO: [0mElapsed 11.78
+[32m[2021-07-22 00:55:08] __main__ INFO: [0mVal 37
+[32m[2021-07-22 00:55:08] __main__ INFO: [0mEpoch 37 loss 0.0277 Linear error 0.19
+[32m[2021-07-22 00:55:08] __main__ INFO: [0mElapsed 0.58
+[32m[2021-07-22 00:55:08] __main__ INFO: [0mTrain 38
+[32m[2021-07-22 00:55:08] __main__ INFO: [0mEpoch 38 Step 0/1181 lr 0.001000 loss 0.0149 (0.0149) Linear error 0.14 (0.14)
+[32m[2021-07-22 00:55:09] __main__ INFO: [0mEpoch 38 Step 100/1181 lr 0.001000 loss 0.0189 (0.0135) Linear error 0.15 (0.14)
+[32m[2021-07-22 00:55:10] __main__ INFO: [0mEpoch 38 Step 200/1181 lr 0.001000 loss 0.0136 (0.0133) Linear error 0.14 (0.14)
+[32m[2021-07-22 00:55:11] __main__ INFO: [0mEpoch 38 Step 300/1181 lr 0.001000 loss 0.0142 (0.0131) Linear error 0.14 (0.14)
+[32m[2021-07-22 00:55:12] __main__ INFO: [0mEpoch 38 Step 400/1181 lr 0.001000 loss 0.0156 (0.0129) Linear error 0.15 (0.14)
+[32m[2021-07-22 00:55:13] __main__ INFO: [0mEpoch 38 Step 500/1181 lr 0.001000 loss 0.0116 (0.0129) Linear error 0.13 (0.14)
+[32m[2021-07-22 00:55:14] __main__ INFO: [0mEpoch 38 Step 600/1181 lr 0.001000 loss 0.0098 (0.0128) Linear error 0.13 (0.14)
+[32m[2021-07-22 00:55:15] __main__ INFO: [0mEpoch 38 Step 700/1181 lr 0.001000 loss 0.0106 (0.0128) Linear error 0.13 (0.14)
+[32m[2021-07-22 00:55:16] __main__ INFO: [0mEpoch 38 Step 800/1181 lr 0.001000 loss 0.0085 (0.0129) Linear error 0.11 (0.14)
+[32m[2021-07-22 00:55:17] __main__ INFO: [0mEpoch 38 Step 900/1181 lr 0.001000 loss 0.0109 (0.0129) Linear error 0.13 (0.14)
+[32m[2021-07-22 00:55:18] __main__ INFO: [0mEpoch 38 Step 1000/1181 lr 0.001000 loss 0.0104 (0.0129) Linear error 0.13 (0.14)
+[32m[2021-07-22 00:55:19] __main__ INFO: [0mEpoch 38 Step 1100/1181 lr 0.001000 loss 0.0223 (0.0130) Linear error 0.18 (0.14)
+[32m[2021-07-22 00:55:20] __main__ INFO: [0mElapsed 11.82
+[32m[2021-07-22 00:55:20] __main__ INFO: [0mVal 38
+[32m[2021-07-22 00:55:21] __main__ INFO: [0mEpoch 38 loss 0.0277 Linear error 0.19
+[32m[2021-07-22 00:55:21] __main__ INFO: [0mElapsed 0.55
+[32m[2021-07-22 00:55:21] __main__ INFO: [0mTrain 39
+[32m[2021-07-22 00:55:21] __main__ INFO: [0mEpoch 39 Step 0/1181 lr 0.001000 loss 0.0116 (0.0116) Linear error 0.13 (0.13)
+[32m[2021-07-22 00:55:22] __main__ INFO: [0mEpoch 39 Step 100/1181 lr 0.001000 loss 0.0116 (0.0130) Linear error 0.13 (0.14)
+[32m[2021-07-22 00:55:23] __main__ INFO: [0mEpoch 39 Step 200/1181 lr 0.001000 loss 0.0086 (0.0127) Linear error 0.12 (0.14)
+[32m[2021-07-22 00:55:24] __main__ INFO: [0mEpoch 39 Step 300/1181 lr 0.001000 loss 0.0146 (0.0129) Linear error 0.15 (0.14)
+[32m[2021-07-22 00:55:25] __main__ INFO: [0mEpoch 39 Step 400/1181 lr 0.001000 loss 0.0083 (0.0130) Linear error 0.11 (0.14)
+[32m[2021-07-22 00:55:26] __main__ INFO: [0mEpoch 39 Step 500/1181 lr 0.001000 loss 0.0103 (0.0129) Linear error 0.12 (0.14)
+[32m[2021-07-22 00:55:27] __main__ INFO: [0mEpoch 39 Step 600/1181 lr 0.001000 loss 0.0149 (0.0129) Linear error 0.15 (0.14)
+[32m[2021-07-22 00:55:28] __main__ INFO: [0mEpoch 39 Step 700/1181 lr 0.001000 loss 0.0145 (0.0129) Linear error 0.15 (0.14)
+[32m[2021-07-22 00:55:29] __main__ INFO: [0mEpoch 39 Step 800/1181 lr 0.001000 loss 0.0159 (0.0129) Linear error 0.15 (0.14)
+[32m[2021-07-22 00:55:30] __main__ INFO: [0mEpoch 39 Step 900/1181 lr 0.001000 loss 0.0104 (0.0130) Linear error 0.12 (0.14)
+[32m[2021-07-22 00:55:31] __main__ INFO: [0mEpoch 39 Step 1000/1181 lr 0.001000 loss 0.0120 (0.0129) Linear error 0.14 (0.14)
+[32m[2021-07-22 00:55:32] __main__ INFO: [0mEpoch 39 Step 1100/1181 lr 0.001000 loss 0.0140 (0.0130) Linear error 0.14 (0.14)
+[32m[2021-07-22 00:55:32] __main__ INFO: [0mElapsed 11.87
+[32m[2021-07-22 00:55:32] __main__ INFO: [0mVal 39
+[32m[2021-07-22 00:55:33] __main__ INFO: [0mEpoch 39 loss 0.0277 Linear error 0.19
+[32m[2021-07-22 00:55:33] __main__ INFO: [0mElapsed 0.53
+[32m[2021-07-22 00:55:33] __main__ INFO: [0mTrain 40
+[32m[2021-07-22 00:55:33] __main__ INFO: [0mEpoch 40 Step 0/1181 lr 0.001000 loss 0.0157 (0.0157) Linear error 0.16 (0.16)
+[32m[2021-07-22 00:55:34] __main__ INFO: [0mEpoch 40 Step 100/1181 lr 0.001000 loss 0.0090 (0.0121) Linear error 0.12 (0.13)
+[32m[2021-07-22 00:55:35] __main__ INFO: [0mEpoch 40 Step 200/1181 lr 0.001000 loss 0.0127 (0.0125) Linear error 0.14 (0.14)
+[32m[2021-07-22 00:55:36] __main__ INFO: [0mEpoch 40 Step 300/1181 lr 0.001000 loss 0.0161 (0.0126) Linear error 0.14 (0.14)
+[32m[2021-07-22 00:55:37] __main__ INFO: [0mEpoch 40 Step 400/1181 lr 0.001000 loss 0.0133 (0.0128) Linear error 0.15 (0.14)
+[32m[2021-07-22 00:55:38] __main__ INFO: [0mEpoch 40 Step 500/1181 lr 0.001000 loss 0.0197 (0.0128) Linear error 0.17 (0.14)
+[32m[2021-07-22 00:55:39] __main__ INFO: [0mEpoch 40 Step 600/1181 lr 0.001000 loss 0.0099 (0.0128) Linear error 0.13 (0.14)
+[32m[2021-07-22 00:55:40] __main__ INFO: [0mEpoch 40 Step 700/1181 lr 0.001000 loss 0.0128 (0.0128) Linear error 0.14 (0.14)
+[32m[2021-07-22 00:55:41] __main__ INFO: [0mEpoch 40 Step 800/1181 lr 0.001000 loss 0.0130 (0.0128) Linear error 0.14 (0.14)
+[32m[2021-07-22 00:55:42] __main__ INFO: [0mEpoch 40 Step 900/1181 lr 0.001000 loss 0.0182 (0.0128) Linear error 0.17 (0.14)
+[32m[2021-07-22 00:55:43] __main__ INFO: [0mEpoch 40 Step 1000/1181 lr 0.001000 loss 0.0100 (0.0128) Linear error 0.12 (0.14)
+[32m[2021-07-22 00:55:44] __main__ INFO: [0mEpoch 40 Step 1100/1181 lr 0.001000 loss 0.0146 (0.0128) Linear error 0.13 (0.14)
+[32m[2021-07-22 00:55:45] __main__ INFO: [0mElapsed 11.82
+[32m[2021-07-22 00:55:45] __main__ INFO: [0mVal 40
+[32m[2021-07-22 00:55:45] __main__ INFO: [0mEpoch 40 loss 0.0277 Linear error 0.19
+[32m[2021-07-22 00:55:45] __main__ INFO: [0mElapsed 0.54
+[32m[2021-07-22 00:55:45] fvcore.common.checkpoint INFO: [0mSaving checkpoint to experiments/mpiigaze/resnet_preact/exp00/00/checkpoint_0040.pth
