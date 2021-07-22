@@ -23,6 +23,8 @@ class FaceParts:
 
         self.normalized_gaze_angles: Optional[np.ndarray] = None
         self.normalized_gaze_vector: Optional[np.ndarray] = None
+        #Adding new line
+        self.target:Optional[np.ndarray] = None   #added as trial and error
         self.gaze_vector: Optional[np.ndarray] = None
 
     @property
@@ -44,6 +46,9 @@ class FaceParts:
         # the same as multiplying the inverse of the rotation matrix to the
         # column gaze vector from the left.
         self.gaze_vector = self.normalized_gaze_vector @ normalizing_rot
+
+    def process_2d_target(self) -> None:
+        self.target = self.target
 
     @staticmethod
     def vector_to_angle(vector: np.ndarray) -> np.ndarray:

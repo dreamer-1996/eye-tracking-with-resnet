@@ -183,11 +183,13 @@ class Demo:
         if self.config.mode == GazeEstimationMethod.MPIIGaze.name:
             for key in [FacePartsName.REYE, FacePartsName.LEYE]:
                 eye = getattr(face, key.name.lower())
-                self.visualizer.draw_3d_line(
-                    eye.center, eye.center + length * eye.gaze_vector)
-                pitch, yaw = np.rad2deg(eye.vector_to_angle(eye.gaze_vector))
+
+                #self.visualizer.draw_3d_line(
+                 #   eye.center, eye.center + length * eye.gaze_vector)
+                #pitch, yaw = np.rad2deg(eye.vector_to_angle(eye.gaze_vector))
+                pitch,yaw = eye.target
                 logger.info(
-                    f'[{key.name.lower()}] pitch: {pitch:.2f}, yaw: {yaw:.2f}')
+                    f'[{key.name.lower()}] x: {pitch*1280.00:.2f}, y: {yaw*720.00:.2f}')
         elif self.config.mode == GazeEstimationMethod.MPIIFaceGaze.name:
             self.visualizer.draw_3d_line(
                 face.center, face.center + length * face.gaze_vector)

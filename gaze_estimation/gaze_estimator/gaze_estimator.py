@@ -83,11 +83,13 @@ class GazeEstimator:
 
         for i, key in enumerate(self.EYE_KEYS):
             eye = getattr(face, key.name.lower())
-            eye.normalized_gaze_angles = predictions[i]
-            if key == FacePartsName.REYE:
-                eye.normalized_gaze_angles *= np.array([1, -1])
-            eye.angle_to_vector()
-            eye.denormalize_gaze_vector()
+            #eye.normalized_gaze_angles = predictions[i]
+            eye.target = predictions[i]
+            #if key == FacePartsName.REYE:
+             #   eye.normalized_gaze_angles *= np.array([1, -1])
+            #eye.angle_to_vector()
+            #eye.denormalize_gaze_vector()
+            eye.process_2d_target()
 
     def _run_mpiifacegaze_model(self, face: Face) -> None:
         image = self._transform(face.normalized_image).unsqueeze(0)
