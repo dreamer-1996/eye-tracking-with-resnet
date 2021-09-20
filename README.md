@@ -50,6 +50,7 @@ python3 demo.py --config configs/demo_mpiigaze_resnet.yaml
 
 * Camera calibration is needed. Save the calibration result in the same format as the sample file `data/calib/sample_params.yaml`.
 * A system should be created such that the `model.pth` gets retrained in real time with some images of the person whose gaze is to be tracked next. This provides the model with some information of the next person whose gaze is to be tracked. This increases the accuracy of the model and we have verified that with experiments.
+![alt text](file:///home/nairit/Desktop/result.png)
 * Trying with different CNN, optimizing the parameters to see if any change in accuracy is happening.
 
 
