@@ -45,6 +45,16 @@ Now run the demo:
 python3 demo.py --config configs/demo_mpiigaze_resnet.yaml
 ```
 
+
+## Further work needed
+
+* Camera calibration is needed. Save the calibration result in the same format as the sample file data/calib/sample_params.yaml.
+* A system should be created such that the `model.pth` gets retrained in real time with some images of the person whose gaze is to be tracked next. This provides the model with some information of the next person whose gaze is to be tracked. This increases the accuracy of the model and we have verified that with experiments.
+* Trying with different CNN, optimizing the parameters to see if any change in accuracy is happening.
+
+
+
+
 ## References
 
 * Zhang, Xucong, Yusuke Sugano, Mario Fritz, and Andreas Bulling. "Appearance-based Gaze Estimation in the Wild." Proc. of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2015. [arXiv:1504.02863](https://arxiv.org/abs/1504.02863), [Project Page](https://www.mpi-inf.mpg.de/departments/computer-vision-and-multimodal-computing/research/gaze-based-human-computer-interaction/appearance-based-gaze-estimation-in-the-wild/)
