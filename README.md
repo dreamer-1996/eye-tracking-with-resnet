@@ -6,7 +6,6 @@ Following repo is modified from this [work](https://github.com/hysts/pytorch_mpi
 
 ## Requirements
 
-* Linux (Tested on Ubuntu only)
 * Python >= 3.7
 
 ```bash
@@ -35,7 +34,7 @@ scripts/run_all_mpiigaze_resnet_preact.sh
 The results, checkpoints and the logs will be generated automatically inside the `experiments` folder.
 
 After training and evaluation is complete, take the last checkpoint file for any experiment for example take the 4th checkpoint .pth file from 
-`experiments/mpiigaze/resnet_preact/exp00/00` and place it in `eye-tracking-with-resnet/data/models/`
+`experiments/mpiigaze/resnet_preact/exp00/00` and place it in `eye-tracking-with-resnet/data/models/mpiigaze/resnet_preact`
 
 Then run the script to download the dlib face model:
 ```bash
