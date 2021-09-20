@@ -32,8 +32,19 @@ Then run the script :
 scripts/run_all_mpiigaze_resnet_preact.sh
 
 ```
-The results,checkpoints and the logs will be generated automatically inside the `experiments` folder
+The results, checkpoints and the logs will be generated automatically inside the `experiments` folder.
 
+After training and evaluation is complete, take the last checkpoint file for any experiment for example take the 4th checkpoint .pth file from 
+`experiments/mpiigaze/resnet_preact/exp00/00` and place it in `eye-tracking-with-resnet/data/models/`
+
+Then run the script to download the dlib face model:
+```bash
+scripts/download_dlib_model.sh
+```
+Now run the demo:
+```bash
+python3 demo.py --config configs/demo_mpiigaze_resnet.yaml
+```
 
 ## References
 
